@@ -23,9 +23,10 @@ class App extends Component {
   }
 
   componentDidMount(){
+    const url = "http://localhost:3000/api/v1/get_project_count"
     let prevData = this.state.data
     const getCountryISO3 = require("country-iso-2-to-3");
-    return fetch("https://api.globalgiving.org/api/public/projectservice/regions/countries/projects/active/count?api_key=4be97db5-e712-49b1-bae9-12c85422ce7a", {
+    return fetch(url, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -34,13 +35,14 @@ class App extends Component {
     })
     .then(res => res.json())
     .then(json => {
-      json.regions.region.forEach((region)=> {
-        region.countries.country.forEach((country)=> {
-          let i = (this.getArrayIndex(prevData, [getCountryISO3(country.iso3166CountryCode), 0]))
+      console.log(json)
+        json.forEach((country)=> {
+          console.log(country)
+          let i = (this.getArrayIndex(prevData, [country[0], 0]))
           //replace the ["XYZ", 0] array with the actual project Count
-          prevData.splice(i, 1, [getCountryISO3(country.iso3166CountryCode), Math.log(country.projectCount)])
+          // prevData.splice(i, 1, [getCountryISO3(country.iso3166CountryCode), country.projectCount])
+          prevData.splice(i, 1, [country[0], country[1]])
         })
-      })
       this.setState({
         data: prevData
       })
