@@ -1,5 +1,5 @@
 .App {
-  text-align: center;
+  text-align: left;
 }
 
 .App-logo {
@@ -26,6 +26,10 @@
 .refreshBtn{
   position: absolute;
   margin-top: 0%;
+}
+
+.datamap {
+  border: 2px black;
 }
 
 @keyframes App-logo-spin {
