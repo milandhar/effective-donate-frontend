@@ -57,11 +57,11 @@ class App extends Component {
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
-       }
+      },
+      body: JSON.stringify({nextProject: null})
     })
       .then(res => res.json())
       .then(json => {
-        console.log(json)
         let hasNextFlag = false
         if (json["has_next"]){
           hasNextFlag = true
@@ -70,7 +70,7 @@ class App extends Component {
         if (hasNextFlag) {
           return fetch(url, {
             method: 'POST',
-            body: JSON.stringify({nextProject: json["projects"]["nextProjectId"]}),
+            body: JSON.stringify({nextProject: json["nextProjectId"]}),
             headers: {
               'Content-Type': 'application/json',
               'Accept': 'application/json'
