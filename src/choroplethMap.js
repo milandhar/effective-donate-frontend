@@ -68,7 +68,7 @@ class ChoroplethMap extends Component {
             // projection: 'mercator'
             setProjection: function (element) {
                 var projection = d3.geo.mercator()
-                    .center([0, 40]) // always in [East Latitude, North Longitude]
+                    .center([0, 0]) // always in [East Latitude, North Longitude]
                     .scale(200)
                     .translate([element.offsetWidth / 3, element.offsetHeight / 3]);
 

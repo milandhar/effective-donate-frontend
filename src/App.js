@@ -40,7 +40,7 @@ class App extends Component {
           console.log(country)
           let i = (this.getArrayIndex(prevData, [country[0], 0]))
           //replace the ["XYZ", 0] array with the actual project Count
-          // prevData.splice(i, 1, [getCountryISO3(country.iso3166CountryCode), country.projectCount])
+          // prevData.splice(i, 1, [country[0], Math.log(country[1])])
           prevData.splice(i, 1, [country[0], country[1]])
         })
       this.setState({
@@ -49,12 +49,53 @@ class App extends Component {
     })
   }
 
+  refreshMap = () => {
+    console.log('in refresh projects')
+    const url = "http://localhost:3000/api/v1/fetch_projects"
+    return fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+       }
+    })
+      .then(res => res.json())
+      .then(json => {
+        console.log(json)
+        let hasNextFlag = false
+        if (json["has_next"]){
+          hasNextFlag = true
+          }
+
+        if (hasNextFlag) {
+          return fetch(url, {
+            method: 'POST',
+            body: JSON.stringify({nextProject: json["projects"]["nextProjectId"]}),
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            }
+          })
+          .then(res => res.json())
+          .then(json => {
+            if (json["has_next"]){
+              hasNextFlag = true
+            } else{
+              hasNextFlag = false
+            }
+          })
+        }
+      })
+
+  }
+
   render() {
     return (
       <div className="app-div" style={{
-        height:"250vh",
-        width: "250vw"
+        height:"50vh",
+        width: "50vw"
       }}>
+        <button onClick={this.refreshMap} id="refreshBtn">Refresh Projects</button>
         <ChoroplethMap data={this.state.data}/>
       </div>
     );
