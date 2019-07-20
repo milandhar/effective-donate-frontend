@@ -35,13 +35,11 @@ class App extends Component {
     })
     .then(res => res.json())
     .then(json => {
-      console.log(json)
         json.forEach((country)=> {
-          console.log(country)
           let i = (this.getArrayIndex(prevData, [country[0], 0]))
           //replace the ["XYZ", 0] array with the actual project Count
           // prevData.splice(i, 1, [country[0], Math.log(country[1])])
-          prevData.splice(i, 1, [country[0], country[1]])
+          prevData.splice(i, 1, [country[0], Math.log(country[1])])
         })
       this.setState({
         data: prevData
@@ -50,7 +48,6 @@ class App extends Component {
   }
 
   refreshMap = () => {
-    console.log('in refresh projects')
     const url = "http://localhost:3000/api/v1/fetch_projects"
     return fetch(url, {
       method: 'POST',
