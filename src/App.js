@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import mapBrowser from './components/mapBrowser.js'
+import MapBrowser from './components/mapBrowser.js';
+import LoginForm from './components/loginForm';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
@@ -18,7 +19,15 @@ class App extends Component {
     return (
       <div className="App">
         <Router>
-          <Route path={'/map'} component={mapBrowser} />
+          <Route exact path="/"
+          render={(props) => (
+            <LoginForm {...props}
+              onLogin={this.updateUser}
+              user={this.state.user}
+            />
+          )}
+        />
+      <Route path={'/map'} component={MapBrowser} />
         </Router>
       </div>
 
