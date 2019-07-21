@@ -66,9 +66,9 @@ class ChoroplethMap extends Component {
                     // tooltip content
                     return ['<div class="hoverinfo">',
                             '<strong>', geo.properties.name, '</strong>',
-                            // '<br>Count: <strong>', data.numberOfThings, '</strong>',
+                            '<br>Count: <strong>', data.numberOfThings, '</strong>',
                             // '<br>Count: <strong>', Math.round(Math.pow(Math.E,data.numberOfThings)),'</strong>',
-                            '<br>Count: <strong>', transformCount,'</strong>',
+                            // '<br>Count: <strong>', transformCount,'</strong>',
                             '</div>'].join('');
                     }
             },
