@@ -1,11 +1,20 @@
 .App {
   text-align: left;
+  height: 100vh !important;
+}
+
+section {
+  height: 100vh !important;
 }
 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 40vmin;
   pointer-events: none;
+}
+
+.celled{
+  height: 250px !important;
 }
 
 .App-header {
@@ -17,6 +26,16 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+.profile-header{
+  margin-top: 40px;
+  margin-left: 10px;
+  text-align: center;
+}
+
+.list-top-image {
+  height: 300px !important;
 }
 
 #choropleth_map{

@@ -59,10 +59,14 @@ export default class Navbar extends Component {
                   <h2 className='bark-font'>         EffectiveDonate         </h2>
                 </a>
                 <a class='item'></a>
-                <a href="http://localhost:3001/profile" class="item">
-                  <i class='user icon'></i>
-                    {localStorage.getItem('username')}
+
+                  <a href="http://localhost:3001/profile" class="item">
+                    <Link to="/profile" replace>
+                    <i class='user icon'></i>
+                      {localStorage.getItem('username')}
+                    </Link>
                   </a>
+
                 <div class="item">
                   <div onClick={this.logout} class="ui blue button">Log Out</div>
                 </div>
