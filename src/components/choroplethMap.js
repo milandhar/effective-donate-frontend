@@ -51,12 +51,9 @@ class ChoroplethMap extends Component {
                     // don't show tooltip if country don't present in dataset
                     let transformCount
                     //check to see what the log-ed project count comes back as...
-                    if(data.numberOfThings === null){
-                      //if log is null, the count was 0
+                    if(!data.numberOfThings){
+                      //if zero or null 
                       transformCount = 0
-                    } else if(data.numberOfThings === 0){
-                      //if the log is 0, the count is 1
-                      transformCount = 1
                     } else {
                       //else take E to the power of the log and round to the nearest integer
                       transformCount = Math.round(Math.pow(Math.E,data.numberOfThings))
@@ -66,9 +63,9 @@ class ChoroplethMap extends Component {
                     // tooltip content
                     return ['<div class="hoverinfo">',
                             '<strong>', geo.properties.name, '</strong>',
-                            '<br>Count: <strong>', data.numberOfThings, '</strong>',
+                            // '<br>Count: <strong>', data.numberOfThings, '</strong>',
                             // '<br>Count: <strong>', Math.round(Math.pow(Math.E,data.numberOfThings)),'</strong>',
-                            // '<br>Count: <strong>', transformCount,'</strong>',
+                            '<br>Count: <strong>', transformCount,'</strong>',
                             '</div>'].join('');
                     }
             },

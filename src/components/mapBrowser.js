@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import { Grid, Image } from 'semantic-ui-react'
 import logo from '../logo.svg';
 import '../App.css';
 import ChoroplethMap from './choroplethMap.js'
+import ThemesDropdownMultiple from './ThemesDropdownMultiple'
 import Navbar from './Navbar.js'
 
 class App extends Component {
@@ -49,8 +51,10 @@ class App extends Component {
         json.forEach((country)=> {
           let i = (this.getArrayIndex(prevData, [country[0], 0]))
           //replace the ["XYZ", 0] array with the actual project Count
-          prevData.splice(i, 1, [country[0], Math.log(country[1])])
-          // prevData.splice(i, 1, [country[0], country[1]])
+          // prevData.splice(i, 1, [country[0], Math.log(country[1])])
+          if (country[1]) {
+            prevData.splice(i, 1, [country[0], Math.log(country[1])])
+          }
         })
       this.setState({
         data: prevData
@@ -135,7 +139,19 @@ class App extends Component {
         <button onClick={this.findLastProject} id="refreshBtn">Get New Projects</button>
         <button onClick={this.refreshMap} id="refreshBtn">Refresh Projects</button>
         <Navbar logout={this.logout}/>
-        <ChoroplethMap data={this.state.data}/>
+        <Grid divided='vertically'>
+          <Grid.Row columns={1}>
+            <Grid.Column>
+              <ChoroplethMap data={this.state.data}/>
+            </Grid.Column>
+          </Grid.Row>
+          <Grid.Row columns={3}>
+            <Grid.Column>
+              <h1>Select Theme(s)</h1>
+              <ThemesDropdownMultiple/>
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
       </div>
     );
   }
