@@ -20,23 +20,31 @@ export default class LoginForm extends Component {
   }
 
   getProfile = () => {
-      let token = this.getToken()
-      fetch('http://localhost:3000/api/v1/profile', {
-        headers: {
-          'Authorization': 'Bearer ' + token
-        }
-      })
-      .then(res=>res.json())
-      .then(json=> {
-        this.setState({user: json.user})
-        // this.props.onLogin(json.user);
-        // localStorage.setItem("user_id", json.user.id)
-      })
-    }
+    let token = this.getToken()
+    fetch('http://localhost:3000/api/v1/profile', {
+      headers: {
+        'Authorization': 'Bearer ' + token
+      }
+    })
+    .then(res=>res.json())
+    .then(json=> {
+      this.setState({user: json.user})
+      // this.props.onLogin(json.user);
+      // localStorage.setItem("user_id", json.user.id)
+    })
+  }
 
-    saveToken = (token) => {
-        localStorage.setItem('jwt', token)
-    }
+  saveToken = (token) => {
+    localStorage.setItem('jwt', token)
+  }
+
+  saveUserInfo = (json) => {
+    localStorage.setItem('userid', json["user"]["id"])
+    localStorage.setItem('username', json["user"]["username"])
+    localStorage.setItem('email_address', json["user"]["email_address"])
+    localStorage.setItem('first_name', json["user"]["first_name"])
+    localStorage.setItem('last_name', json["user"]["last_name"])
+  }
 
   login = (ev) => {
     ev.preventDefault()
@@ -54,10 +62,9 @@ export default class LoginForm extends Component {
     fetch(URL, headers)
       .then(res=>res.json())
       .then(json => {
-          // this.props.onLogin(json.user);
-          console.log('login:', json)
           if (json && json.jwt) {
             this.saveToken(json.jwt)
+            this.saveUserInfo(json)
             this.getProfile()
             this.setState(prevState => ({
               loggedIn: true

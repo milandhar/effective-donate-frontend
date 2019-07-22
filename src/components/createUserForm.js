@@ -19,7 +19,7 @@ export default class CreateUserFOrm extends Component {
     }
 
 
-    createUser = () => { 
+    createUser = () => {
         const URL = 'http://localhost:3000/api/v1/users'
 
         const headers = {
@@ -57,7 +57,6 @@ export default class CreateUserFOrm extends Component {
 
 
     render() {
-
         return(
             <div>
                 <header className='spacer'> </header>

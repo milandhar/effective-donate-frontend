@@ -19,8 +19,20 @@
   color: white;
 }
 
+#choropleth_map{
+  margin-top: 20px;
+  height: 200vh;
+  width: 165vw;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .App-link {
   color: #61dafb;
+}
+
+.app-div{
+  margin: 0px !important;
 }
 
 .refreshBtn{

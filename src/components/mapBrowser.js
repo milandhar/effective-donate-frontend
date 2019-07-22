@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from '../logo.svg';
 import '../App.css';
 import ChoroplethMap from './choroplethMap.js'
+import Navbar from './Navbar.js'
 
 class App extends Component {
 
@@ -20,6 +21,16 @@ class App extends Component {
           }
       }
       return false;   // Not found
+  }
+
+  logout = () => {
+    localStorage.setItem('jwt', '')
+    localStorage.setItem('username', '')
+    localStorage.setItem('email_address', '')
+    localStorage.setItem('first_name', '')
+    localStorage.setItem('last_name', '')
+    this.props.history.push("/")
+    return false
   }
 
   componentDidMount(){
@@ -118,13 +129,12 @@ class App extends Component {
   }
 
   render() {
+    {console.log(this.props.history)}
     return (
-      <div className="app-div" style={{
-        height:"50vh",
-        width: "50vw"
-      }}>
+      <div className="app-div">
         <button onClick={this.findLastProject} id="refreshBtn">Get New Projects</button>
         <button onClick={this.refreshMap} id="refreshBtn">Refresh Projects</button>
+        <Navbar logout={this.logout}/>
         <ChoroplethMap data={this.state.data}/>
       </div>
     );
