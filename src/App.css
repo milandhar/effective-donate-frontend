@@ -1,11 +1,20 @@
 .App {
-  text-align: center;
+  text-align: left;
+  height: 100vh !important;
+}
+
+section {
+  height: 100vh !important;
 }
 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 40vmin;
   pointer-events: none;
+}
+
+.celled{
+  height: 250px !important;
 }
 
 .App-header {
@@ -19,8 +28,39 @@
   color: white;
 }
 
+.profile-header{
+  margin-top: 40px;
+  margin-left: 10px;
+  text-align: center;
+}
+
+.list-top-image {
+  height: 300px !important;
+}
+
+#choropleth_map{
+  margin-top: 20px;
+  height: 200vh;
+  width: 165vw;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .App-link {
   color: #61dafb;
+}
+
+.app-div{
+  margin: 0px !important;
+}
+
+.refreshBtn{
+  position: absolute;
+  margin-top: 0%;
+}
+
+.datamap {
+  border: 2px black;
 }
 
 @keyframes App-logo-spin {

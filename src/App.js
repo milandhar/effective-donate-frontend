@@ -1,26 +1,52 @@
-import React from 'react';
+import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import MapBrowser from './components/mapBrowser.js';
+import LoginForm from './components/loginForm';
+import Profile from './components/Profile';
+import CreateUserForm from './components/createUserForm';
+import ReactDOM from 'react-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+
+  constructor(){
+    super()
+    this.state = {
+      }
+    }
+
+
+  render() {
+    return (
+      <div className="App">
+        <Router>
+          <Route exact path="/"
+          render={(props) => (
+            <LoginForm {...props}
+              onLogin={this.updateUser}
+              user={this.state.user}
+            />
+          )}
+        />
+      <Route path={'/map'} component={MapBrowser} />
+      <Route path={'/create_user'} component={CreateUserForm} />
+      <Route path={'/profile'} component={Profile} />
+        </Router>
+      </div>
+
+
+      // <div className="app-div" style={{
+      //   height:"50vh",
+      //   width: "50vw"
+      // }}>
+      //   <button onClick={this.findLastProject} id="refreshBtn">Get New Projects</button>
+      //   <button onClick={this.refreshMap} id="refreshBtn">Refresh Projects</button>
+      //   <ChoroplethMap data={this.state.data}/>
+      // </div>
+    );
+  }
 }
+
 
 export default App;
