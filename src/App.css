@@ -28,6 +28,48 @@ section {
   color: white;
 }
 
+.column {
+  text-align: center;
+}
+
+.dropdown-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.select-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.content{
+  text-align: left;
+}
+
+.list .item{
+  display: flex !important;
+  flex-direction: row;
+}
+
+.select-container button {
+  width: 50px;
+}
+
+.buttons{
+  display: flex;
+  flex-direction: row;
+}
+
+
+.dropdown-container select{
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
 .profile-header{
   margin-top: 40px;
   margin-left: 10px;

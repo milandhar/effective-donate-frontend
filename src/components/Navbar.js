@@ -46,12 +46,13 @@ export default class Navbar extends Component {
             <div>
               <div class="ui seven fluid item top attached menu borderless">
                 <div class="item">
-                <a class="item" href="http://localhost:3001/browse">
-                  <img class="ui avatar image" />
+                <a class="item" href="http://localhost:3001/map">
+                  <i class="globe icon"></i>
                 Map
                 </a>
                 </div>
                 <a href="http://localhost:3001/liked" class="item">
+                <i class="star icon"></i>
                 Favorites
                 </a>
                 <a class='item'></a>

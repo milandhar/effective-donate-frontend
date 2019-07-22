@@ -29,10 +29,10 @@ class App extends Component {
             />
           )}
         />
-      <Route path={'/map'} component={MapBrowser} />
-      <Route path={'/create_user'} component={CreateUserForm} />
-      <Route path={'/profile'} component={Profile} />
-        </Router>
+            <Route path={'/map'} component={MapBrowser} />
+            <Route path={'/create_user'} component={CreateUserForm} />
+            <Route path={'/profile'} component={Profile} />
+          </Router>
       </div>
 
 
