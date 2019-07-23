@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Grid, Image } from 'semantic-ui-react'
+import FavoriteThemes from './FavoriteThemes'
 
 import Navbar from './Navbar'
 // import ProfileDisplay from './ProfileDisplay'
@@ -90,7 +91,8 @@ export default class Profile extends Component {
                 {/*</div>*/}
                 </Grid.Column>
                 <Grid.Column width={13}>
-                  <h1 class="ui center aligned header highlight">
+                  <FavoriteThemes />
+                  {/*<h1 class="ui center aligned header highlight">
                     Favorite Themes:
                   </h1>
                   <div class="dropdown-container">
@@ -124,7 +126,7 @@ export default class Profile extends Component {
                         <i class="plus circle icon"></i>
                       </button>
                     </div>
-                  </div>
+                  </div> */}
                 </Grid.Column>
               </Grid.Row>
               <Grid.Row>
