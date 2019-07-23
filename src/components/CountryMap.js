@@ -13,6 +13,15 @@ const wrapperStyles = {
 }
 
 export default class CountryMap extends Component {
+
+
+  getCountryMapJson = () => {
+    let countryCode = this.props.location.state.link.id
+    let path = `/simpleMaps/${countryCode}.json`
+    console.log(path)
+    return path
+  }
+
   render() {
     return (
       <div style={wrapperStyles}>
@@ -27,7 +36,7 @@ export default class CountryMap extends Component {
           }}
           >
           <ZoomableGroup center={[ 8.2, 46.8 ]} disablePanning>
-            <Geographies geography="/countryMaps/ch-with-cantons.json">
+            <Geographies geography={this.getCountryMapJson()}>
               {(geographies, projection) =>
                 geographies.map((geography, i) =>
                   geography.id !== "ATA" && (

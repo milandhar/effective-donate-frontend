@@ -96,7 +96,10 @@ class ChoroplethMap extends Component {
                 let link = geography.id
                 // link to the country component here. Might need a callback to mapBrowser first
                 // could use localStorage as a backup
-                props.history.push("/country")
+                props.history.push({
+                  pathname: "/country",
+                  state: {link: geography}
+                })
                 // this.clickCountry()
                 // console.log(link)
               })
