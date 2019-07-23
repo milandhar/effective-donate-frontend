@@ -91,11 +91,11 @@ export default class Profile extends Component {
                 {/*</div>*/}
                 </Grid.Column>
                 <Grid.Column width={13}>
-                  <FavoriteThemes />
-                  {/*<h1 class="ui center aligned header highlight">
+                  <h1 class="ui center aligned header highlight">
                     Favorite Themes:
                   </h1>
-                  <div class="dropdown-container">
+                  <FavoriteThemes />
+                {/*  <div class="dropdown-container">
                     <div class="select-container">
                       <select class="ui dropdown">
                         <option value="">Humanitarian Assistance</option>
