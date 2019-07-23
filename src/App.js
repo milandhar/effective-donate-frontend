@@ -34,9 +34,6 @@ class App extends Component {
             <Route path={'/map'} component={MapBrowser} />
             <Route path={'/create_user'} component={CreateUserForm} />
             <Route path={'/profile'} component={Profile} />
-            <Route path={'/bubble'} component={BubbleMap} />
-            <Route path={'/country'} component={CountryMap} />
-            <Route path={'/worldmap'} component={WorldMap} />
           </Router>
       </div>
 

@@ -5,17 +5,25 @@ export default class FavoriteThemes extends Component {
   constructor(){
     super()
     this.state = {
-      userThemes: []
+      userThemes: [],
+      themes: []
     }
   }
 
   componentDidMount(){
     console.log('in mount')
+    this.getThemes()
     this.fetchUserThemes()
   }
 
-  fetchUserThemes = () =>{
-    console.log('in fetch')
+  getThemes = () => {
+    const url = 'http://localhost:3000/api/v1/themes'
+    fetch(url)
+    .then(res=>res.json())
+    .then(json => {this.setState({themes: json})})
+  }
+
+  fetchUserThemes = () => {
     let token = localStorage.getItem("jwt")
       fetch('http://localhost:3000/api/v1/profile', {
         headers: {
@@ -35,38 +43,43 @@ export default class FavoriteThemes extends Component {
       })
   }
 
+  returnDropdown = (themeNum) => {
+    let userTheme = this.state.userThemes[0]
+    let themes = this.state.themes
+    console.log(themes)
+
+
+        return this.state.themes.map((theme) => {
+          return <option value={theme.id}>{theme.name}</option>
+          console.log(theme)
+        }
+    )
+    return this.state.themes.map((theme)=> {
+      return(
+        <div>
+          {theme.name}
+        </div>
+        )
+      })
+  }
+
   render(){
     return(
       <div class="dropdown-container">
         <div class="select-container">
           <select class="ui dropdown">
-            <option value="">Humanitarian Assistance</option>
-            <option value="1">Male</option>
-            <option value="0">Female</option>
+            {this.returnDropdown(0)}
           </select>
-          <button class="ui icon button">
-            <i class="plus circle icon"></i>
-          </button>
         </div>
         <div class="select-container">
           <select class="ui dropdown">
-            <option value="">Democracy and Governance</option>
-            <option value="1">Male</option>
-            <option value="0">Female</option>
+            {this.returnDropdown(1)}
           </select>
-          <button class="ui icon button">
-            <i class="plus circle icon"></i>
-          </button>
         </div>
         <div class="select-container">
           <select class="ui dropdown">
-            <option value="">Climate Change</option>
-            <option value="1">Male</option>
-            <option value="0">Female</option>
+            {this.returnDropdown(2)}
           </select>
-          <button class="ui icon button">
-            <i class="plus circle icon"></i>
-          </button>
         </div>
       </div>
     )
