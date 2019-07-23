@@ -3,13 +3,18 @@ import { Dropdown } from 'semantic-ui-react'
 
 export default class FavoriteThemes extends Component {
 
+  //make a single list with the id and name => selected options at this time
+  //set the value initially with fetch
+  //onchange => change that list
+  //build function that translates theme id to string
+  //build function that translates theme string to id
+
   constructor(){
     super()
     this.state = {
       userThemes: [],
       themes: [],
       themeOptions: [],
-      default: []
     }
   }
 
@@ -30,8 +35,13 @@ export default class FavoriteThemes extends Component {
     .then(()=> this.fetchUserThemes())
   }
 
+  getThemeFromId = (themeId) => {
+    let theme = this.state.themes.find(theme=>theme.id===themeId)
+    return theme
+  }
+
   fetchUserThemes = () => {
-    console.log('in user themes')
+    let themeArray = []
     let token = localStorage.getItem("jwt")
       fetch('http://localhost:3000/api/v1/profile', {
         headers: {
@@ -40,15 +50,15 @@ export default class FavoriteThemes extends Component {
       })
       .then(res=>res.json())
       .then(json=> {
-        let themeArray = []
-        themeArray.push(json.user.theme1)
-        themeArray.push(json.user.theme2)
-        themeArray.push(json.user.theme3)
+        themeArray.push(this.getThemeFromId(json.user.theme1))
+        themeArray.push(this.getThemeFromId(json.user.theme2))
+        themeArray.push(this.getThemeFromId(json.user.theme3))
         this.setState({
           userThemes: themeArray
         })
       })
       .then(() => this.renderThemeField())
+      return themeArray
   }
 
   returnDropdown = (themeNum) => {
@@ -72,13 +82,12 @@ export default class FavoriteThemes extends Component {
     console.log('in find defaults')
     let themes = this.state.themes
     let defaults = []
-    console.log(this.state)
     this.state.userThemes.forEach((theme, idx) => {
       defaults.push(themes[theme]["name"])
     })
     this.setState({default: defaults})
-
   }
+
 
   renderThemeField = () => {
     console.log('in render theme field')
@@ -87,30 +96,86 @@ export default class FavoriteThemes extends Component {
     this.state.themes.forEach((theme)=> {
         optionsArray.push({key: theme.id, text: theme.name, value: theme.name})
       })
-      this.setState({themeOptions: optionsArray}, () => this.findDefaults())
+      this.setState({themeOptions: optionsArray})
     }
+
+    getThemeFromState = (idx) => {
+      let theme = ""
+      if(this.state.userThemes[idx]){
+        theme = this.state.userThemes[idx]["name"]
+      } else{
+        theme = "Select a Theme"
+      }
+      return theme
+    }
+
+    getThemeFromName = (name) => {
+      let theme = this.state.themes.find(theme=>theme.name===name)
+      return theme
+    }
+
+    handleChange = (ev, data) => {
+      console.log('in handle change')
+      let userThemeNumber = parseInt(data.name)
+      let newThemeName = data.value
+      let newThemeId = this.getThemeFromName(newThemeName).id
+      let prevUserThemes = this.state.userThemes
+      prevUserThemes.splice(userThemeNumber, 1, {id: newThemeId, name: newThemeName})
+      this.setState({prevUserThemes})
+      this.postUserThemes(userThemeNumber, newThemeId)
+    }
+
+    postUserThemes = (themeNumber, themeId) => {
+      let bodyHash = {}
+      bodyHash[`theme${themeNumber+1}`] = themeId
+      console.log(bodyHash)
+      const URL = `http://localhost:3000/api/v1/users/${localStorage.userid}`
+      const headers = {
+          method: 'Put',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(bodyHash)
+      }
+      fetch(URL, headers)
+          .then(res=>res.json())
+          // .then(json => {
+          //   if(!json["error"]){
+          //     this.props.history.push("/")
+          //   }
+          // })
+          // .catch(error => console.log(error))
+        }
 
   render(){
     return(
       <div class="dropdown-container">
-        {console.log('in render')}
         <Dropdown
           fluid
           selection
+          key="0"
+          name="0"
           options={this.state.themeOptions}
-          defaultValue={this.state.themes[0]}
+          value={this.getThemeFromState(0)}
+          onChange={this.handleChange}
         />
         <Dropdown
           fluid
           selection
+          key="1"
+          name="1"
           options={this.state.themeOptions}
-          defaultValue={this.state.default[1]}
+          value={this.getThemeFromState(1)}
+          onChange={this.handleChange}
         />
         <Dropdown
           fluid
           selection
+          key="2"
+          name="2"
           options={this.state.themeOptions}
-          defaultValue={this.state.default[2]}
+          value={this.getThemeFromState(2)}
+          onChange={this.handleChange}
         />
         {/*<div class="select-container">
           <select class="ui dropdown">
