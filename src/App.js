@@ -4,7 +4,9 @@ import './App.css';
 import MapBrowser from './components/mapBrowser.js';
 import LoginForm from './components/loginForm';
 import Profile from './components/Profile';
+import BubbleMap from './components/BubbleMap';
 import CreateUserForm from './components/createUserForm';
+import CountryMap from './components/CountryMap';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
@@ -31,6 +33,8 @@ class App extends Component {
             <Route path={'/map'} component={MapBrowser} />
             <Route path={'/create_user'} component={CreateUserForm} />
             <Route path={'/profile'} component={Profile} />
+            <Route path={'/bubble'} component={BubbleMap} />
+            <Route path={'/country'} component={CountryMap} />
           </Router>
       </div>
 

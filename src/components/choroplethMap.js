@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import Datamap from 'datamaps/dist/datamaps.world.min.js';
 import d3 from 'd3';
-import WorldJson from '../World.topo.json';
+import WorldJson from '../countryMaps/World.topo.json';
+import { Redirect, Link } from 'react-router-dom'
 
 class ChoroplethMap extends Component {
 
+    constructor(props){
+      super(props)
+    }
 
-    componentDidUpdate() {
+    componentDidUpdate(props) {
         // Datamaps expect data in format:
         // { "USA": { "fillColor": "#42a844", numberOfWhatever: 75},
         //   "FRA": { "fillColor": "#8dc386", numberOfWhatever: 43 } }
@@ -52,7 +56,7 @@ class ChoroplethMap extends Component {
                     let transformCount
                     //check to see what the log-ed project count comes back as...
                     if(!data.numberOfThings){
-                      //if zero or null 
+                      //if zero or null
                       transformCount = 0
                     } else {
                       //else take E to the power of the log and round to the nearest integer
@@ -86,9 +90,25 @@ class ChoroplethMap extends Component {
 
                 var path = d3.geo.path().projection(projection);
                 return { path: path, projection: projection };
+            },
+            done: function(map){
+              map.svg.selectAll('.datamaps-subunit').on('click', function(geography) {
+                let link = geography.id
+                // link to the country component here. Might need a callback to mapBrowser first
+                // could use localStorage as a backup
+                props.history.push("/country")
+                // this.clickCountry()
+                // console.log(link)
+              })
             }
         });
-    }
+      }
+
+      clickCountry = () => {
+        console.log('in click country')
+        this.props.handleClick()
+      }
+
     render() {
         return (
             <div id="choropleth_map"></div>

@@ -88,6 +88,14 @@ section {
   margin-right: auto;
 }
 
+#bubbles_map{
+  padding-top: 80px;
+  height: 120vh;
+  width: 140vw;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .three{
   padding-bottom: 500px !important;
   bottom: 600px !important;
