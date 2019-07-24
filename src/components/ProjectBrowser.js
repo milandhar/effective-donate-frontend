@@ -24,10 +24,12 @@ export default class ProjectBrowser extends Component {
   }
 
   setSelectedCountry = () => {
-    console.log('in set selected')
     if(this.props.location.state.countryCode){
-      console.log(this.props.location.state.countryCode)
-      this.setState({selectedCountry: this.props.location.state.countryCode})
+      console.log(this.state.selectedCountry)
+      if(this.state.selectedCountry === ""){
+        console.log(this.props.location.state.countryCode)
+        this.setState({selectedCountry: this.props.location.state.countryCode}, this.fetchProjects)
+      }
     }
   }
 
@@ -50,16 +52,20 @@ export default class ProjectBrowser extends Component {
           })
         }
       })
+      const sortJsonArray = require('sort-json-array');
+      console.log(sortJsonArray(countryArray, 'text'))
+      this.setState({countryList: sortJsonArray(countryArray, 'text')}, this.setSelectedCountry)
+      // this.setSelectedCountry()
     })
     // let countries = json.country.name.sort(this.compare)
-    const sortJsonArray = require('sort-json-array');
-    console.log(sortJsonArray(countryArray, 'text'))
-    this.setState({countryList: sortJsonArray(countryArray, 'text')})
-    this.setSelectedCountry()
+
+    // return(sortJsonArray(countryArray, 'text'))
   }
 
-  fetchProjects = (countryCode) => {
+  fetchProjects = () => {
     console.log('in fetch projects')
+    const countryCode = this.state.selectedCountry
+    console.log(countryCode)
     const url = `http://localhost:3000/api/v1/get_projects?countryCode=${countryCode}`
     fetch(url)
     .then(res=>res.json())
@@ -71,8 +77,14 @@ export default class ProjectBrowser extends Component {
 
   handleChange = (ev, data) => {
     this.setState({selectedCountry: data.value})
-    this.fetchProjects(data.value)
+    this.fetchProjects()
   }
+
+  // getCountryList = () => {
+  //   let list = (this.fetchCountries())
+  //   console.log(list)
+  //   return list
+  // }
 
   render() {
     return(
@@ -91,14 +103,14 @@ export default class ProjectBrowser extends Component {
                 <Header.Content>Country</Header.Content>
               </Header>
               {console.log('in render')}
-              {console.log(this.state.selectedCountry)}
+              {console.log(this.state.countryList)}
               <Dropdown
                 fluid
                 search
                 selection
                 options={this.state.countryList}
                 onChange={this.handleChange}
-                placeholder={this.state.selectedCountry}
+                value={this.state.selectedCountry}
               />
             </Grid.Column>
             <Grid.Column>
