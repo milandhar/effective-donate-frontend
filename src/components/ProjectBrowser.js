@@ -24,17 +24,14 @@ export default class ProjectBrowser extends Component {
   }
 
   setSelectedCountry = () => {
-    if(this.props.location.state.countryCode){
-      console.log(this.state.selectedCountry)
+    if(this.props.location && this.props.location.state && this.props.location.state.countryCode){
       if(this.state.selectedCountry === ""){
-        console.log(this.props.location.state.countryCode)
         this.setState({selectedCountry: this.props.location.state.countryCode}, this.fetchProjects)
       }
     }
   }
 
   fetchCountries = () => {
-    console.log('in fetch countries')
     const url = `http://localhost:3000/api/v1/countries`
     const getCountryISO2 = require("country-iso-3-to-2");
     let countryArray = []
@@ -53,7 +50,6 @@ export default class ProjectBrowser extends Component {
         }
       })
       const sortJsonArray = require('sort-json-array');
-      console.log(sortJsonArray(countryArray, 'text'))
       this.setState({countryList: sortJsonArray(countryArray, 'text')}, this.setSelectedCountry)
       // this.setSelectedCountry()
     })
@@ -63,28 +59,24 @@ export default class ProjectBrowser extends Component {
   }
 
   fetchProjects = () => {
-    console.log('in fetch projects')
     const countryCode = this.state.selectedCountry
-    console.log(countryCode)
     const url = `http://localhost:3000/api/v1/get_projects?countryCode=${countryCode}`
     fetch(url)
     .then(res=>res.json())
     .then(json=> {
       this.setState({countryProjects: json})
     })
-    .then(()=>this.setSelectedCountry())
+    // .then(()=>this.setSelectedCountry())
   }
 
   handleChange = (ev, data) => {
-    this.setState({selectedCountry: data.value})
-    this.fetchProjects()
+    this.setState({selectedCountry: data.value}, this.fetchProjects)
   }
 
-  // getCountryList = () => {
-  //   let list = (this.fetchCountries())
-  //   console.log(list)
-  //   return list
-  // }
+  addFavorite = (ev, data) => {
+    console.log(ev)
+    console.log(data)
+  }
 
   render() {
     return(
@@ -102,12 +94,11 @@ export default class ProjectBrowser extends Component {
               <Header as='h3' textAlign='center'>
                 <Header.Content>Country</Header.Content>
               </Header>
-              {console.log('in render')}
-              {console.log(this.state.countryList)}
               <Dropdown
                 fluid
                 search
                 selection
+                placeholder="Country"
                 options={this.state.countryList}
                 onChange={this.handleChange}
                 value={this.state.selectedCountry}
@@ -122,7 +113,7 @@ export default class ProjectBrowser extends Component {
           </Grid.Row>
           <Grid.Row>
               {this.state.countryProjects.map((project) => {
-                return <CountryCard key={project.id} image={project.image_url} theme={project.theme.name} title={project.title} country={project.country}/>
+                return <CountryCard id={project.id} handleStar={this.addFavorite()} funding={project.funding} longTermImpact={project.long_term_impact} summary={project.summary} goal={project.goal} key={project.id} image={project.image_url} theme={project.theme.name} title={project.title} country={project.country.name}/>
               })}
           </Grid.Row>
         </Grid>

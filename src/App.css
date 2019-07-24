@@ -17,6 +17,14 @@ section {
   height: 250px !important;
 }
 
+.meta {
+  text-align: center;
+}
+
+.header {
+  text-align: center;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -50,9 +58,25 @@ section {
   text-align: left;
 }
 
+.extra{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.extra a{
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.card:after{
+  display: none !important;
+}
+
 .list .item{
   display: flex !important;
   flex-direction: row;
+  justify-content: space-between;
 }
 
 .select-container button {
