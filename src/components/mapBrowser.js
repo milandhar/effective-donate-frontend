@@ -6,7 +6,7 @@ import ChoroplethMap from './choroplethMap.js'
 import ThemesDropdownMultiple from './ThemesDropdownMultiple'
 import Navbar from './Navbar.js'
 
-class App extends Component {
+class MapBrowser extends Component {
 
   constructor(){
     super()
@@ -137,7 +137,6 @@ class App extends Component {
   }
 
   render() {
-    {console.log(this.props.history)}
     return (
       <div className="app-div">
         <button onClick={this.findLastProject} id="refreshBtn">Get New Projects</button>
@@ -162,4 +161,4 @@ class App extends Component {
 }
 
 
-export default App;
+export default MapBrowser;

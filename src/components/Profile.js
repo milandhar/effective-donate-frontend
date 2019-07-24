@@ -65,8 +65,6 @@ export default class Profile extends Component {
          }), ()=> console.log(this.state.profileInfo))
      }
 
-     editProfile = newState =>{
-     }
 
     render() {
         {document.body.style = 'background: white;'}
@@ -85,7 +83,7 @@ export default class Profile extends Component {
                       <i class="user icon"></i>
                     </h2>
                     <h2 class="ui header highlight">
-                      {localStorage.getItem('first_name')} {localStorage.getItem('last_name')}
+                      {localStorage.first_name} {localStorage.last_name}
                     </h2>
                   </div>
                 {/*</div>*/}
