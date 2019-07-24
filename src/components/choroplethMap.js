@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import Datamap from 'datamaps/dist/datamaps.world.min.js';
 import d3 from 'd3';
-import WorldJson from '../World.topo.json';
+import WorldJson from '../countryMaps/World.topo.json';
+import { Redirect, Link } from 'react-router-dom'
 
 class ChoroplethMap extends Component {
 
+    constructor(props){
+      super(props)
+    }
 
-    componentDidUpdate() {
+    componentDidUpdate(props) {
         // Datamaps expect data in format:
         // { "USA": { "fillColor": "#42a844", numberOfWhatever: 75},
         //   "FRA": { "fillColor": "#8dc386", numberOfWhatever: 43 } }
@@ -51,12 +55,9 @@ class ChoroplethMap extends Component {
                     // don't show tooltip if country don't present in dataset
                     let transformCount
                     //check to see what the log-ed project count comes back as...
-                    if(data.numberOfThings === null){
-                      //if log is null, the count was 0
+                    if(!data.numberOfThings){
+                      //if zero or null
                       transformCount = 0
-                    } else if(data.numberOfThings === 0){
-                      //if the log is 0, the count is 1
-                      transformCount = 1
                     } else {
                       //else take E to the power of the log and round to the nearest integer
                       transformCount = Math.round(Math.pow(Math.E,data.numberOfThings))
@@ -66,9 +67,9 @@ class ChoroplethMap extends Component {
                     // tooltip content
                     return ['<div class="hoverinfo">',
                             '<strong>', geo.properties.name, '</strong>',
-                            '<br>Count: <strong>', data.numberOfThings, '</strong>',
+                            // '<br>Count: <strong>', data.numberOfThings, '</strong>',
                             // '<br>Count: <strong>', Math.round(Math.pow(Math.E,data.numberOfThings)),'</strong>',
-                            // '<br>Count: <strong>', transformCount,'</strong>',
+                            '<br>Count: <strong>', transformCount,'</strong>',
                             '</div>'].join('');
                     }
             },
@@ -89,9 +90,29 @@ class ChoroplethMap extends Component {
 
                 var path = d3.geo.path().projection(projection);
                 return { path: path, projection: projection };
+            },
+            done: function(map){
+              map.svg.selectAll('.datamaps-subunit').on('click', function(geography) {
+                let link = geography.id
+                // link to the country component here. Might need a callback to mapBrowser first
+                // could use localStorage as a backup
+                props.handleClick(geography)
+                // props.history.push({
+                //   pathname: "/country",
+                //   state: {link: geography}
+                // })
+                // this.clickCountry()
+                // console.log(link)
+              })
             }
         });
-    }
+      }
+
+      clickCountry = () => {
+        console.log('in click country')
+        this.props.handleClick()
+      }
+
     render() {
         return (
             <div id="choropleth_map"></div>

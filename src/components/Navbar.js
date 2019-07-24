@@ -45,14 +45,17 @@ export default class Navbar extends Component {
         return(
             <div>
               <div class="ui seven fluid item top attached menu borderless">
-                <div class="item">
-                <a class="item" href="http://localhost:3001/browse">
-                  <img class="ui avatar image" />
+                <a class="item">
+                <Link to="/map" replace>
+                <i class="globe icon"></i>
                 Map
+                </Link>
                 </a>
-                </div>
-                <a href="http://localhost:3001/liked" class="item">
-                Favorites
+                <a class="item">
+                  <Link to="/projects" replace>
+                <i class="tasks icon"></i>
+                Projects
+                </Link>
                 </a>
                 <a class='item'></a>
                 <a class='item bark-font'>
@@ -60,7 +63,7 @@ export default class Navbar extends Component {
                 </a>
                 <a class='item'></a>
 
-                  <a href="http://localhost:3001/profile" class="item">
+                  <a class="item">
                     <Link to="/profile" replace>
                     <i class='user icon'></i>
                       {localStorage.getItem('username')}

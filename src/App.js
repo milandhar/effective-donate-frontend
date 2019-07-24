@@ -5,6 +5,7 @@ import MapBrowser from './components/mapBrowser.js';
 import LoginForm from './components/loginForm';
 import Profile from './components/Profile';
 import CreateUserForm from './components/createUserForm';
+import ProjectBrowser from './components/ProjectBrowser';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
@@ -16,7 +17,6 @@ class App extends Component {
       }
     }
 
-
   render() {
     return (
       <div className="App">
@@ -25,14 +25,14 @@ class App extends Component {
           render={(props) => (
             <LoginForm {...props}
               onLogin={this.updateUser}
-              user={this.state.user}
+              user={this.state.user}/>
+              )}
             />
-          )}
-        />
-      <Route path={'/map'} component={MapBrowser} />
-      <Route path={'/create_user'} component={CreateUserForm} />
-      <Route path={'/profile'} component={Profile} />
-        </Router>
+            <Route path={'/map'} component={MapBrowser} />
+            <Route path={'/create_user'} component={CreateUserForm} />
+            <Route path={'/profile'} component={Profile} />
+            <Route path={'/projects'} component={ProjectBrowser} />
+          </Router>
       </div>
 
 
