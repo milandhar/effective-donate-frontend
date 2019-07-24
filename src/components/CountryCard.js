@@ -14,10 +14,7 @@ export default class CountryCard extends Component {
     this.checkIfStarred()
   }
 
-
   handleStar = () => {
-    console.log('in handle')
-    console.log(this.props)
     //post to user_starred_projects here
     const userId = localStorage.userid
     const projectId = this.props.id
@@ -32,7 +29,6 @@ export default class CountryCard extends Component {
     fetch(url, headers)
       .then(res=>res.json())
       .then(json => {
-          console.log(json)
           if(!json.error){
             this.setState({starred: true})
           }

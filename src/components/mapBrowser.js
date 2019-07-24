@@ -73,7 +73,9 @@ class MapBrowser extends Component {
     return false
   }
 
+
   componentDidMount(){
+    // this.getThemes()
     const url = "http://localhost:3000/api/v1/get_project_count"
     let prevData = this.state.data
     const getCountryISO3 = require("country-iso-2-to-3");
@@ -181,12 +183,14 @@ class MapBrowser extends Component {
   render() {
     return (
       <div className="app-div">
-        <button onClick={this.findLastProject} id="refreshBtn">Get New Projects</button>
-        <button onClick={this.refreshMap} id="refreshBtn">Refresh Projects</button>
         <Navbar logout={this.logout}/>
+          <button onClick={this.findLastProject} id="refreshBtn">Get New Projects</button>
+          <button onClick={this.refreshMap} id="refreshBtn">Refresh Projects</button>
         <Grid divided='vertically'>
           <Grid.Row columns={1}>
             <Grid.Column>
+              {console.log('rendering map')}
+              {console.log(this.state.data)}
               <ChoroplethMap history={this.props.history} handleClick={this.goToProjects} data={this.state.data}/>
             </Grid.Column>
           </Grid.Row>
