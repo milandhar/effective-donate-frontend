@@ -5,11 +5,14 @@ export default class ThemesDropdownMultiple extends Component {
   constructor(){
     super()
     this.state = {
-      options: []
+      options: [],
+      themes: [],
+      filteredThemes: []
     }
   }
 
   componentDidMount(){
+    this.getThemes()
     const url = "http://localhost:3000/api/v1/themes"
     let newOptions = []
     fetch(url)
@@ -23,30 +26,56 @@ export default class ThemesDropdownMultiple extends Component {
     .then(() => this.changeState(newOptions))
   }
 
+  fetchUserThemes = () => {
+    console.log('in fetch user themes')
+    let themeArray = []
+    let token = localStorage.getItem("jwt")
+      fetch('http://localhost:3000/api/v1/profile', {
+        headers: {
+          'Authorization': 'Bearer ' + token
+        }
+      })
+      .then(res=>res.json())
+      .then(json=> {
+        if(json.user.theme1){
+          themeArray.push(this.getThemeFromId(json.user.theme1).name)
+        }
+        if(json.user.theme2){
+          themeArray.push(this.getThemeFromId(json.user.theme2).name)
+        }
+        if(json.user.theme3) {
+          themeArray.push(this.getThemeFromId(json.user.theme3).name)
+        }
+        this.setState({
+          filteredThemes: themeArray
+        })
+      })
+      // .then(() => this.renderThemeField())
+      // return themeArray
+  }
+
+  getThemeFromId = (themeId) => {
+    let theme = this.state.themes.find(theme=>theme.id===themeId)
+    return theme
+  }
+
+  getThemes = () => {
+    console.log('in themes')
+    const url = 'http://localhost:3000/api/v1/themes'
+    fetch(url)
+    .then(res=>res.json())
+    .then(json => {
+      this.setState({themes: json}, this.fetchUserThemes)
+    })
+  }
+
   changeState = (newOptions) => {
     this.setState({options: newOptions})
   }
 
-// const options = [
-//   { key: 'angular', text: 'Angular', value: 'angular' },
-//   { key: 'css', text: 'CSS', value: 'css' },
-//   { key: 'design', text: 'Graphic Design', value: 'design' },
-//   { key: 'ember', text: 'Ember', value: 'ember' },
-//   { key: 'html', text: 'HTML', value: 'html' },
-//   { key: 'ia', text: 'Information Architecture', value: 'ia' },
-//   { key: 'javascript', text: 'Javascript', value: 'javascript' },
-//   { key: 'mech', text: 'Mechanical Engineering', value: 'mech' },
-//   { key: 'meteor', text: 'Meteor', value: 'meteor' },
-//   { key: 'node', text: 'NodeJS', value: 'node' },
-//   { key: 'plumbing', text: 'Plumbing', value: 'plumbing' },
-//   { key: 'python', text: 'Python', value: 'python' },
-//   { key: 'rails', text: 'Rails', value: 'rails' },
-//   { key: 'react', text: 'React', value: 'react' },
-//   { key: 'repair', text: 'Kitchen Repair', value: 'repair' },
-//   { key: 'ruby', text: 'Ruby', value: 'ruby' },
-//   { key: 'ui', text: 'UI Design', value: 'ui' },
-//   { key: 'ux', text: 'User Experience', value: 'ux' },
-// ]
+  handleChange = (ev, data) => {
+    this.setState({filteredThemes: data.value})
+  }
 
-  render() {return <Dropdown placeholder='Themes' fluid multiple selection options={this.state.options} />}
+  render() {return <Dropdown value={this.state.filteredThemes} onChange={this.handleChange} placeholder='Themes' fluid multiple selection options={this.state.options} />}
 }

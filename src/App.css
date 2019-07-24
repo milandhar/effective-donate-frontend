@@ -64,6 +64,10 @@ section {
   justify-content: center;
 }
 
+.map-dropdown-div{
+  bottom: 600px !important;
+}
+
 .extra a{
   margin-left: 5px;
   margin-right: 5px;

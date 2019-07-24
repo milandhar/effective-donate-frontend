@@ -89,12 +89,21 @@ export default class Profile extends Component {
          }), ()=> console.log(this.state.profileInfo))
      }
 
+     logout = () => {
+       localStorage.setItem('jwt', '')
+       localStorage.setItem('username', '')
+       localStorage.setItem('email_address', '')
+       localStorage.setItem('first_name', '')
+       localStorage.setItem('last_name', '')
+       this.props.history.push("/")
+       return false
+     }
 
     render() {
         {document.body.style = 'background: white;'}
         return(
           <section class = "profile-section">
-           <Navbar />
+           <Navbar logout={this.logout}/>
             <Grid celled>
               <Grid.Row>
                 <Grid.Column width={3}>

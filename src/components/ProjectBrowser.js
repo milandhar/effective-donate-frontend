@@ -78,6 +78,16 @@ export default class ProjectBrowser extends Component {
     console.log(data)
   }
 
+  logout = () => {
+    localStorage.setItem('jwt', '')
+    localStorage.setItem('username', '')
+    localStorage.setItem('email_address', '')
+    localStorage.setItem('first_name', '')
+    localStorage.setItem('last_name', '')
+    this.props.history.push("/")
+    return false
+  }
+
   render() {
     return(
       <div className="app-div">
@@ -111,10 +121,11 @@ export default class ProjectBrowser extends Component {
               <ThemesDropdownMultiple />
             </Grid.Column>
           </Grid.Row>
-          <Grid.Row>
+          <Grid.Row columns = {4}>
               {this.state.countryProjects.map((project) => {
-                return <CountryCard id={project.id} handleStar={this.addFavorite()} funding={project.funding} longTermImpact={project.long_term_impact} summary={project.summary} goal={project.goal} key={project.id} image={project.image_url} theme={project.theme.name} title={project.title} country={project.country.name}/>
-              })}
+
+                return <div className="column"> <CountryCard id={project.id} handleStar={this.addFavorite()} funding={project.funding} longTermImpact={project.long_term_impact} summary={project.summary} goal={project.goal} key={project.id} image={project.image_url} theme={project.theme.name} title={project.title} country={project.country.name}/></div>
+            })}
           </Grid.Row>
         </Grid>
       </div>

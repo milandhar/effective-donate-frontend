@@ -23,7 +23,7 @@ export default class StarredProjectsList extends Component {
             <List.Header> {project.title} </List.Header>
           </List.Content>
           <List.Content>
-          Funding: ${project.funding.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} | Goal: ${project.goal.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}
+          Funding: ${project.funding.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} / Goal: ${project.goal.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}
           </List.Content>
           <List.Content>
             <Button icon>

@@ -69,6 +69,7 @@ export default class CountryCard extends Component {
     <Card.Content>
       <Card.Header>{this.props.title}</Card.Header>
       <Card.Meta>{this.props.theme} | {this.props.country}</Card.Meta>
+      <Card.Meta>${this.props.funding.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} / ${this.props.goal.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</Card.Meta>
       <Card.Description>
         {this.props.name}
       </Card.Description>
