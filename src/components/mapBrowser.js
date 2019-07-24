@@ -132,8 +132,12 @@ class MapBrowser extends Component {
     }
   }
 
-  goToCountry = () => {
-    this.props.history.push("/country")
+  goToProjects = (geography) => {
+    console.log(geography)
+    this.props.history.push({
+      pathname: '/projects',
+      state: {countryCode: geography.id}
+    })
   }
 
   render() {
@@ -145,7 +149,7 @@ class MapBrowser extends Component {
         <Grid divided='vertically'>
           <Grid.Row columns={1}>
             <Grid.Column>
-              <ChoroplethMap history={this.props.history} handleClick={this.goToCountry} data={this.state.data}/>
+              <ChoroplethMap history={this.props.history} handleClick={this.goToProjects} data={this.state.data}/>
             </Grid.Column>
           </Grid.Row>
           <Grid.Row columns={3}>

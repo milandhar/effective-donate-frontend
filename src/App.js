@@ -25,10 +25,9 @@ class App extends Component {
           render={(props) => (
             <LoginForm {...props}
               onLogin={this.updateUser}
-              user={this.state.user}
+              user={this.state.user}/>
+              )}
             />
-          )}
-        />
             <Route path={'/map'} component={MapBrowser} />
             <Route path={'/create_user'} component={CreateUserForm} />
             <Route path={'/profile'} component={Profile} />
