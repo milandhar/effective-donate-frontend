@@ -176,7 +176,7 @@ class MapBrowser extends Component {
   goToProjects = (geography) => {
     this.props.history.push({
       pathname: '/projects',
-      state: {countryCode: geography.id}  
+      state: {countryCode: geography.id}
     })
   }
 
@@ -184,17 +184,26 @@ class MapBrowser extends Component {
     return (
       <div className="app-div">
         <Navbar logout={this.logout}/>
+        <div>
           <button onClick={this.findLastProject} id="refreshBtn">Get New Projects</button>
           <button onClick={this.refreshMap} id="refreshBtn">Refresh Projects</button>
+        </div>
         <Grid divided='vertically'>
           <Grid.Row columns={1}>
-            {console.log('rendering map')}
             <Grid.Column>
               <ChoroplethMap history={this.props.history} handleClick={this.goToProjects} data={this.state.data}/>
             </Grid.Column>
           </Grid.Row>
           <Grid.Row className="map-dropdown-div"columns={1}>
             <Grid.Column>
+              <div>
+                <div class="attribution-div">
+                  <a href="https://www.globalgiving.org/" target="_blank">
+                    <img id="gg-logo" src={require('../img/GG2015_Logo_horizontal_4color.png')} />
+                  </a>
+                  <p class="gg-attribution">Project Data</p>
+                </div>
+              </div>
               <h1>Select Theme(s)</h1>
               <ThemesDropdownMultiple className="map-dropdown"/>
             </Grid.Column>
