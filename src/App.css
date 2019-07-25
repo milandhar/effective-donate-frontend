@@ -7,14 +7,38 @@ section {
   height: 100vh !important;
 }
 
+#gg-logo {
+  max-width: 15%;
+}
+
+.gg-attribution {
+  font-family: 'Open Sans', sans-serif;
+}
+
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 40vmin;
   pointer-events: none;
 }
 
+.org-link{
+  color: blue !important;
+}
+
+.attribution-div{
+  text-align: center;
+}
+
 .celled{
   height: 250px !important;
+}
+
+.meta {
+  text-align: center;
+}
+
+.header {
+  text-align: center;
 }
 
 .App-header {
@@ -50,9 +74,57 @@ section {
   text-align: left;
 }
 
+.extra{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.ui.globe.icon{
+  font-size: 20px;
+}
+
+.login-field{
+  width: 20%;
+}
+
+.login-div h2{
+  margin-top: 10px;
+  text-align: center;
+}
+
+.ui.form{
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.map-dropdown-div{
+  bottom: 600px !important;
+}
+
+.map-dropdown-div .multiple.dropdown{
+  width: 30% !important;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.extra a{
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.card:after{
+  display: none !important;
+}
+
 .list .item{
   display: flex !important;
   flex-direction: row;
+  justify-content: space-between;
 }
 
 .select-container button {

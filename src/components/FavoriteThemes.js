@@ -115,14 +115,23 @@ export default class FavoriteThemes extends Component {
     }
 
     handleChange = (ev, data) => {
-      console.log('in handle change')
       let userThemeNumber = parseInt(data.name)
       let newThemeName = data.value
       let newThemeId = this.getThemeFromName(newThemeName).id
       let prevUserThemes = this.state.userThemes
-      prevUserThemes.splice(userThemeNumber, 1, {id: newThemeId, name: newThemeName})
-      this.setState({prevUserThemes})
-      this.postUserThemes(userThemeNumber, newThemeId)
+      let unique = true
+      prevUserThemes.forEach(theme => {
+        if(theme.name === newThemeName){
+          unique = false
+        }
+      })
+      if(unique){
+        prevUserThemes.splice(userThemeNumber, 1, {id: newThemeId, name: newThemeName})
+        this.setState({prevUserThemes})
+        this.postUserThemes(userThemeNumber, newThemeId)
+      } else{
+        window.alert('duplicate theme')
+      }
     }
 
     postUserThemes = (themeNumber, themeId) => {

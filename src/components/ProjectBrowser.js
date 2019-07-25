@@ -24,15 +24,14 @@ export default class ProjectBrowser extends Component {
   }
 
   setSelectedCountry = () => {
-    console.log('in set selected')
-    if(this.props.location.state.countryCode){
-      console.log(this.props.location.state.countryCode)
-      this.setState({selectedCountry: this.props.location.state.countryCode})
+    if(this.props.location && this.props.location.state && this.props.location.state.countryCode){
+      if(this.state.selectedCountry === ""){
+        this.setState({selectedCountry: this.props.location.state.countryCode}, this.fetchProjects)
+      }
     }
   }
 
   fetchCountries = () => {
-    console.log('in fetch countries')
     const url = `http://localhost:3000/api/v1/countries`
     const getCountryISO2 = require("country-iso-3-to-2");
     let countryArray = []
@@ -50,28 +49,42 @@ export default class ProjectBrowser extends Component {
           })
         }
       })
+      const sortJsonArray = require('sort-json-array');
+      this.setState({countryList: sortJsonArray(countryArray, 'text')}, this.setSelectedCountry)
+      // this.setSelectedCountry()
     })
     // let countries = json.country.name.sort(this.compare)
-    const sortJsonArray = require('sort-json-array');
-    console.log(sortJsonArray(countryArray, 'text'))
-    this.setState({countryList: sortJsonArray(countryArray, 'text')})
-    this.setSelectedCountry()
+
+    // return(sortJsonArray(countryArray, 'text'))
   }
 
-  fetchProjects = (countryCode) => {
-    console.log('in fetch projects')
+  fetchProjects = () => {
+    const countryCode = this.state.selectedCountry
     const url = `http://localhost:3000/api/v1/get_projects?countryCode=${countryCode}`
     fetch(url)
     .then(res=>res.json())
     .then(json=> {
       this.setState({countryProjects: json})
     })
-    .then(()=>this.setSelectedCountry())
+    // .then(()=>this.setSelectedCountry())
   }
 
   handleChange = (ev, data) => {
-    this.setState({selectedCountry: data.value})
-    this.fetchProjects(data.value)
+    this.setState({selectedCountry: data.value}, this.fetchProjects)
+  }
+
+  addFavorite = (ev, data) => {
+
+  }
+
+  logout = () => {
+    localStorage.setItem('jwt', '')
+    localStorage.setItem('username', '')
+    localStorage.setItem('email_address', '')
+    localStorage.setItem('first_name', '')
+    localStorage.setItem('last_name', '')
+    this.props.history.push("/")
+    return false
   }
 
   render() {
@@ -90,15 +103,14 @@ export default class ProjectBrowser extends Component {
               <Header as='h3' textAlign='center'>
                 <Header.Content>Country</Header.Content>
               </Header>
-              {console.log('in render')}
-              {console.log(this.state.selectedCountry)}
               <Dropdown
                 fluid
                 search
                 selection
+                placeholder="Country"
                 options={this.state.countryList}
                 onChange={this.handleChange}
-                placeholder={this.state.selectedCountry}
+                value={this.state.selectedCountry}
               />
             </Grid.Column>
             <Grid.Column>
@@ -108,10 +120,10 @@ export default class ProjectBrowser extends Component {
               <ThemesDropdownMultiple />
             </Grid.Column>
           </Grid.Row>
-          <Grid.Row>
+          <Grid.Row columns = {4}>
               {this.state.countryProjects.map((project) => {
-                return <CountryCard key={project.id} image={project.image_url} theme={project.theme.name} title={project.title} country={project.country}/>
-              })}
+                return <div className="column"> <CountryCard id={project.id} orgUrl={project.organization.url} organization={project.organization.name} handleStar={this.addFavorite()} funding={project.funding} longTermImpact={project.long_term_impact} summary={project.summary} goal={project.goal} key={project.id} image={project.image_url} theme={project.theme.name} title={project.title} country={project.country.name}/></div>
+            })}
           </Grid.Row>
         </Grid>
       </div>

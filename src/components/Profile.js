@@ -3,6 +3,7 @@ import { Grid, Image } from 'semantic-ui-react'
 import FavoriteThemes from './FavoriteThemes'
 
 import Navbar from './Navbar'
+import StarredProjectsList from './StarredProjectsList'
 // import ProfileDisplay from './ProfileDisplay'
 // import EmailDisplay from './EmailDisplay'
 
@@ -11,10 +12,33 @@ export default class Profile extends Component {
         super(props);
         this.state = {
             selected: '',
-            }
+            projectArray: []
+          }
           // this.getProfile()
         };
 
+    componentDidMount(){
+      this.fetchProjects()
+    }
+
+    fetchProjects = () => {
+      let userId = localStorage.userid
+      const url = `http://localhost:3000/api/v1/get_user_projects`
+      const headers = {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({user_id: userId})
+      }
+      fetch(url, headers)
+        .then(res=>res.json())
+        .then(json => {
+          if(!json.error){
+            this.setState({projectArray: json})
+          }
+        })
+    }
       // getProfile = () => {
       //   let token = localStorage.getItem("jwt")
       //   fetch('http://localhost:3000/api/v1/profile', {
@@ -65,12 +89,21 @@ export default class Profile extends Component {
          }), ()=> console.log(this.state.profileInfo))
      }
 
+     logout = () => {
+       localStorage.setItem('jwt', '')
+       localStorage.setItem('username', '')
+       localStorage.setItem('email_address', '')
+       localStorage.setItem('first_name', '')
+       localStorage.setItem('last_name', '')
+       this.props.history.push("/")
+       return false
+     }
 
     render() {
         {document.body.style = 'background: white;'}
         return(
           <section class = "profile-section">
-           <Navbar />
+           <Navbar logout={this.logout}/>
             <Grid celled>
               <Grid.Row>
                 <Grid.Column width={3}>
@@ -132,50 +165,9 @@ export default class Profile extends Component {
                 </Grid.Column>
                 <Grid.Column width={13}>
                   <h1 class="ui center aligned header highlight">
-                    Favorited Projects:
+                    Starred Projects:
                   </h1>
-                  <div class="ui relaxed divided list">
-                    <div class="item">
-                      <i class="large github middle aligned icon"></i>
-                      <div class="content">
-                        <div class="header">Poor women micro-enterprise development-Indonesia</div>
-                        <div class="description">Indonesia</div>
-                      </div>
-                      <div class="buttons">
-                        <button class="ui button">Donate</button>
-                        <button class="ui button">
-                          <i class="close icon"></i>
-                        </button>
-                      </div>
-                    </div>
-                    <div class="item">
-                      <i class="large github middle aligned icon"></i>
-                      <div class="content">
-                        <div class="header">Digital Divide Data (DDD)</div>
-                        <div class="description">United States</div>
-                      </div>
-                      <div class="buttons">
-                        <button class="ui button">Donate</button>
-                        <button class="ui button">
-                          <i class="close icon"></i>
-                        </button>
-                      </div>
-                    </div>
-                    <div class="item">
-                      <i class="large github middle aligned icon"></i>
-                      <div class="content">
-                        <div class="header">Community-based landslide awareness in El Salvador</div>
-                        <div class="description">El Salvador</div>
-                      </div>
-                      <div class="buttons">
-                        <button class="ui button">Donate</button>
-                        <button class="ui button">
-                          <i class="close icon"></i>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-
+                  <StarredProjectsList projectArray={this.state.projectArray}/>
                 </Grid.Column>
               </Grid.Row>
             </Grid>
