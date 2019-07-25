@@ -64,8 +64,36 @@ section {
   justify-content: center;
 }
 
+.ui.globe.icon{
+  font-size: 20px;
+}
+
+.login-field{
+  width: 20%;
+}
+
+.login-div h2{
+  margin-top: 10px;
+  text-align: center;
+}
+
+.ui.form{
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .map-dropdown-div{
   bottom: 600px !important;
+}
+
+.map-dropdown-div .multiple.dropdown{
+  width: 30% !important;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .extra a{

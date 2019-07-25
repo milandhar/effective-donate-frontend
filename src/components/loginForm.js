@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Form } from 'semantic-ui-react'
+import { Form, Header, Icon  } from 'semantic-ui-react'
 import { Link, Redirect } from 'react-router-dom'
 
 export default class LoginForm extends Component {
@@ -84,15 +84,17 @@ export default class LoginForm extends Component {
           <div className='login-section'>
             <div className='login-div'>
               <article className ='login'>
-                <h2 id="login-title" className='bark-font'>         EffectiveDonate         </h2>
-                  <img id="login-icon" class="ui avatar image" />
+                <Header as='h2' icon textAlign='center'>
+                  EffectiveDonate
+                  <Icon name='globe' circular />
+                </Header>
                 <h2>Sign in</h2>
                 <Form onSubmit={this.login}>
-                <Form.Field onChange={this.handleChange}>
+                <Form.Field className="login-field" onChange={this.handleChange}>
                 <label>Username</label>
                 <input name='username' type="text" placeholder='username' ref={this.username} required />
                 </Form.Field>
-                <Form.Field  onChange={this.handleChange}>
+                <Form.Field className="login-field" onChange={this.handleChange}>
                 <label>Password</label>
                 <input id='loginpassword' name='password' type="password" placeholder='password' ref={this.password} required />
                 </Form.Field>

@@ -74,8 +74,7 @@ export default class ProjectBrowser extends Component {
   }
 
   addFavorite = (ev, data) => {
-    console.log(ev)
-    console.log(data)
+
   }
 
   logout = () => {
@@ -123,7 +122,6 @@ export default class ProjectBrowser extends Component {
           </Grid.Row>
           <Grid.Row columns = {4}>
               {this.state.countryProjects.map((project) => {
-
                 return <div className="column"> <CountryCard id={project.id} handleStar={this.addFavorite()} funding={project.funding} longTermImpact={project.long_term_impact} summary={project.summary} goal={project.goal} key={project.id} image={project.image_url} theme={project.theme.name} title={project.title} country={project.country.name}/></div>
             })}
           </Grid.Row>

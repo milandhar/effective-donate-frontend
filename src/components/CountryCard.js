@@ -50,7 +50,6 @@ export default class CountryCard extends Component {
     fetch(url, headers)
     .then(res=>res.json())
     .then(json => {
-      console.log(json)
         if(json["status"] === "Star"){
           starred = true
           this.setState({starred:true})

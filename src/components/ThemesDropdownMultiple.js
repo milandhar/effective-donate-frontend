@@ -60,7 +60,6 @@ export default class ThemesDropdownMultiple extends Component {
   }
 
   getThemes = () => {
-    console.log('in themes')
     const url = 'http://localhost:3000/api/v1/themes'
     fetch(url)
     .then(res=>res.json())
