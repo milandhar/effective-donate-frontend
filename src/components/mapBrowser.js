@@ -30,15 +30,16 @@ class MapBrowser extends Component {
   }
 
   getProjectCount = () => {
-    const url = "http://localhost:3000/api/v1/get_project_count"
+    const url = "http://localhost:3000/api/v1/get_project_theme_count"
     let prevData = this.state.data
     const getCountryISO3 = require("country-iso-2-to-3");
     return fetch(url, {
-      method: 'GET',
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
-       }
+      },
+      body: {themes: this.state.mapThemes}
     })
     .then(res => res.json())
     .then(json => {

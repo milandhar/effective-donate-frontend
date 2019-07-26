@@ -9,12 +9,12 @@ import Navbar from './Navbar.js'
 
 export default class ProjectBrowser extends Component {
 
-  constructor(){
-    super()
+  constructor(props){
+    super(props)
     this.state = {
       countryList: [],
       selectedCountry: "",
-      selectedThemes: [],
+      projectThemes: this.props.userThemes,
       countryProjects: []
     }
   }
@@ -87,6 +87,12 @@ export default class ProjectBrowser extends Component {
     return false
   }
 
+  updateProjectThemes = (themes) => {
+    console.log('in update project themes')
+    this.setState({projectThemes: themes})
+    this.props.updateAppThemes(themes)
+  }
+
   render() {
     return(
       <div className="app-div">
@@ -117,7 +123,7 @@ export default class ProjectBrowser extends Component {
               <Header as='h3' textAlign='center'>
                 <Header.Content>Themes</Header.Content>
               </Header>
-              <ThemesDropdownMultiple />
+              <ThemesDropdownMultiple updateMapThemes={this.updateProjectThemes} themes={this.props.themes} mapThemes={this.state.projectThemes} />
             </Grid.Column>
           </Grid.Row>
           <Grid.Row columns = {4}>

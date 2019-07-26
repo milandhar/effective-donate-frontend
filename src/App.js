@@ -93,7 +93,12 @@ class App extends Component {
           : <div>Loading Thing</div>}
             <Route path={'/create_user'} component={CreateUserForm} />
             <Route path={'/profile'} component={Profile} />
-            <Route path={'/projects'} component={ProjectBrowser} />
+            {(this.state.updatedThemes)
+          ? <Route
+              path={'/projects'}
+              render={()=><ProjectBrowser updateAppThemes={this.updateAppThemes} themes={this.state.themes} userThemes={this.state.userThemes} fetchUserThemes={this.fetchUserThemes}/>}
+              />
+          : <div>Loading Thing</div>}
           </Router>
       </div>
 
