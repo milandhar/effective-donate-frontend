@@ -10,7 +10,7 @@ class ChoroplethMap extends Component {
       super(props)
     }
 
-    componentDidUpdate(props) {
+    componentDidMount(props) {
         // Datamaps expect data in format:
         // { "USA": { "fillColor": "#42a844", numberOfWhatever: 75},
         //   "FRA": { "fillColor": "#8dc386", numberOfWhatever: 43 } }
