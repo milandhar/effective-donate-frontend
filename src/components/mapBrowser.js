@@ -22,16 +22,24 @@ class MapBrowser extends Component {
 
   componentDidMount(){
     // this.props.fetchUserThemes()
-    this.getProjectCount()
+    // this.getProjectCount()
+    // console.log('in did mount')
+    // console.log(this.state.updatedMapThemes)
+    // if(this.state.updatedMapThemes){
+    //   this.getThemeProjectCount()
+    // }
     this.setState({
       mapThemes: this.props.userThemes,
       updatedMapThemes: true
-    })
+    }, this.getThemeProjectCount)
   }
 
-  getProjectCount = () => {
+  getThemeProjectCount = () => {
+    console.log('in get theme project count')
+    console.log(this.state.mapThemes)
     const url = "http://localhost:3000/api/v1/get_project_theme_count"
     let prevData = this.state.data
+    let [theme1, theme2, theme3, theme4, theme5, theme6, theme7, theme8, theme9, theme10, theme11, theme12, theme13, theme14, theme15, theme16, theme17, theme18] = this.state.mapThemes
     const getCountryISO3 = require("country-iso-2-to-3");
     return fetch(url, {
       method: 'POST',
@@ -39,7 +47,36 @@ class MapBrowser extends Component {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      body: {themes: this.state.mapThemes}
+      body: JSON.stringify({themes: this.state.mapThemes})
+    })
+    .then(res => res.json())
+    .then(json => {
+        json.forEach((country)=> {
+          let i = (this.getArrayIndex(prevData, [country[0], 0]))
+          //replace the ["XYZ", 0] array with the actual project Count
+          // prevData.splice(i, 1, [country[0], Math.log(country[1])])
+          if (country[1]) {
+            prevData.splice(i, 1, [country[0], Math.log(country[1])])
+          }
+        })
+      this.setState({
+        updatedData: true,
+        data: prevData
+      })
+      // , this.setState({data: prevData}))
+    })
+  }
+
+  getProjectCount = () => {
+    const url = "http://localhost:3000/api/v1/get_project_count"
+    let prevData = this.state.data
+    const getCountryISO3 = require("country-iso-2-to-3");
+    return fetch(url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      }
     })
     .then(res => res.json())
     .then(json => {
@@ -189,13 +226,14 @@ class MapBrowser extends Component {
   }
 
   updateMapThemes = (themes) => {
-    this.setState({mapThemes: themes})
     this.props.updateAppThemes(themes)
+    this.setState({mapThemes: themes}, this.getThemeProjectCount)
   }
 
   render() {
     return (
       <div className="app-div">
+        {console.log('in map render')}
         <Navbar logout={this.logout}/>
         <div>
           <button onClick={this.findLastProject} id="refreshBtn">Get New Projects</button>

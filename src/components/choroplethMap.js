@@ -8,12 +8,22 @@ class ChoroplethMap extends Component {
 
     constructor(props){
       super(props)
+      this.state = {
+        needsUpdate: false
+      }
     }
 
     componentDidMount(props) {
+      console.log('in choro did mount')
+      this.renderMap()
+
         // Datamaps expect data in format:
         // { "USA": { "fillColor": "#42a844", numberOfWhatever: 75},
         //   "FRA": { "fillColor": "#8dc386", numberOfWhatever: 43 } }
+      }
+
+      renderMap = () => {
+        console.log('in choro renderMap()')
         let dataset = {};
 
         // We need to colorize every country based on "numberOfWhatever"
@@ -96,7 +106,7 @@ class ChoroplethMap extends Component {
                 let link = geography.id
                 // link to the country component here. Might need a callback to mapBrowser first
                 // could use localStorage as a backup
-                props.handleClick(geography)
+                this.props.handleClick(geography)
                 // props.history.push({
                 //   pathname: "/country",
                 //   state: {link: geography}
@@ -109,13 +119,16 @@ class ChoroplethMap extends Component {
       }
 
       clickCountry = () => {
-        console.log('in click country')
         this.props.handleClick()
       }
 
     render() {
+        {console.log('in choro render')}
         return (
-            <div id="choropleth_map"></div>
+            <div>
+              <div id="choropleth_map"></div>
+              {console.log('rendered choro')}
+            </div>
         );
     }
 }
