@@ -14,12 +14,29 @@ class App extends Component {
   constructor(){
     super()
     this.state = {
-        userThemes: []
+        userThemes: [],
+        themes: [],
+        updatedThemes: false
       }
     }
 
-  updateUserThemes() => {
+  componentDidMount(){
+    this.getThemes()
+  }
 
+
+  getThemeFromId = (themeId) => {
+    let theme = this.state.themes.find(theme=>theme.id===themeId)
+    return theme
+  }
+
+  getThemes = () => {
+    const url = 'http://localhost:3000/api/v1/themes'
+    fetch(url)
+    .then(res=>res.json())
+    .then(json => {
+      this.setState({themes: json}, this.fetchUserThemes())
+    })
   }
 
   fetchUserThemes = () => {
@@ -42,11 +59,16 @@ class App extends Component {
           themeArray.push(this.getThemeFromId(json.user.theme3).name)
         }
         this.setState({
-          userThemes: themeArray
+          userThemes: themeArray,
+          updatedThemes: true
         })
       })
       // .then(() => this.renderThemeField())
       // return themeArray
+  }
+
+  updateAppThemes = (themes) => {
+    this.setState({userThemes: themes})
   }
 
   render() {
@@ -60,10 +82,20 @@ class App extends Component {
               user={this.state.user}/>
               )}
             />
-            <Route path={'/map'} component={MapBrowser} />
+          {(this.state.updatedThemes)
+            ? <Route
+              path={'/map'}
+              render={()=><MapBrowser updateAppThemes={this.updateAppThemes} themes={this.state.themes} userThemes={this.state.userThemes} fetchUserThemes={this.fetchUserThemes}/>}
+            />
+          : <div>Loading Thing</div>}
             <Route path={'/create_user'} component={CreateUserForm} />
             <Route path={'/profile'} component={Profile} />
-            <Route path={'/projects'} component={ProjectBrowser} />
+            {(this.state.updatedThemes)
+          ? <Route
+              path={'/projects'}
+              render={()=><ProjectBrowser updateAppThemes={this.updateAppThemes} themes={this.state.themes} userThemes={this.state.userThemes} fetchUserThemes={this.fetchUserThemes}/>}
+              />
+          : <div>Loading Thing</div>}
           </Router>
       </div>
 
