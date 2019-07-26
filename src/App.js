@@ -16,7 +16,9 @@ class App extends Component {
     this.state = {
         userThemes: [],
         themes: [],
-        updatedThemes: false
+        updatedThemes: false,
+        selectedCountry: "",
+        updatedSelectedCountry: false
       }
     }
 
@@ -49,19 +51,21 @@ class App extends Component {
       })
       .then(res=>res.json())
       .then(json=> {
-        if(json.user.theme1){
-          themeArray.push(this.getThemeFromId(json.user.theme1).name)
+        if(!json["error"]){
+          if(json.user.theme1){
+            themeArray.push(this.getThemeFromId(json.user.theme1).name)
+          }
+          if(json.user.theme2){
+            themeArray.push(this.getThemeFromId(json.user.theme2).name)
+          }
+          if(json.user.theme3) {
+            themeArray.push(this.getThemeFromId(json.user.theme3).name)
+          }
+          this.setState({
+            userThemes: themeArray,
+            updatedThemes: true
+          })
         }
-        if(json.user.theme2){
-          themeArray.push(this.getThemeFromId(json.user.theme2).name)
-        }
-        if(json.user.theme3) {
-          themeArray.push(this.getThemeFromId(json.user.theme3).name)
-        }
-        this.setState({
-          userThemes: themeArray,
-          updatedThemes: true
-        })
       })
       // .then(() => this.renderThemeField())
       // return themeArray
@@ -69,6 +73,13 @@ class App extends Component {
 
   updateAppThemes = (themes) => {
     this.setState({userThemes: themes})
+  }
+
+  updateSelectedCountry = (country) => {
+    this.setState({
+      updatedSelectedCountry: true,
+      selectedCountry: country
+    })
   }
 
   render() {
@@ -85,7 +96,7 @@ class App extends Component {
           {(this.state.updatedThemes)
             ? <Route
               path={'/map'}
-              render={()=><MapBrowser updateAppThemes={this.updateAppThemes} themes={this.state.themes} userThemes={this.state.userThemes} fetchUserThemes={this.fetchUserThemes}/>}
+              render={()=><MapBrowser updateSelectedCountry={this.updateSelectedCountry} updateAppThemes={this.updateAppThemes} themes={this.state.themes} userThemes={this.state.userThemes} fetchUserThemes={this.fetchUserThemes}/>}
             />
           : <div>Loading Thing</div>}
             <Route path={'/create_user'} component={CreateUserForm} />
@@ -93,7 +104,7 @@ class App extends Component {
             {(this.state.updatedThemes)
           ? <Route
               path={'/projects'}
-              render={()=><ProjectBrowser updateAppThemes={this.updateAppThemes} themes={this.state.themes} userThemes={this.state.userThemes} fetchUserThemes={this.fetchUserThemes}/>}
+              render={()=><ProjectBrowser updatedSelectedCountry={this.state.updatedSelectedCountry} updateSelectedCountry={this.updateSelectedCountry} appSelectedCountry={this.state.selectedCountry} updateAppThemes={this.updateAppThemes} themes={this.state.themes} userThemes={this.state.userThemes} fetchUserThemes={this.fetchUserThemes}/>}
               />
           : <div>Loading Thing</div>}
           </Router>

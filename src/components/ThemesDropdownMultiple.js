@@ -13,7 +13,6 @@ export default class ThemesDropdownMultiple extends Component {
 
   componentDidMount(){
     // this.getThemes()
-    console.log(this.props.userThemes)
     const url = "http://localhost:3000/api/v1/themes"
     let newOptions = []
     fetch(url)

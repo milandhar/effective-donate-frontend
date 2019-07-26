@@ -13,24 +13,22 @@ class ChoroplethMap extends Component {
       }
     }
 
-    componentDidMount(props) {
-      console.log('in choro did mount')
-      this.renderMap()
+    componentDidMount() {
+      this.renderMap(this.props)
 
         // Datamaps expect data in format:
         // { "USA": { "fillColor": "#42a844", numberOfWhatever: 75},
         //   "FRA": { "fillColor": "#8dc386", numberOfWhatever: 43 } }
       }
 
-      renderMap = () => {
-        console.log('in choro renderMap()')
+      renderMap = (props) => {
         let dataset = {};
 
         // We need to colorize every country based on "numberOfWhatever"
         // colors should be uniq for every value.
         // For this purpose we create palette(using min/max this.props.data-value)
 
-        let onlyValues = this.props.data.map(function (obj) { return obj[1]; });
+        let onlyValues = props.data.map(function (obj) { return obj[1]; });
         let minValue = Math.min.apply(null, onlyValues),
             maxValue = Math.max.apply(null, onlyValues);
 
@@ -41,7 +39,7 @@ class ChoroplethMap extends Component {
             .range(["#EFEFFF", "#02386F"]); // blue color
 
         // fill dataset in appropriate format
-        this.props.data.forEach(function (item) { //
+        props.data.forEach(function (item) { //
             // item example value ["USA", 70]
             let iso = item[0],
                 value = item[1];
@@ -106,7 +104,7 @@ class ChoroplethMap extends Component {
                 let link = geography.id
                 // link to the country component here. Might need a callback to mapBrowser first
                 // could use localStorage as a backup
-                this.props.handleClick(geography)
+                props.handleClick(geography)
                 // props.history.push({
                 //   pathname: "/country",
                 //   state: {link: geography}
@@ -119,15 +117,13 @@ class ChoroplethMap extends Component {
       }
 
       clickCountry = () => {
-        this.props.handleClick()
+        // this.props.handleClick()
       }
 
     render() {
-        {console.log('in choro render')}
         return (
             <div>
               <div id="choropleth_map"></div>
-              {console.log('rendered choro')}
             </div>
         );
     }

@@ -6,6 +6,8 @@ import ChoroplethMap from './choroplethMap.js'
 import CountryCard from './CountryCard.js'
 import ThemesDropdownMultiple from './ThemesDropdownMultiple'
 import Navbar from './Navbar.js'
+import { withRouter } from 'react-router-dom'
+
 
 export default class ProjectBrowser extends Component {
 
@@ -13,15 +15,17 @@ export default class ProjectBrowser extends Component {
     super(props)
     this.state = {
       countryList: [],
-      selectedCountry: "",
+      selectedCountry: this.props.appSelectedCountry,
       projectThemes: this.props.userThemes,
       countryProjects: [],
-      themesUpdated: false
+      themesUpdated: false,
+      countryUpdated: this.props.updatedSelectedCountry
     }
   }
 
   componentDidMount(){
     this.fetchCountries()
+    this.fetchThemeProjects()
   }
 
   setSelectedCountry = () => {
@@ -66,6 +70,7 @@ export default class ProjectBrowser extends Component {
   }
 
   fetchProjects = () => {
+    console.log('in fetch projects')
     const countryCode = this.state.selectedCountry
     const url = `http://localhost:3000/api/v1/get_projects?countryCode=${countryCode}`
     fetch(url)
@@ -116,6 +121,7 @@ export default class ProjectBrowser extends Component {
   }
 
   updateProjectThemes = (themes) => {
+    console.log('in update project themes')
     this.props.updateAppThemes(themes)
     this.setState({projectThemes: themes}, this.fetchThemeProjects)
   }
@@ -124,13 +130,13 @@ export default class ProjectBrowser extends Component {
     return(
       <div className="app-div">
         <Navbar logout={this.logout}/>
+        {console.log(this.state.countryProjects)}
         <div>
           <Header as='h2' icon textAlign='center'>
             <Icon name='tasks' circular />
           </Header>
         </div>
         <Grid>
-
           <Grid.Row columns={2}>
             <Grid.Column>
               <Header as='h3' textAlign='center'>
@@ -145,7 +151,7 @@ export default class ProjectBrowser extends Component {
                 onChange={this.handleChange}
                 value={this.state.selectedCountry}
               />
-            </Grid.Column>
+          </Grid.Column>
             <Grid.Column>
               <Header as='h3' textAlign='center'>
                 <Header.Content>Themes</Header.Content>

@@ -5,6 +5,8 @@ import '../App.css';
 import ChoroplethMap from './choroplethMap.js'
 import ThemesDropdownMultiple from './ThemesDropdownMultiple'
 import Navbar from './Navbar.js'
+import { withRouter } from 'react-router-dom'
+
 
 class MapBrowser extends Component {
 
@@ -219,6 +221,9 @@ class MapBrowser extends Component {
   }
 
   goToProjects = (geography) => {
+    console.log(this.props)
+    console.log(geography.id)
+    this.props.updateSelectedCountry(geography.id)
     this.props.history.push({
       pathname: '/projects',
       state: {countryCode: geography.id}
@@ -270,4 +275,4 @@ class MapBrowser extends Component {
 }
 
 
-export default MapBrowser;
+export default withRouter(MapBrowser);
