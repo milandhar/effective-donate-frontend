@@ -15,7 +15,8 @@ export default class ProjectBrowser extends Component {
       countryList: [],
       selectedCountry: "",
       projectThemes: this.props.userThemes,
-      countryProjects: []
+      countryProjects: [],
+      themesUpdated: false
     }
   }
 
@@ -24,14 +25,16 @@ export default class ProjectBrowser extends Component {
   }
 
   setSelectedCountry = () => {
+    console.log('in set selected country')
     if(this.props.location && this.props.location.state && this.props.location.state.countryCode){
       if(this.state.selectedCountry === ""){
-        this.setState({selectedCountry: this.props.location.state.countryCode}, this.fetchProjects)
+        this.setState({selectedCountry: this.props.location.state.countryCode}, this.fetchThemeProjects)
       }
     }
   }
 
   fetchCountries = () => {
+    console.log('in fetchCountries')
     const url = `http://localhost:3000/api/v1/countries`
     const getCountryISO2 = require("country-iso-3-to-2");
     let countryArray = []
@@ -50,12 +53,16 @@ export default class ProjectBrowser extends Component {
         }
       })
       const sortJsonArray = require('sort-json-array');
-      this.setState({countryList: sortJsonArray(countryArray, 'text')}, this.setSelectedCountry)
-      // this.setSelectedCountry()
+      if(this.props.location && this.props.location.state && this.props.location.state.countryCode){
+        if(this.state.selectedCountry === ""){
+      this.setState({
+        countryList: sortJsonArray(countryArray, 'text')},
+        this.setSelectedCountry)
+        }
+      } else {
+        this.setState({countryList: sortJsonArray(countryArray, 'text')})
+      }
     })
-    // let countries = json.country.name.sort(this.compare)
-
-    // return(sortJsonArray(countryArray, 'text'))
   }
 
   fetchProjects = () => {
@@ -66,11 +73,32 @@ export default class ProjectBrowser extends Component {
     .then(json=> {
       this.setState({countryProjects: json})
     })
-    // .then(()=>this.setSelectedCountry())
+  }
+
+  fetchThemeProjects = () => {
+    console.log('in fetch theme projects')
+    const countryCode = this.state.selectedCountry
+    // const [theme1, theme2, theme3, theme4, theme5, theme6, theme7, theme8, theme9, theme10, theme11, theme12, theme13, theme14, theme15, theme16, theme17, theme18] = this.state.projectThemes
+    const url = `http://localhost:3000/api/v1/get_theme_projects`
+    return fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({themes: this.state.projectThemes, countryCode: countryCode})
+    })
+    .then(res => res.json())
+    .then(json => {
+      this.setState({
+        countryProjects: json
+      }, this.setState({themesUpdated: true}))
+    })
+
   }
 
   handleChange = (ev, data) => {
-    this.setState({selectedCountry: data.value}, this.fetchProjects)
+    this.setState({selectedCountry: data.value}, this.fetchThemeProjects)
   }
 
   addFavorite = (ev, data) => {
@@ -88,9 +116,8 @@ export default class ProjectBrowser extends Component {
   }
 
   updateProjectThemes = (themes) => {
-    console.log('in update project themes')
-    this.setState({projectThemes: themes})
     this.props.updateAppThemes(themes)
+    this.setState({projectThemes: themes}, this.fetchThemeProjects)
   }
 
   render() {
@@ -126,14 +153,16 @@ export default class ProjectBrowser extends Component {
               <ThemesDropdownMultiple updateMapThemes={this.updateProjectThemes} themes={this.props.themes} mapThemes={this.state.projectThemes} />
             </Grid.Column>
           </Grid.Row>
-          <Grid.Row columns = {4}>
-              {this.state.countryProjects.map((project) => {
-                return <div className="column"> <CountryCard id={project.id} orgUrl={project.organization.url} organization={project.organization.name} handleStar={this.addFavorite()} funding={project.funding} longTermImpact={project.long_term_impact} summary={project.summary} goal={project.goal} key={project.id} image={project.image_url} theme={project.theme.name} title={project.title} country={project.country.name}/></div>
-            })}
-          </Grid.Row>
+          {(this.state.themesUpdated)
+            ? <Grid.Row columns = {4}>
+                {this.state.countryProjects.map((project) => {
+                  return <div className="column"> <CountryCard id={project.id} orgUrl={project.organization.url} organization={project.organization.name} handleStar={this.addFavorite()} funding={project.funding} longTermImpact={project.long_term_impact} summary={project.summary} goal={project.goal} key={project.id} image={project.image_url} theme={project.theme.name} title={project.title} country={project.country.name}/></div>
+              })}
+            </Grid.Row>
+            : <div>loading</div>
+          }
         </Grid>
       </div>
     )
   }
-
 }

@@ -62,7 +62,6 @@ class App extends Component {
           userThemes: themeArray,
           updatedThemes: true
         })
-        console.log('updated userThemes')
       })
       // .then(() => this.renderThemeField())
       // return themeArray
@@ -75,8 +74,6 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        {console.log('in app render')}
-        {console.log(this.state.userThemes)}
         <Router>
           <Route exact path="/"
           render={(props) => (
