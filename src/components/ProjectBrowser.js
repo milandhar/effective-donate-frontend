@@ -9,7 +9,7 @@ import Navbar from './Navbar.js'
 import { withRouter } from 'react-router-dom'
 
 
-export default class ProjectBrowser extends Component {
+class ProjectBrowser extends Component {
 
   constructor(props){
     super(props)
@@ -131,7 +131,6 @@ export default class ProjectBrowser extends Component {
     return(
       <div className="app-div">
         <Navbar logout={this.logout}/>
-        {console.log(this.state.countryProjects)}
         <div>
           <Header as='h2' icon textAlign='center'>
             <Icon name='tasks' circular />
@@ -173,3 +172,5 @@ export default class ProjectBrowser extends Component {
     )
   }
 }
+
+export default withRouter(ProjectBrowser)

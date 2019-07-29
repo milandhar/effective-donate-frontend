@@ -99,6 +99,28 @@ export default class Profile extends Component {
        return false
      }
 
+     removeFavorite = (projectId) => {
+       const userId = localStorage.userid
+       const url = `http://localhost:3000/api/v1/remove_project`
+       const headers = {
+           method: 'POST',
+           headers: {
+               'Content-Type': 'application/json'
+           },
+           body: JSON.stringify({user_id: userId, project_id: projectId})
+       }
+       fetch(url, headers)
+         .then(res=>res.json())
+         .then(json => {
+           if(json.error){
+             alert(`Could not remove project: ${json["error"]}`)
+           } else{
+             alert(json["message"])
+             this.fetchProjects()
+           }
+         })
+     }
+
     render() {
         {document.body.style = 'background: white;'}
         return(
@@ -107,7 +129,6 @@ export default class Profile extends Component {
             <Grid celled>
               <Grid.Row>
                 <Grid.Column width={3}>
-                {/*<div class="row list-top-image">*/}
                   <div class='profile-header'>
                     <h2 class="ui header highlight">
                       {localStorage.getItem('username')}
@@ -119,45 +140,13 @@ export default class Profile extends Component {
                       {localStorage.first_name} {localStorage.last_name}
                     </h2>
                   </div>
-                {/*</div>*/}
                 </Grid.Column>
                 <Grid.Column width={13}>
                   <h1 class="ui center aligned header highlight">
                     Favorite Themes:
                   </h1>
                   <FavoriteThemes />
-                {/*  <div class="dropdown-container">
-                    <div class="select-container">
-                      <select class="ui dropdown">
-                        <option value="">Humanitarian Assistance</option>
-                        <option value="1">Male</option>
-                        <option value="0">Female</option>
-                      </select>
-                      <button class="ui icon button">
-                        <i class="plus circle icon"></i>
-                      </button>
-                    </div>
-                    <div class="select-container">
-                      <select class="ui dropdown">
-                        <option value="">Democracy and Governance</option>
-                        <option value="1">Male</option>
-                        <option value="0">Female</option>
-                      </select>
-                      <button class="ui icon button">
-                        <i class="plus circle icon"></i>
-                      </button>
-                    </div>
-                    <div class="select-container">
-                      <select class="ui dropdown">
-                        <option value="">Climate Change</option>
-                        <option value="1">Male</option>
-                        <option value="0">Female</option>
-                      </select>
-                      <button class="ui icon button">
-                        <i class="plus circle icon"></i>
-                      </button>
-                    </div>
-                  </div> */}
+
                 </Grid.Column>
               </Grid.Row>
               <Grid.Row>
@@ -167,27 +156,10 @@ export default class Profile extends Component {
                   <h1 class="ui center aligned header highlight">
                     Starred Projects:
                   </h1>
-                  <StarredProjectsList projectArray={this.state.projectArray}/>
+                  <StarredProjectsList removeFavorite={this.removeFavorite} projectArray={this.state.projectArray}/>
                 </Grid.Column>
               </Grid.Row>
             </Grid>
-            {/*<div class="row mint">
-                <div class="ui fluid three item top attached tabular menu">
-                    <a class="active item" onClick={this.handleSelect} name='profile' id='profile'>
-                        Profile
-                    </a>
-                    <a class="item" onClick={this.handleSelect} name='email' id='email'>
-                         <i class="envelope outline icon"></i> Email
-                    </a>
-
-                 </div>
-                </div>
-                */}
-
-
-            {/* {this.state.selected==='email'?*/}
-            {/* <EmailDisplay updateEmail={this.getProfile} user={this.state.profileInfo} />:*/}
-            {/* <ProfileDisplay updateProfile={this.getProfile} user={this.state.profileInfo}/>}*/}
         </section>
         )
     }

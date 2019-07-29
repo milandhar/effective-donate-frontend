@@ -246,7 +246,7 @@ class MapBrowser extends Component {
           <button onClick={this.refreshMap} id="refreshBtn">Refresh Projects</button>
         </div>
         <Grid divided='vertically'>
-          <Grid.Row columns={1}>
+          <Grid.Row columns={1} id="map-div">
             <Grid.Column>
               {(this.state.updatedData)
               ? <div>

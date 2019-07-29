@@ -29,10 +29,10 @@ export default class CountryCard extends Component {
     fetch(url, headers)
       .then(res=>res.json())
       .then(json => {
-          if(!json.error){
-            this.setState({starred: true})
-          }
-        })
+        if(!json.error){
+          this.setState({starred: true})
+        }
+      })
   }
 
   checkIfStarred = () => {

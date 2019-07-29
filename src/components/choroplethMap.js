@@ -59,6 +59,7 @@ class ChoroplethMap extends Component {
 
       let map = new Datamap({
           element: document.getElementById('choropleth_map'),
+          responsive: true,
           scope: 'world',
           geographyConfig: {
               popupOnHover: true,
@@ -100,8 +101,8 @@ class ChoroplethMap extends Component {
           // projection: 'mercator'
           setProjection: function (element) {
               var projection = d3.geo.mercator()
-                  .center([0, 0]) // always in [East Latitude, North Longitude]
-                  .scale(200)
+                  .center([0, 20]) // always in [East Latitude, North Longitude]
+                  .scale(240)
                   .translate([element.offsetWidth / 3, element.offsetHeight / 3]);
 
               var path = d3.geo.path().projection(projection);
