@@ -83,6 +83,7 @@ export default class ProjectBrowser extends Component {
   fetchThemeProjects = () => {
     console.log('in fetch theme projects')
     const countryCode = this.state.selectedCountry
+    console.log(countryCode)
     // const [theme1, theme2, theme3, theme4, theme5, theme6, theme7, theme8, theme9, theme10, theme11, theme12, theme13, theme14, theme15, theme16, theme17, theme18] = this.state.projectThemes
     const url = `http://localhost:3000/api/v1/get_theme_projects`
     return fetch(url, {

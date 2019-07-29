@@ -17,7 +17,7 @@ class App extends Component {
         userThemes: [],
         themes: [],
         updatedThemes: false,
-        selectedCountry: "",
+        selectedCountry: "USA",
         updatedSelectedCountry: false
       }
     }

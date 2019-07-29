@@ -7,73 +7,43 @@ export default class ThemesDropdownMultiple extends Component {
     this.state = {
       options: [],
       themes: this.props.themes,
-      filteredThemes: this.props.mapThemes
+      filteredThemes: this.props.mapThemes,
+      themeNamesArray: []
     }
   }
 
   componentDidMount(){
-    // this.getThemes()
     const url = "http://localhost:3000/api/v1/themes"
     let newOptions = []
+    let themeNamesArray = []
     fetch(url)
     .then(res=>res.json())
     .then(json=> {
       json.forEach(theme => {
         newOptions.push({key: theme["name"], text: theme["name"], value: theme["name"]})
+        themeNamesArray.push(theme["name"])
       })
-      // , () => this.changeState(newOptions)
+      newOptions.unshift({key: "All", text: "All", value: "All"})
+      console.log(newOptions)
     })
-    .then(() => this.changeState(newOptions))
+    .then(() => this.changeState(newOptions), this.setState({themeNamesArray: themeNamesArray}))
   }
 
-  // fetchUserThemes = () => {
-  //   let themeArray = []
-  //   let token = localStorage.getItem("jwt")
-  //     fetch('http://localhost:3000/api/v1/profile', {
-  //       headers: {
-  //         'Authorization': 'Bearer ' + token
-  //       }
-  //     })
-  //     .then(res=>res.json())
-  //     .then(json=> {
-  //       if(json.user.theme1){
-  //         themeArray.push(this.getThemeFromId(json.user.theme1).name)
-  //       }
-  //       if(json.user.theme2){
-  //         themeArray.push(this.getThemeFromId(json.user.theme2).name)
-  //       }
-  //       if(json.user.theme3) {
-  //         themeArray.push(this.getThemeFromId(json.user.theme3).name)
-  //       }
-  //       this.setState({
-  //         filteredThemes: themeArray
-  //       })
-  //     })
-  //     // .then(() => this.renderThemeField())
-  //     // return themeArray
-  // }
-
-  // getThemeFromId = (themeId) => {
-  //   let theme = this.state.themes.find(theme=>theme.id===themeId)
-  //   return theme
-  // }
-  //
-  // getThemes = () => {
-  //   const url = 'http://localhost:3000/api/v1/themes'
-  //   fetch(url)
-  //   .then(res=>res.json())
-  //   .then(json => {
-  //     this.setState({themes: json}, this.fetchUserThemes)
-  //   })
-  // }
 
   changeState = (newOptions) => {
     this.setState({options: newOptions})
   }
 
   handleChange = (ev, data) => {
-    this.setState({filteredThemes: data.value})
-    this.props.updateMapThemes(data.value)
+    if(data.value.includes("All")){
+      this.setState({filteredThemes: this.state.themeNamesArray})
+      this.props.updateMapThemes(this.state.themeNamesArray)
+    } else {
+      this.setState({filteredThemes: data.value})
+      this.props.updateMapThemes(data.value)
+    }
+
+    console.log(data)
   }
 
   render(){
