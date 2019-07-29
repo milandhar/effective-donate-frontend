@@ -12,6 +12,7 @@ export default class DonatePage extends Component {
     this.state = {
       selectedProject: JSON.parse(localStorage.getItem('selectedProject')),
       donationOptions: [],
+      starred: false,
       chosenAmount: null,
       name: '',
       email: '',
@@ -28,6 +29,7 @@ export default class DonatePage extends Component {
 
   componentDidMount(){
     this.findDonationOptions()
+    this.checkIfStarred()
   }
 
   logout = () => {
@@ -54,7 +56,7 @@ export default class DonatePage extends Component {
       .then(res=>res.json())
       .then(json => {
         console.log(json)
-        if(json[0].amount){
+        if(json && json[0]){
           this.setState({donationOptions: json, chosenAmount: json[0].amount})
         }
       })
@@ -85,6 +87,50 @@ export default class DonatePage extends Component {
     this.setState({ [name]: value})
   }
 
+  checkIfStarred = () => {
+    let starred = false
+    const userId = localStorage.userid
+    const projectId = this.state.selectedProject.id
+    const url = `http://localhost:3000/api/v1/check_star`
+    const headers = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({user_id: userId, project_id: projectId})
+    }
+    fetch(url, headers)
+    .then(res=>res.json())
+    .then(json => {
+      console.log(json)
+        if(json["status"] === "Star"){
+          starred = true
+          this.setState({starred:true})
+        }
+    })
+  }
+
+  handleStar = () => {
+    //post to user_starred_projects here
+    const userId = localStorage.userid
+    const projectId = this.state.selectedProject.id
+    const url = `http://localhost:3000/api/v1/user_starred_projects`
+    const headers = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({user_id: userId, project_id: projectId})
+    }
+    fetch(url, headers)
+      .then(res=>res.json())
+      .then(json => {
+        if(!json.error){
+          this.setState({starred: true})
+        }
+      })
+  }
+
   render() {
     return(
       <section>
@@ -100,6 +146,9 @@ export default class DonatePage extends Component {
               <Header as='h2' textAlign='center'>
                 <Header.Content>{this.state.selectedProject.title}</Header.Content>
               </Header>
+              <a onClick={this.handleStar}>
+              {this.state.starred ? <Icon className="donate active" name='star' /> : <Icon name='star' />}
+              </a>
             </Grid.Column>
           </Grid.Row>
           <Grid.Row columns={2}>

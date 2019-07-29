@@ -58,11 +58,11 @@ class ProjectBrowser extends Component {
       })
       const sortJsonArray = require('sort-json-array');
       if(this.props.location && this.props.location.state && this.props.location.state.countryCode){
-        if(this.state.selectedCountry === ""){
+        // if(this.state.selectedCountry === ""){
       this.setState({
         countryList: sortJsonArray(countryArray, 'text')},
         this.setSelectedCountry)
-        }
+        // }
       } else {
         this.setState({countryList: sortJsonArray(countryArray, 'text')})
       }

@@ -205,6 +205,9 @@ section {
   width: 50%;
 }
 
+.star.icon.donate.active{
+  color: gold !important;
+}
 
 @media only screen and (max-width: 1300px) {
   #map-div {

@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import { Grid, Image } from 'semantic-ui-react'
 import FavoriteThemes from './FavoriteThemes'
-
 import Navbar from './Navbar'
 import StarredProjectsList from './StarredProjectsList'
+import { withRouter } from 'react-router-dom'
 
 
-export default class Profile extends Component {
+class Profile extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -93,7 +93,7 @@ export default class Profile extends Component {
              alert(json["message"])
              this.fetchProjects()
            }
-         })
+        })
      }
 
     render() {
@@ -131,7 +131,7 @@ export default class Profile extends Component {
                   <h1 class="ui center aligned header highlight">
                     Starred Projects:
                   </h1>
-                  <StarredProjectsList removeFavorite={this.removeFavorite} projectArray={this.state.projectArray}/>
+                  <StarredProjectsList handleDonate={this.props.handleDonate} removeFavorite={this.removeFavorite} projectArray={this.state.projectArray}/>
                 </Grid.Column>
               </Grid.Row>
             </Grid>
@@ -139,3 +139,5 @@ export default class Profile extends Component {
         )
     }
 }
+
+export default withRouter(Profile)

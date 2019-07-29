@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { Image, List, Button, Icon } from 'semantic-ui-react'
+import { withRouter } from 'react-router-dom'
 
-export default class StarredProjectsList extends Component {
+class StarredProjectsList extends Component {
   constructor(props){
     super(props)
   }
@@ -9,6 +10,11 @@ export default class StarredProjectsList extends Component {
   handleRemove = (project) => {
     console.log(project)
     this.props.removeFavorite(project.id)
+  }
+
+  goToDonation = (project) => {
+    this.props.handleDonate(project)
+    this.props.history.push("/donate")
   }
 
 
@@ -30,7 +36,7 @@ export default class StarredProjectsList extends Component {
             <Button onClick={()=>this.handleRemove(project)} icon>
               <Icon name='close' />
             </Button>
-            <Button icon>
+            <Button onClick={()=>this.goToDonation(project)} icon>
               <Icon name='dollar sign' />
             </Button>
           </List.Content>
@@ -40,3 +46,5 @@ export default class StarredProjectsList extends Component {
     )
   }
 }
+
+export default withRouter(StarredProjectsList)

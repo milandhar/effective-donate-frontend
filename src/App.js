@@ -108,7 +108,10 @@ class App extends Component {
             />
           : <div>Loading Thing</div>}
             <Route path={'/create_user'} component={CreateUserForm} />
-            <Route path={'/profile'} component={Profile} />
+            <Route
+              path={'/profile'}
+              render={()=><Profile handleDonate={this.handleDonate}/>}
+            />
             {(this.state.updatedThemes)
           ? <Route
               path={'/projects'}
