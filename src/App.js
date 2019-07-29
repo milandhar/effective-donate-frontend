@@ -6,6 +6,7 @@ import LoginForm from './components/loginForm';
 import Profile from './components/Profile';
 import CreateUserForm from './components/createUserForm';
 import ProjectBrowser from './components/ProjectBrowser';
+import DonatePage from './components/DonatePage';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
@@ -17,8 +18,9 @@ class App extends Component {
         userThemes: [],
         themes: [],
         updatedThemes: false,
-        selectedCountry: "USA",
-        updatedSelectedCountry: false
+        selectedCountry: "COL",
+        updatedSelectedCountry: false,
+        selectedProject: {}
       }
     }
 
@@ -82,6 +84,12 @@ class App extends Component {
     })
   }
 
+  handleDonate = (project) => {
+    this.setState({selectedProject: project})
+    localStorage.removeItem('selectedProject')
+    localStorage.setItem('selectedProject', JSON.stringify(project))
+  }
+
   render() {
     return (
       <div className="App">
@@ -104,8 +112,15 @@ class App extends Component {
             {(this.state.updatedThemes)
           ? <Route
               path={'/projects'}
-              render={()=><ProjectBrowser updatedSelectedCountry={this.state.updatedSelectedCountry} updateSelectedCountry={this.updateSelectedCountry} appSelectedCountry={this.state.selectedCountry} updateAppThemes={this.updateAppThemes} themes={this.state.themes} userThemes={this.state.userThemes} fetchUserThemes={this.fetchUserThemes}/>}
+              render={()=><ProjectBrowser handleDonate={this.handleDonate} updatedSelectedCountry={this.state.updatedSelectedCountry} updateSelectedCountry={this.updateSelectedCountry} appSelectedCountry={this.state.selectedCountry} updateAppThemes={this.updateAppThemes} themes={this.state.themes} userThemes={this.state.userThemes} fetchUserThemes={this.fetchUserThemes}/>}
               />
+          : <div>Loading Thing</div>}
+
+          {(this.state.selectedProject)
+          ? <Route
+            path={'/donate'}
+            render={()=><DonatePage project={this.state.selectedProject}/>}
+            />
           : <div>Loading Thing</div>}
           </Router>
       </div>

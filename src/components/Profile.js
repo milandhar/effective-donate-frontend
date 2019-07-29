@@ -4,8 +4,7 @@ import FavoriteThemes from './FavoriteThemes'
 
 import Navbar from './Navbar'
 import StarredProjectsList from './StarredProjectsList'
-// import ProfileDisplay from './ProfileDisplay'
-// import EmailDisplay from './EmailDisplay'
+
 
 export default class Profile extends Component {
     constructor(props) {
@@ -39,30 +38,6 @@ export default class Profile extends Component {
           }
         })
     }
-      // getProfile = () => {
-      //   let token = localStorage.getItem("jwt")
-      //   fetch('http://localhost:3000/api/v1/profile', {
-      //     headers: {
-      //       'Authorization': 'Bearer ' + token
-      //     }
-      //   })
-      //   .then(res=>res.json())
-      //   .then(json=> {
-      //     console.log(json)
-      //     this.setState({
-      //       profileInfo: {
-      //         ...this.state.profileInfo,
-      //         username: json.user.username,
-      //         email_address: json.user.email_address,
-      //         zipcode: json.user.zipcode,
-      //         user_id: json.user.id,
-      //         message_template: json.user.message_template
-      //       }
-      //     });
-      //   })
-      // }
-
-
 
     handleSelect = event => {
         const profileBtn = document.getElementById('profile')

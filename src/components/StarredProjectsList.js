@@ -35,7 +35,7 @@ export default class StarredProjectsList extends Component {
             </Button>
           </List.Content>
         </List.Item>)
-      }) }
+      })}
       </List>
     )
   }

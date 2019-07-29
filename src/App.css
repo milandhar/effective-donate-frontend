@@ -189,6 +189,18 @@ section {
   margin-bottom: -25%;
 }
 
+.item.donation.options {
+  justify-content: flex-start !important;
+}
+
+.donation.description .header {
+  text-align: left !important;
+}
+
+.content.donation.amount {
+  /* width: 4em; */
+}
+
 
 @media only screen and (max-width: 1300px) {
   #map-div {
