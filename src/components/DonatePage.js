@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Grid, Header, Icon, Radio, Form } from 'semantic-ui-react'
+import { Grid, Header, Icon, Radio, Form, Button } from 'semantic-ui-react'
 import FavoriteThemes from './FavoriteThemes'
 import DonationOptionsList from './DonationOptionsList'
 
@@ -12,7 +12,17 @@ export default class DonatePage extends Component {
     this.state = {
       selectedProject: JSON.parse(localStorage.getItem('selectedProject')),
       donationOptions: [],
-      chosenAmount: null
+      chosenAmount: null,
+      name: '',
+      email: '',
+      cardNumber: null,
+      expiration: '',
+      code: null,
+      submittedName: '',
+      submittedEmail: '',
+      submittedCardNumber: '',
+      submittedExpiration: '',
+      submittedCode: null
     }
   }
 
@@ -44,7 +54,9 @@ export default class DonatePage extends Component {
       .then(res=>res.json())
       .then(json => {
         console.log(json)
-        this.setState({donationOptions: json})
+        if(json[0].amount){
+          this.setState({donationOptions: json, chosenAmount: json[0].amount})
+        }
       })
   }
 
@@ -54,6 +66,23 @@ export default class DonatePage extends Component {
 
   handleAmountChange = (ev) => {
     this.updateChosenAmount(ev.target.value)
+  }
+
+  handleSubmit = () => {
+    const { name, email, cardNumber, expiration, code } = this.state
+    this.setState({
+      submittedName: name,
+      submittedEmail: email,
+      submittedcardNumber: cardNumber,
+      submittedExpiration: expiration,
+      submittedCode: code
+    })
+  }
+
+  handleChange = (ev, { name, value }) => {
+    console.log(name)
+    console.log(value)
+    this.setState({ [name]: value})
   }
 
   render() {
@@ -101,6 +130,26 @@ export default class DonatePage extends Component {
             </Grid.Column>
             <Grid.Column>
               <DonationOptionsList updateChosenAmount={this.updateChosenAmount} donationOptions={this.state.donationOptions}/>
+            </Grid.Column>
+          </Grid.Row>
+          <Grid.Row columns={1}>
+            <Grid.Column>
+              <Form onSubmit={this.handleSubmit}>
+                <div id="payment-div">
+                  <Form.Group>
+                    <Form.Input onChange={this.handleChange} name='name' value={this.state.name} label='Full Name' placeholder='Full Name' width={8} />
+                    <Form.Input onChange={this.handleChange} name='email' value={this.state.email} type='email' label='Email Address' placeholder='Email Address' width={8} />
+                  </Form.Group>
+                  <Form.Group>
+                    <Form.Input onChange={this.handleChange} name='cardNumber' value={this.state.cardNumber} type='tel' label='Card Number' placeholder='Card Number' width={8} />
+                    <Form.Input onChange={this.handleChange} name='expiration' value={this.state.expiration} label='Expiration' placeholder='MM/YY' width={5} />
+                    <Form.Input onChange={this.handleChange} name='code' value={this.state.code} label='Code' placeholder='Code' width={3} />
+                  </Form.Group>
+                  <Form.Checkbox label='I agree to the Terms and Conditions' />
+                  {/*Add validation ternary here */}
+                  <Button type='submit'>Complete Donation</Button>
+                </div>
+              </Form>
             </Grid.Column>
           </Grid.Row>
         </Grid>
