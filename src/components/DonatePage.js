@@ -49,9 +49,11 @@ export default class DonatePage extends Component {
   }
 
   updateChosenAmount = (amount) => {
-    console.log(amount)
-    console.log('in parent chosen')
     this.setState({chosenAmount: amount})
+  }
+
+  handleAmountChange = (ev) => {
+    this.updateChosenAmount(ev.target.value)
   }
 
   render() {
@@ -79,18 +81,22 @@ export default class DonatePage extends Component {
                   <input
                     placeholder='Donation Amount'
                     value={this.state.chosenAmount}
+                    onChange={this.handleAmountChange}
                   />
                 </Form.Field>
                 <Form.Field>
                   <label>Donate Monthly?</label>
                   <Radio toggle />
                 </Form.Field>
-                <Form.Field>
+                {(this.state.chosenAmount)
+              ?<Form.Field>
                   <label>Total:</label>
                     <Header as='h2' textAlign='center'>
-                      <Header.Content>$100</Header.Content>
+                      <Header.Content>{`$${this.state.chosenAmount}`}</Header.Content>
                     </Header>
                 </Form.Field>
+              : <div></div>
+                }
               </Form>
             </Grid.Column>
             <Grid.Column>
