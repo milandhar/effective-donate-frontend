@@ -14,12 +14,14 @@ export default class DonatePage extends Component {
       donationOptions: [],
       starred: false,
       chosenAmount: null,
-      name: '',
+      firstName: '',
+      lastName: '',
       email: '',
       cardNumber: null,
       expiration: '',
       code: null,
-      submittedName: '',
+      submittedFirstName: '',
+      submittedLastName: '',
       submittedEmail: '',
       submittedCardNumber: '',
       submittedExpiration: '',
@@ -71,9 +73,10 @@ export default class DonatePage extends Component {
   }
 
   handleSubmit = () => {
-    const { name, email, cardNumber, expiration, code } = this.state
+    const { firstName, lastName, email, cardNumber, expiration, code } = this.state
     this.setState({
-      submittedName: name,
+      submittedFirstName: firstName,
+      submittedLastName: lastName,
       submittedEmail: email,
       submittedcardNumber: cardNumber,
       submittedExpiration: expiration,
@@ -82,8 +85,6 @@ export default class DonatePage extends Component {
   }
 
   handleChange = (ev, { name, value }) => {
-    console.log(name)
-    console.log(value)
     this.setState({ [name]: value})
   }
 
@@ -186,7 +187,8 @@ export default class DonatePage extends Component {
               <Form onSubmit={this.handleSubmit}>
                 <div id="payment-div">
                   <Form.Group>
-                    <Form.Input onChange={this.handleChange} name='name' value={this.state.name} label='Full Name' placeholder='Full Name' width={8} />
+                    <Form.Input onChange={this.handleChange} name='firstName' value={this.state.firstName} label='First Name' placeholder='First Name' width={4} />
+                    <Form.Input onChange={this.handleChange} name='lastNAme' value={this.state.lastNAme} label='Last Name' placeholder='Last Name' width={4} />
                     <Form.Input onChange={this.handleChange} name='email' value={this.state.email} type='email' label='Email Address' placeholder='Email Address' width={8} />
                   </Form.Group>
                   <Form.Group>
