@@ -289,6 +289,14 @@ section {
   justify-content: space-around !important;
 }
 
+th {
+  font-size: 1.5em;
+}
+
+td {
+  font-weight: bold;
+}
+
 @media only screen and (max-width: 1300px) {
   #map-div {
     margin-bottom: -5%;
