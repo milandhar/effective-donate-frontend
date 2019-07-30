@@ -1,0 +1,141 @@
+<html>
+<head>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<script src="https://js.braintreegateway.com/web/3.6.2/js/client.js"></script>
+<script src="https://js.braintreegateway.com/web/3.6.2/js/hosted-fields.js"></script>
+
+   <script type="text/javascript" src="https://www.globalgiving.org/javascript/partner/client-donation.js"></script>
+
+   <script>
+
+      var paymentConfig = new GGPaymentConfig({
+            api_key: '4be97db5-e712-49b1-bae9-12c85422ce7a',
+            api_token: 'vu1q0pqdi0howd79qdi16hylykqdi2vde9c6qdi3',
+            is_test: true,
+            paymentGatewayKey: 'sandbox_w3f7vg63_346mrgcqwkppmnhx',
+            refcode: 'abc123'
+            // transactionId: 'YOUR_TRANSACTION_ID'
+                  });
+
+      var payment = new GGPayment(paymentConfig);
+
+      var beforeSubmitCallback=function(event,GGPayment) {
+         if (GGPayment.api_key.indexOf('YOUR_') == 0 || GGPayment.api_token.indexOf('YOUR_') == 0)
+         {
+            alert('This form is for demonstration only. Please view-source and run on your own server by replacing the payment gateway key:sandbox_mbzbpnqn_346mrgcqwkppmnhx, YOUR_TRANSACTION_ID, YOUR_REF_CODE, YOUR_API_KEY,  and YOUR_API_TOKEN with your own values.');
+            return false;
+         }
+
+         $('#paymentInfo').hide();
+         $('#processing').show();
+         return true; //return false to prevent submission
+      }
+
+      var successCallback=function(data, textStatus, jqXHR) {
+         console.log('receiptid:' + data.donation.receipt.receiptNumber);
+         $('#processing').hide();
+         $('#thankyou').show();
+      };
+
+      var errorCallback=function(jqXHR, textStatus, errorThrown) {
+
+         $('#errorReason').html('');
+         var errorContent = jqXHR.getResponseHeader("content-type") || '';
+
+         if (errorContent.indexOf('json') > -1) {
+
+           res = $.parseJSON(jqXHR.responseText);
+           var reasons='<br/>Reason(s): <br/>';
+           for (var i=0;i<res.error_response.errors.error.length;i++)
+           {
+               reasons += res.error_response.errors.error[i].error_message  + '<br/>';
+           }
+            $('#errorReason').html(reasons + '<br/><br/><a href="javascript:location.reload();">Try Again</a>');
+         }
+
+         console.log(errorThrown);
+         $('#processing').hide();
+         $('#error').show();
+      };
+
+      payment.startup(successCallback,errorCallback,beforeSubmitCallback);
+
+   </script>
+
+<!--[if IE 9]>
+   <link rel="stylesheet" href="https://www.globalgiving.org/css/partner/client-donation-ie9.css"/>
+<![endif]-->
+<link rel="stylesheet" href="https://www.globalgiving.org/css/partner/client-donation.css"/>
+
+
+<style>
+#paymentInfo,#processing, #thankyou, #error {
+   width:500px;
+   margin-left:-250px;
+   padding-left:50%;
+}
+#processing, #thankyou, #error {
+   display:none;
+   padding-top:200px;
+   font-family: courier, monospace;
+   font-weight:800;
+   font-size: 14px;
+}
+</style>
+
+</head>
+<body>
+
+<div class="demo-frame">
+  <form method="post" id="ggPaymentForm" method="POST">
+
+    <div id="paymentInfo">
+
+<strong><h2>Client-Side Instructions: </h2>View source and replace the payment gateway key "sandbox_mbzbpnqn_346mrgcqwkppmnhx", YOUR_REF_CODE. YOUR_API_KEY, YOUR_TRANSACTION_ID and YOUR_API_TOKEN with your own values.<br/><br/>           Submitting the form will construct the JSON/API call for you with call-backs on success or error. You must generate an API token on the
+server side to use within this form.<br><br>      </strong>
+
+       <label class="local-label" for="project">Project ID</label>
+       <input type="text" name="donation.project.id" class="local-field" id="project" value="554"/>
+
+       <label class="local-label" for="amount">Amount</label>
+       <input type="text" name="donation.amount" class="local-field" id="amount" value="100"/>
+
+       <label class="local-label" for="firstName">First Name</label>
+       <input type="text" name="donation.payment_detail.firstname" class="local-field" id="firstName"/>
+
+       <label class="local-label" for="lastName">Last Name</label>
+       <input type="text" name="donation.payment_detail.lastname" class="local-field" id="lastName"/>
+
+       <label class="local-label" for="amount">Email</label>
+       <input type="text" name="donation.email" class="local-field" id="email"/>
+
+       <label class="hosted-fields--label" for="ggCardNumber">Card Number</label>
+       <div id="ggCardNumber" class="hosted-field"></div>
+
+       <label class="hosted-fields--label" for="ggCardExpiration">Expiration Date</label>
+       <div id="ggCardExpiration" class="hosted-field"></div>
+
+       <label class="hosted-fields--label" for="ggCardCvv">CVV</label>
+       <div id="ggCardCvv" class="hosted-field"></div>
+
+       <label class="hosted-fields--label" for="ggCardPostal">Postal Code</label>
+       <div id="ggCardPostal" class="hosted-field"></div>
+
+       <div class="button-container">
+       <input type="submit" class="button button--small button--green" value="Donate" id="submitButton"/>
+       </div>
+
+    </div>
+    <div id="processing">Processing...</div>
+    <div id="thankyou">Thank you for your donation!</div>
+    <div id="error">Sorry, we could not process your donation.<div id="errorReason"></div></div>
+
+
+  </form>
+<div>
+
+
+</body>
+</html>
