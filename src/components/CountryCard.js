@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Card, Icon, Image, Rating } from 'semantic-ui-react'
+import { Card, Icon, Image, Rating, Progress } from 'semantic-ui-react'
 import { withRouter } from 'react-router-dom'
 
 
@@ -71,6 +71,7 @@ class CountryCard extends Component {
       <Card.Header>{this.props.title}</Card.Header>
       <Card.Meta>{this.props.theme} | {this.props.country}</Card.Meta>
       <Card.Meta> <a className="org-link" href={this.props.orgUrl} target="_blank">{this.props.organization}</a></Card.Meta>
+      <Progress value={this.props.funding} total={this.props.goal} color='blue' progress='percent' percent={Math.round(this.props.funding*100/this.props.goal)} />
       <Card.Meta>${this.props.funding.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} / ${this.props.goal.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</Card.Meta>
       <Card.Description>
         {this.props.name}

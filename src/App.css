@@ -209,6 +209,21 @@ section {
   color: gold !important;
 }
 
+.card-div{
+  margin-bottom: 15px !important;
+  padding-left: .25rem;
+  padding-right: .25rem;
+  width: 20% !important;
+}
+
+.card-row{
+  justify-content: center !important;
+}
+
+.ui.progress {
+  margin-bottom: .2em !important;
+}
+
 @media only screen and (max-width: 1300px) {
   #map-div {
     margin-bottom: -5%;
