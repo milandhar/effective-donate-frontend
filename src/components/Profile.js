@@ -101,7 +101,7 @@ class Profile extends Component {
         return(
           <section class = "profile-section">
            <Navbar logout={this.logout}/>
-            <Grid celled>
+            <Grid>
               <Grid.Row>
                 <Grid.Column width={3}>
                   <div class='profile-header'>
@@ -121,7 +121,6 @@ class Profile extends Component {
                     Favorite Themes:
                   </h1>
                   <FavoriteThemes />
-
                 </Grid.Column>
               </Grid.Row>
               <Grid.Row>

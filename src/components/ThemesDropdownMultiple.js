@@ -48,6 +48,7 @@ export default class ThemesDropdownMultiple extends Component {
 
   render(){
     return(<Dropdown
+      className="themes-drop"
       value={this.state.filteredThemes}
       onChange={this.handleChange}
       placeholder='Themes'

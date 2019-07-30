@@ -33,6 +33,7 @@ class ProjectBrowser extends Component {
     if(this.props.location && this.props.location.state && this.props.location.state.countryCode){
       if(this.state.selectedCountry === ""){
         this.setState({selectedCountry: this.props.location.state.countryCode}, this.fetchThemeProjects)
+        console.log('setting country state')
       }
     }
   }
@@ -143,6 +144,7 @@ class ProjectBrowser extends Component {
                 <Header.Content>Country</Header.Content>
               </Header>
               <Dropdown
+                className="country-drop"
                 fluid
                 search
                 selection
@@ -159,10 +161,10 @@ class ProjectBrowser extends Component {
               <ThemesDropdownMultiple updateMapThemes={this.updateProjectThemes} themes={this.props.themes} mapThemes={this.state.projectThemes} />
             </Grid.Column>
           </Grid.Row>
-          {(this.state.themesUpdated)
-            ? <Grid.Row columns = {4}>
+          {(this.state.themesUpdated && this.state.countryProjects != [])
+            ? <Grid.Row className="card-row" columns = {4}>
                 {this.state.countryProjects.map((project) => {
-                  return <div className="column"> <CountryCard id={project.id} handleDonate={this.props.handleDonate} orgUrl={project.organization.url} organization={project.organization.name} handleStar={this.addFavorite()} funding={project.funding} longTermImpact={project.long_term_impact} summary={project.summary} goal={project.goal} key={project.id} image={project.image_url} theme={project.theme.name} title={project.title} country={project.country.name}/></div>
+                  return <div className="column card-div"> <CountryCard id={project.id} handleDonate={this.props.handleDonate} orgUrl={project.organization.url} organization={project.organization.name} handleStar={this.addFavorite()} funding={project.funding} longTermImpact={project.long_term_impact} summary={project.summary} goal={project.goal} key={project.id} image={project.image_url} theme={project.theme.name} title={project.title} country={project.country.name}/></div>
               })}
             </Grid.Row>
             : <div>loading</div>

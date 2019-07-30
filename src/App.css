@@ -193,8 +193,19 @@ section {
   justify-content: flex-start !important;
 }
 
+.ui.circular.button {
+  width: 80px !important;
+}
+
+
+.donation.description {
+  width: 100%;
+  margin-left: 20px !important;
+}
+
 .donation.description .header {
   text-align: left !important;
+  padding-top: 8px !important;
 }
 
 .content.donation.amount {
@@ -207,6 +218,83 @@ section {
 
 .star.icon.donate.active{
   color: gold !important;
+}
+
+.card-div{
+  margin-bottom: 20px !important;
+  padding-left: .25rem;
+  padding-right: .25rem;
+  width: 20% !important;
+}
+
+.card-row{
+  justify-content: center !important;
+}
+
+.ui.card{
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.ui.progress {
+  margin-bottom: .2em !important;
+}
+
+.country-drop {
+  width: 28% !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.themes-drop {
+  width: 60% !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  text-align: center !important;
+}
+
+.ui.form.create-form{
+  flex-direction: column !important;
+  width: 50% !important;
+}
+
+.equal.width.fields{
+  flex-direction: column !important;
+}
+
+#fields-div {
+  flex-direction: column !important;
+}
+
+#fields-div label {
+  font-size: 14px;
+}
+
+#button-div {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+}
+
+#top-themes {
+  font-size: 18px !important;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+#form-group-div {
+  display: flex;
+  flex-direction: row;
+  width: 70% !important;
+  justify-content: space-around !important;
+}
+
+th {
+  font-size: 1.5em;
+}
+
+td {
+  font-weight: bold;
 }
 
 @media only screen and (max-width: 1300px) {
