@@ -120,11 +120,14 @@ export default class FavoriteThemes extends Component {
       let newThemeId = this.getThemeFromName(newThemeName).id
       let prevUserThemes = this.state.userThemes
       let unique = true
-      prevUserThemes.forEach(theme => {
-        if(theme.name === newThemeName){
-          unique = false
-        }
-      })
+
+      if (prevUserThemes[0] != undefined && prevUserThemes[1] != undefined && prevUserThemes[2] != undefined){
+        prevUserThemes.forEach(theme => {
+          if(theme.name === newThemeName){
+            unique = false
+          }
+        })
+      }
       if(unique){
         prevUserThemes.splice(userThemeNumber, 1, {id: newThemeId, name: newThemeName})
         this.setState({prevUserThemes})
@@ -148,12 +151,6 @@ export default class FavoriteThemes extends Component {
       }
       fetch(URL, headers)
           .then(res=>res.json())
-          // .then(json => {
-          //   if(!json["error"]){
-          //     this.props.history.push("/")
-          //   }
-          // })
-          // .catch(error => console.log(error))
         }
 
   render(){

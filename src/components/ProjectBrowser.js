@@ -143,6 +143,7 @@ class ProjectBrowser extends Component {
                 <Header.Content>Country</Header.Content>
               </Header>
               <Dropdown
+                className="country-drop"
                 fluid
                 search
                 selection

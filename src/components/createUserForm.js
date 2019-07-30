@@ -1,5 +1,5 @@
 import React, { Component} from 'react'
-import { Button, Form, Grid, Header, Checkbox } from 'semantic-ui-react'
+import { Button, Form, Grid, Header, Checkbox, List, Icon } from 'semantic-ui-react'
 import { Redirect, Link } from 'react-router-dom'
 
 export default class CreateUserForm extends Component {
@@ -109,21 +109,18 @@ export default class CreateUserForm extends Component {
       let themes = this.state.themes.sort(this.compare)
       return this.state.themes.map((theme)=> {
         return(
-          <Form.Field
-            control={Checkbox}
-            label={theme.name}
-            value={theme.id}
-            onClick={this.handleChange}
-            checked={this.state.checked}
+          <List.Item>
+            <Form.Field
+              control={Checkbox}
+              label={theme.name}
+              value={theme.id}
+              onClick={this.handleChange}
+              checked={this.state.checked}
           />
+          </List.Item>
           )
         })
       }
-
-      // getThemeId = (themeName) => {
-      //   let themes = this.state.themes
-      //   console.log(themes)
-      // }
 
 
     render() {
@@ -133,93 +130,53 @@ export default class CreateUserForm extends Component {
                 <container className='login-section'>
                 <div className='login-div'>
                 <article className ='login'>
-                <Header  as='h1' dividing> Create Account </Header>
+                <Header as='h1' icon textAlign='center'>
+                  Create Account
+                  <Icon name='user circle' circular />
+                </Header>
                 <Grid centered columns={2} padded='vertically'>
                 <Form className='create-form'>
+                  <div id="form-group-div">
                   <Form.Group widths='equal'>
-
-
-                    <Form.Field>
+                    <Form.Field required>
                      <label>Username</label>
-                     <input ref={this.username} name='username' placeholder='username' required/>
+                     <input ref={this.username} name='username' placeholder='username'/>
                      </Form.Field>
 
-                     <Form.Field>
+                     <Form.Field required>
                      <label>Password</label>
-                     <input ref={this.password} type="password" name='password' placeholder='password' required/>
+                     <input ref={this.password} type="password" name='password' placeholder='password'/>
                      </Form.Field>
 
-                     <Form.Field>
+                     <Form.Field required>
                      <label>First Name</label>
-                     <input ref={this.firstname} type="text" name='firstname' placeholder='First Name' required/>
+                     <input ref={this.firstname} type="text" name='firstname' placeholder='First Name'/>
                      </Form.Field>
 
-                     <Form.Field>
+                     <Form.Field required>
                      <label>Last Name</label>
-                     <input ref={this.lastname} type="text" name='lastname' placeholder='Last Name' required/>
+                     <input ref={this.lastname} type="text" name='lastname' placeholder='Last Name'/>
                      </Form.Field>
 
-                     <Form.Field>
+                     <Form.Field required>
                      <label>Email Address</label>
-                     <input ref={this.emailaddress} type="email"name='email_address' placeholder='email' required/>
+                     <input ref={this.emailaddress} type="email"name='email_address' placeholder='email'/>
                      </Form.Field>
                   </Form.Group>
-                  <Form.Group inline>
-                    <label>Top Themes (Up to 3)</label>
+                  <Form.Group id="fields-div" flex>
+                    <label id="top-themes">Top Themes (Up to 3)</label>
                     <div>
-                      {this.renderThemeField()}
+                      <List>
+                        {this.renderThemeField()}
+                      </List>
                     </div>
-
-                    {/* <Form.Field
-                      control={Checkbox}
-                      label='Animals'
-                      value={this.getThemeId('Animals')}
-                      onChange={this.handleChange}
-                    />
-                    <Form.Field
-                      control={Checkbox}
-                      label='Arts and Culture'
-                      value='Arts and Culture'
-                      onChange={this.handleChange}
-                    />
-                    <Form.Field
-                      control={Checkbox}
-                      label='Children'
-                      value='Children'
-                      onChange={this.handleChange}
-                    />
-                    <Form.Field
-                      control={Checkbox}
-                      label='Education'
-                      value='Education'
-                      onChange={this.handleChange}
-                    />
-                    <Form.Field
-                      control={Checkbox}
-                      label='Democracy and Governance'
-                      value='Democracy and Governance'
-                      onChange={this.handleChange}
-                    />
-                    <Form.Field
-                      control={Checkbox}
-                      label='Disaster Recovery'
-                      value='Disaster Recovery'
-                      onChange={this.handleChange}
-                    />
-                    <Form.Field
-                      control={Checkbox}
-                      label='Disaster Recovery'
-                      value='Disaster Recovery'
-                      onChange={this.handleChange}
-                    />
-                    */}
                   </Form.Group>
+                </div>
                      <div id="button-div">
                        <Form.Field>
                          <Button onClick={this.handleSubmit}>Create Profile</Button>
                        </Form.Field>
                        <Form.Field>
-                        {/* <Button><Link to="/" replace>Return to Login</Link></Button>*/}
                           <Button onClick={this.backToLogin}>Return to Login</Button>
                        </Form.Field>
                      </div>

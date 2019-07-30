@@ -84,7 +84,7 @@ export default class LoginForm extends Component {
           <div className='login-section'>
             <div className='login-div'>
               <article className ='login'>
-                <Header as='h2' icon textAlign='center'>
+                <Header as='h1' icon textAlign='center'>
                   EffectiveDonate
                   <Icon name='globe' circular />
                 </Header>
