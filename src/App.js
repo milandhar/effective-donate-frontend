@@ -6,6 +6,7 @@ import LoginForm from './components/loginForm';
 import Profile from './components/Profile';
 import CreateUserForm from './components/createUserForm';
 import ProjectBrowser from './components/ProjectBrowser';
+import DonatePage from './components/DonatePage';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
@@ -16,7 +17,10 @@ class App extends Component {
     this.state = {
         userThemes: [],
         themes: [],
-        updatedThemes: false
+        updatedThemes: false,
+        selectedCountry: "COL",
+        updatedSelectedCountry: false,
+        selectedProject: {}
       }
     }
 
@@ -49,19 +53,21 @@ class App extends Component {
       })
       .then(res=>res.json())
       .then(json=> {
-        if(json.user.theme1){
-          themeArray.push(this.getThemeFromId(json.user.theme1).name)
+        if(!json["error"]){
+          if(json.user.theme1){
+            themeArray.push(this.getThemeFromId(json.user.theme1).name)
+          }
+          if(json.user.theme2){
+            themeArray.push(this.getThemeFromId(json.user.theme2).name)
+          }
+          if(json.user.theme3) {
+            themeArray.push(this.getThemeFromId(json.user.theme3).name)
+          }
+          this.setState({
+            userThemes: themeArray,
+            updatedThemes: true
+          })
         }
-        if(json.user.theme2){
-          themeArray.push(this.getThemeFromId(json.user.theme2).name)
-        }
-        if(json.user.theme3) {
-          themeArray.push(this.getThemeFromId(json.user.theme3).name)
-        }
-        this.setState({
-          userThemes: themeArray,
-          updatedThemes: true
-        })
       })
       // .then(() => this.renderThemeField())
       // return themeArray
@@ -69,6 +75,19 @@ class App extends Component {
 
   updateAppThemes = (themes) => {
     this.setState({userThemes: themes})
+  }
+
+  updateSelectedCountry = (country) => {
+    this.setState({
+      updatedSelectedCountry: true,
+      selectedCountry: country
+    })
+  }
+
+  handleDonate = (project) => {
+    this.setState({selectedProject: project})
+    localStorage.removeItem('selectedProject')
+    localStorage.setItem('selectedProject', JSON.stringify(project))
   }
 
   render() {
@@ -85,16 +104,26 @@ class App extends Component {
           {(this.state.updatedThemes)
             ? <Route
               path={'/map'}
-              render={()=><MapBrowser updateAppThemes={this.updateAppThemes} themes={this.state.themes} userThemes={this.state.userThemes} fetchUserThemes={this.fetchUserThemes}/>}
+              render={()=><MapBrowser updateSelectedCountry={this.updateSelectedCountry} updateAppThemes={this.updateAppThemes} themes={this.state.themes} userThemes={this.state.userThemes} fetchUserThemes={this.fetchUserThemes}/>}
             />
           : <div>Loading Thing</div>}
             <Route path={'/create_user'} component={CreateUserForm} />
-            <Route path={'/profile'} component={Profile} />
+            <Route
+              path={'/profile'}
+              render={()=><Profile handleDonate={this.handleDonate}/>}
+            />
             {(this.state.updatedThemes)
           ? <Route
               path={'/projects'}
-              render={()=><ProjectBrowser updateAppThemes={this.updateAppThemes} themes={this.state.themes} userThemes={this.state.userThemes} fetchUserThemes={this.fetchUserThemes}/>}
+              render={()=><ProjectBrowser handleDonate={this.handleDonate} updatedSelectedCountry={this.state.updatedSelectedCountry} updateSelectedCountry={this.updateSelectedCountry} appSelectedCountry={this.state.selectedCountry} updateAppThemes={this.updateAppThemes} themes={this.state.themes} userThemes={this.state.userThemes} fetchUserThemes={this.fetchUserThemes}/>}
               />
+          : <div>Loading Thing</div>}
+
+          {(this.state.selectedProject)
+          ? <Route
+            path={'/donate'}
+            render={()=><DonatePage project={this.state.selectedProject}/>}
+            />
           : <div>Loading Thing</div>}
           </Router>
       </div>

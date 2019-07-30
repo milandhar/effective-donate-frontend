@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { Card, Icon, Image, Rating } from 'semantic-ui-react'
+import { withRouter } from 'react-router-dom'
 
 
-export default class CountryCard extends Component {
+class CountryCard extends Component {
   constructor(props){
     super(props)
     this.state = {
@@ -29,10 +30,10 @@ export default class CountryCard extends Component {
     fetch(url, headers)
       .then(res=>res.json())
       .then(json => {
-          if(!json.error){
-            this.setState({starred: true})
-          }
-        })
+        if(!json.error){
+          this.setState({starred: true})
+        }
+      })
   }
 
   checkIfStarred = () => {
@@ -57,6 +58,11 @@ export default class CountryCard extends Component {
     })
   }
 
+  handleDollar = (project) => {
+    this.props.handleDonate(project)
+    this.props.history.push("/donate")
+  }
+
   render(){
     return(
     <Card>
@@ -74,8 +80,7 @@ export default class CountryCard extends Component {
       <a onClick={this.handleStar}>
         {this.state.starred ? <Icon className="active" name='star' /> : <Icon name='star' />}
       </a>
-      {/*<Rating onClick={this.handleStar}/>*/}
-      <a>
+      <a onClick={()=>this.handleDollar(this.props)}>
         <Icon name='dollar sign' />
       </a>
     </Card.Content>
@@ -83,3 +88,5 @@ export default class CountryCard extends Component {
     )
   }
 }
+
+export default withRouter(CountryCard)

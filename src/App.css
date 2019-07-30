@@ -102,12 +102,15 @@ section {
   align-items: center;
 }
 
-.map-dropdown-div{
-  bottom: 600px !important;
+.map-dropdown-div .column{
+  /* bottom: 600px !important; */
+  /* display: flex !important;
+  flex-direction: row !important;
+  justify-content: flex-start !important; */
 }
 
 .map-dropdown-div .multiple.dropdown{
-  width: 30% !important;
+  width: 30% ;
   margin-left: auto;
   margin-right: auto;
 }
@@ -153,20 +156,17 @@ section {
 }
 
 #choropleth_map{
-  padding-top: 80px;
+  padding-bottom: 0px !important;
+  padding-top: 30px;
   height: 120vh;
   width: 140vw;
   margin-left: auto;
   margin-right: auto;
+  text-align: center;
+  display: flex;
+  justify-content: flex-start;
 }
 
-#bubbles_map{
-  padding-top: 80px;
-  height: 120vh;
-  width: 140vw;
-  margin-left: auto;
-  margin-right: auto;
-}
 
 .App-link {
   color: #61dafb;
@@ -184,6 +184,42 @@ section {
 .datamap {
   border: 2px black;
 }
+
+#map-div {
+  margin-bottom: -25%;
+}
+
+.item.donation.options {
+  justify-content: flex-start !important;
+}
+
+.donation.description .header {
+  text-align: left !important;
+}
+
+.content.donation.amount {
+  /* width: 4em; */
+}
+
+#payment-div {
+  width: 50%;
+}
+
+.star.icon.donate.active{
+  color: gold !important;
+}
+
+@media only screen and (max-width: 1300px) {
+  #map-div {
+    margin-bottom: -5%;
+  }
+}
+/*
+@media only screen and (max-width: 500px) {
+  #map-div {
+    margin-bottom: -22%;
+  }
+} */
 
 @keyframes App-logo-spin {
   from {

@@ -1,13 +1,20 @@
 import React, { Component } from 'react'
 import { Image, List, Button, Icon } from 'semantic-ui-react'
+import { withRouter } from 'react-router-dom'
 
-export default class StarredProjectsList extends Component {
+class StarredProjectsList extends Component {
   constructor(props){
     super(props)
   }
 
-  componentDidUpdate(){
-    console.log(this.props.projectArray)
+  handleRemove = (project) => {
+    console.log(project)
+    this.props.removeFavorite(project.id)
+  }
+
+  goToDonation = (project) => {
+    this.props.handleDonate(project)
+    this.props.history.push("/donate")
   }
 
 
@@ -15,7 +22,7 @@ export default class StarredProjectsList extends Component {
     return(
       <List divided verticalAlign='middle'>
       {this.props.projectArray.map((project, idx) => {
-        return (<List.Item className="project">
+        return (<List.Item key={project.id} className="project">
           <List.Content>
             {project.country.name}
           </List.Content>
@@ -26,16 +33,18 @@ export default class StarredProjectsList extends Component {
           Funding: ${project.funding.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} / Goal: ${project.goal.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}
           </List.Content>
           <List.Content>
-            <Button icon>
+            <Button onClick={()=>this.handleRemove(project)} icon>
               <Icon name='close' />
             </Button>
-            <Button icon>
+            <Button onClick={()=>this.goToDonation(project)} icon>
               <Icon name='dollar sign' />
             </Button>
           </List.Content>
         </List.Item>)
-      }) }
+      })}
       </List>
     )
   }
 }
+
+export default withRouter(StarredProjectsList)

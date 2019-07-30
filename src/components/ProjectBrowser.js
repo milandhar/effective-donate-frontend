@@ -6,22 +6,26 @@ import ChoroplethMap from './choroplethMap.js'
 import CountryCard from './CountryCard.js'
 import ThemesDropdownMultiple from './ThemesDropdownMultiple'
 import Navbar from './Navbar.js'
+import { withRouter } from 'react-router-dom'
 
-export default class ProjectBrowser extends Component {
+
+class ProjectBrowser extends Component {
 
   constructor(props){
     super(props)
     this.state = {
       countryList: [],
-      selectedCountry: "",
+      selectedCountry: this.props.appSelectedCountry,
       projectThemes: this.props.userThemes,
       countryProjects: [],
-      themesUpdated: false
+      themesUpdated: false,
+      countryUpdated: this.props.updatedSelectedCountry
     }
   }
 
   componentDidMount(){
     this.fetchCountries()
+    this.fetchThemeProjects()
   }
 
   setSelectedCountry = () => {
@@ -54,11 +58,11 @@ export default class ProjectBrowser extends Component {
       })
       const sortJsonArray = require('sort-json-array');
       if(this.props.location && this.props.location.state && this.props.location.state.countryCode){
-        if(this.state.selectedCountry === ""){
+        // if(this.state.selectedCountry === ""){
       this.setState({
         countryList: sortJsonArray(countryArray, 'text')},
         this.setSelectedCountry)
-        }
+        // }
       } else {
         this.setState({countryList: sortJsonArray(countryArray, 'text')})
       }
@@ -66,6 +70,7 @@ export default class ProjectBrowser extends Component {
   }
 
   fetchProjects = () => {
+    console.log('in fetch projects')
     const countryCode = this.state.selectedCountry
     const url = `http://localhost:3000/api/v1/get_projects?countryCode=${countryCode}`
     fetch(url)
@@ -78,6 +83,7 @@ export default class ProjectBrowser extends Component {
   fetchThemeProjects = () => {
     console.log('in fetch theme projects')
     const countryCode = this.state.selectedCountry
+    console.log(countryCode)
     // const [theme1, theme2, theme3, theme4, theme5, theme6, theme7, theme8, theme9, theme10, theme11, theme12, theme13, theme14, theme15, theme16, theme17, theme18] = this.state.projectThemes
     const url = `http://localhost:3000/api/v1/get_theme_projects`
     return fetch(url, {
@@ -116,6 +122,7 @@ export default class ProjectBrowser extends Component {
   }
 
   updateProjectThemes = (themes) => {
+    console.log('in update project themes')
     this.props.updateAppThemes(themes)
     this.setState({projectThemes: themes}, this.fetchThemeProjects)
   }
@@ -130,7 +137,6 @@ export default class ProjectBrowser extends Component {
           </Header>
         </div>
         <Grid>
-
           <Grid.Row columns={2}>
             <Grid.Column>
               <Header as='h3' textAlign='center'>
@@ -145,7 +151,7 @@ export default class ProjectBrowser extends Component {
                 onChange={this.handleChange}
                 value={this.state.selectedCountry}
               />
-            </Grid.Column>
+          </Grid.Column>
             <Grid.Column>
               <Header as='h3' textAlign='center'>
                 <Header.Content>Themes</Header.Content>
@@ -156,7 +162,7 @@ export default class ProjectBrowser extends Component {
           {(this.state.themesUpdated)
             ? <Grid.Row columns = {4}>
                 {this.state.countryProjects.map((project) => {
-                  return <div className="column"> <CountryCard id={project.id} orgUrl={project.organization.url} organization={project.organization.name} handleStar={this.addFavorite()} funding={project.funding} longTermImpact={project.long_term_impact} summary={project.summary} goal={project.goal} key={project.id} image={project.image_url} theme={project.theme.name} title={project.title} country={project.country.name}/></div>
+                  return <div className="column"> <CountryCard id={project.id} handleDonate={this.props.handleDonate} orgUrl={project.organization.url} organization={project.organization.name} handleStar={this.addFavorite()} funding={project.funding} longTermImpact={project.long_term_impact} summary={project.summary} goal={project.goal} key={project.id} image={project.image_url} theme={project.theme.name} title={project.title} country={project.country.name}/></div>
               })}
             </Grid.Row>
             : <div>loading</div>
@@ -166,3 +172,5 @@ export default class ProjectBrowser extends Component {
     )
   }
 }
+
+export default withRouter(ProjectBrowser)
