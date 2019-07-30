@@ -121,7 +121,6 @@ class Profile extends Component {
                     Favorite Themes:
                   </h1>
                   <FavoriteThemes />
-
                 </Grid.Column>
               </Grid.Row>
               <Grid.Row>

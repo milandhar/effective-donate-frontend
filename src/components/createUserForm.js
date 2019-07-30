@@ -66,13 +66,21 @@ export default class CreateUserForm extends Component {
               console.log(json["error"])
               if(!json["error"]){
                 this.props.history.push("/")
+              } else{
+                alert(json["error"])
               }
             })
             .catch(error => console.log(error))
     }
 
-    handleSubmit = ()=>{
+    handleSubmit = (ev, data)=>{
+      //can check themes here
+      console.log(this.state.topThemes.length)
+      if(this.state.topThemes.length > 3){
+        alert('Please select only 3 themes')
+      } else {
         this.createUser()
+      }
     }
 
     backToLogin = () => {
@@ -97,13 +105,11 @@ export default class CreateUserForm extends Component {
     handleChange = (ev, data) =>{
       console.log(data)
       let prevThemes = this.state.topThemes
-      if (prevThemes.length < 4){
+      // if (prevThemes.length < 3){
         prevThemes.push(data.value)
         this.setState({topThemes: prevThemes})
-      }
+      // }
     }
-
-
 
     renderThemeField = () => {
       let themes = this.state.themes.sort(this.compare)
@@ -135,7 +141,7 @@ export default class CreateUserForm extends Component {
                   <Icon name='user circle' circular />
                 </Header>
                 <Grid centered columns={2} padded='vertically'>
-                <Form className='create-form'>
+                <Form onSubmit={this.handleSubmit} className='create-form'>
                   <div id="form-group-div">
                   <Form.Group widths='equal'>
                     <Form.Field required>
@@ -174,7 +180,7 @@ export default class CreateUserForm extends Component {
                 </div>
                      <div id="button-div">
                        <Form.Field>
-                         <Button onClick={this.handleSubmit}>Create Profile</Button>
+                         <Button>Create Profile</Button>
                        </Form.Field>
                        <Form.Field>
                           <Button onClick={this.backToLogin}>Return to Login</Button>

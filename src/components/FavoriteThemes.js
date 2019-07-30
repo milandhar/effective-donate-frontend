@@ -183,21 +183,6 @@ export default class FavoriteThemes extends Component {
           value={this.getThemeFromState(2)}
           onChange={this.handleChange}
         />
-        {/*<div class="select-container">
-          <select class="ui dropdown">
-            {this.returnDropdown(0)}
-          </select>
-        </div>
-        <div class="select-container">
-          <select class="ui dropdown">
-            {this.returnDropdown(1)}
-          </select>
-        </div>
-        <div class="select-container">
-          <select class="ui dropdown">
-            {this.returnDropdown(2)}
-          </select>
-        </div>*/}
       </div>
     )
   }
