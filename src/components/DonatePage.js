@@ -145,7 +145,7 @@ export default class DonatePage extends Component {
         <Grid>
           <Grid.Row columns={1}>
             <Grid.Column>
-              <Header as='h2' textAlign='center'>
+              <Header as='h1' textAlign='center'>
                 <Header.Content>{this.state.selectedProject.title}</Header.Content>
               </Header>
               <a onClick={this.handleStar}>
@@ -159,6 +159,7 @@ export default class DonatePage extends Component {
                 <Form.Field>
                   <label>Amount:</label>
                   <input
+                    id='amount-input'
                     placeholder='Donation Amount'
                     value={this.state.chosenAmount}
                     onChange={this.handleAmountChange}

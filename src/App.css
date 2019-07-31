@@ -14,10 +14,30 @@ section {
   padding-bottom: 40px;
 }
 
+.visiblity-div {
+  height: 500px !important;
+}
+
+.user.icon{
+  color: rgb(21,134, 203)
+}
+
+.tasks.icon{
+  color: rgb(21,134, 203)
+}
+
 .country-drop-div{
   margin-top: 18px !important;
   flex-direction: column !important;
   width: 50%;
+}
+
+.dollar.sign.circular.icon{
+  color: green;
+}
+
+#amount-input {
+  text-align: center;
 }
 
 #gg-logo {

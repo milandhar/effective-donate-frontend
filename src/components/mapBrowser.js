@@ -31,7 +31,6 @@ class MapBrowser extends Component {
   }
 
   getThemeProjectCount = () => {
-    console.log('in get theme project count')
     const url = "http://localhost:3000/api/v1/get_project_theme_count"
     let prevData = this.state.data
     // let [theme1, theme2, theme3, theme4, theme5, theme6, theme7, theme8, theme9, theme10, theme11, theme12, theme13, theme14, theme15, theme16, theme17, theme18] = this.state.mapThemes
