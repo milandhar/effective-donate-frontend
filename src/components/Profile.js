@@ -123,7 +123,7 @@ class Profile extends Component {
                   <h1 class="ui center aligned header highlight">
                     Favorite Themes:
                   </h1>
-                  <FavoriteThemes />
+                  <FavoriteThemes updateAppThemes={this.props.updateAppThemes} />
                 </Grid.Column>
               </Grid.Row>
               <Grid.Row>

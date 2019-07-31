@@ -47,8 +47,8 @@ export default class CreateUserForm extends Component {
         if(this.props.location && this.props.location.state && this.props.location.state.countryCode){
           // if(this.state.selectedCountry === ""){
         this.setState({
-          countryList: sortJsonArray(countryArray, 'text')},
-          this.setSelectedCountry)
+          countryList: sortJsonArray(countryArray, 'text')})
+          // ,this.setSelectedCountry)
           // }
         } else {
           this.setState({countryList: sortJsonArray(countryArray, 'text')})
@@ -85,6 +85,7 @@ export default class CreateUserForm extends Component {
                first_name: this.firstname.current.form[2].value,
                last_name: this.lastname.current.form[3].value,
                email_address: this.emailaddress.current.form[4].value,
+               default_country: this.state.selectedCountry,
                theme1: theme_id_1,
                theme2: theme_id_2,
                theme3: theme_id_3
@@ -150,7 +151,6 @@ export default class CreateUserForm extends Component {
               control={Checkbox}
               label={theme.name}
               value={theme.id}
-              onClick={this.handleChange}
               checked={this.state.checked}
           />
           </List.Item>
@@ -211,6 +211,7 @@ export default class CreateUserForm extends Component {
                   </Form.Group>
                 </div>
                 <Form.Group className="country-drop-div" flex>
+                  <Form.Field required>
                   <label id="default-country">Default Country</label>
                   <Dropdown
                     className="create-country-drop"
@@ -222,6 +223,7 @@ export default class CreateUserForm extends Component {
                     onChange={this.handleChange}
                     value={this.state.selectedCountry}
                   />
+                </Form.Field>
                 </Form.Group>
                      <div id="button-div">
                        <Form.Field>

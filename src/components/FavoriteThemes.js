@@ -130,6 +130,7 @@ export default class FavoriteThemes extends Component {
       }
       if(unique){
         prevUserThemes.splice(userThemeNumber, 1, {id: newThemeId, name: newThemeName})
+        this.props.updateAppThemes(prevUserThemes)
         this.setState({prevUserThemes})
         this.postUserThemes(userThemeNumber, newThemeId)
       } else{

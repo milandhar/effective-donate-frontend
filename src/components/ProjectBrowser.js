@@ -150,10 +150,9 @@ class ProjectBrowser extends Component {
               <ThemesDropdownMultiple updateMapThemes={this.updateProjectThemes} themes={this.props.themes} mapThemes={this.state.projectThemes} />
             </Grid.Column>
           </Grid.Row>
-          {(this.state.themesUpdated && this.state.countryProjects != [])
+          {(this.state.themesUpdated && !this.state.countryProjects["error"])
             ? <Grid.Row className="card-row" columns = {4}>
                 {this.state.countryProjects.map((project) => {
-                  {console.log(project)}
                   return <div className="column card-div"> <CountryCard id={project.id} projectLink={project.project_link} handleDonate={this.props.handleDonate} orgUrl={project.organization.url} organization={project.organization.name} funding={project.funding} longTermImpact={project.long_term_impact} activities={project.activities} summary={project.summary} goal={project.goal} key={project.id} image={project.image_url} theme={project.theme.name} title={project.title} country={project.country.name}/></div>
               })}
             </Grid.Row>

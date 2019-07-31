@@ -18,9 +18,10 @@ class App extends Component {
         userThemes: [],
         themes: [],
         updatedThemes: false,
-        selectedCountry: "COL",
+        selectedCountry: "",
         updatedSelectedCountry: false,
-        selectedProject: {}
+        selectedProject: {},
+        user: {}
       }
     }
 
@@ -78,10 +79,13 @@ class App extends Component {
   }
 
   updateSelectedCountry = (country) => {
-    this.setState({
-      updatedSelectedCountry: true,
-      selectedCountry: country
-    })
+    if(country){
+      console.log(country)
+      this.setState({
+        updatedSelectedCountry: true,
+        selectedCountry: country
+      }, console.log(this.state.selectedCountry))
+    }
   }
 
   handleDonate = (project) => {
@@ -90,15 +94,21 @@ class App extends Component {
     localStorage.setItem('selectedProject', JSON.stringify(project))
   }
 
+  setUser = (user) => {
+    this.setState({user: user, selectedCountry: user.defaultCountry})
+  }
+
   render() {
     return (
       <div className="App">
         <Router>
-          <Route exact path="/"
-          render={(props) => (
+          <Route
+            exact path="/"
+            render={(props) => (
             <LoginForm {...props}
               onLogin={this.updateUser}
-              user={this.state.user}/>
+              setUser={this.setUser}
+              updateSelectedCountry={this.updateSelectedCountry}/>
               )}
             />
           {(this.state.updatedThemes)
@@ -106,25 +116,26 @@ class App extends Component {
               path={'/map'}
               render={()=><MapBrowser updateSelectedCountry={this.updateSelectedCountry} updateAppThemes={this.updateAppThemes} themes={this.state.themes} userThemes={this.state.userThemes} fetchUserThemes={this.fetchUserThemes}/>}
             />
-          : <div>Loading Thing</div>}
-            <Route path={'/create_user'} component={CreateUserForm} />
+          : <div>""</div>}
+            <Route
+              path={'/create_user'} component={CreateUserForm} />
             <Route
               path={'/profile'}
-              render={()=><Profile handleDonate={this.handleDonate}/>}
+              render={()=><Profile updateAppThemes={this.updateAppThemes} handleDonate={this.handleDonate}/>}
             />
             {(this.state.updatedThemes)
           ? <Route
               path={'/projects'}
               render={()=><ProjectBrowser handleDonate={this.handleDonate} updatedSelectedCountry={this.state.updatedSelectedCountry} updateSelectedCountry={this.updateSelectedCountry} appSelectedCountry={this.state.selectedCountry} updateAppThemes={this.updateAppThemes} themes={this.state.themes} userThemes={this.state.userThemes} fetchUserThemes={this.fetchUserThemes}/>}
               />
-          : <div>Loading Thing</div>}
+          : <div>""</div>}
 
           {(this.state.selectedProject)
           ? <Route
             path={'/donate'}
             render={()=><DonatePage project={this.state.selectedProject}/>}
             />
-          : <div>Loading Thing</div>}
+          : <div>""</div>}
           </Router>
       </div>
 
