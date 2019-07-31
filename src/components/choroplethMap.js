@@ -14,16 +14,12 @@ class ChoroplethMap extends Component {
     }
 
     componentDidUpdate(){
-      console.log('in choropleth didUpdate')
-      console.log(this.props.data[231])
       // if(this.props.dropdownUpdated){
       this.renderMap(this.props)
       // }
     }
 
     componentDidMount() {
-      console.log('in choropleth didMount')
-      console.log(this.props.data[231])
       this.renderMap(this.props)
     }
 
@@ -102,7 +98,7 @@ class ChoroplethMap extends Component {
           setProjection: function (element) {
               var projection = d3.geo.mercator()
                   .center([0, 20]) // always in [East Latitude, North Longitude]
-                  .scale(240)
+                  .scale(220)
                   .translate([element.offsetWidth / 3, element.offsetHeight / 3]);
 
               var path = d3.geo.path().projection(projection);

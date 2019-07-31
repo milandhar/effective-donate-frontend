@@ -161,16 +161,26 @@ section {
   height: 300px !important;
 }
 
+.secondary.menu {
+  align-items: flex-end !important;
+  flex-direction: row;
+}
+
+.menu .header {
+  font-size: 16px;
+}
+
+
 #choropleth_map{
   padding-bottom: 0px !important;
-  padding-top: 30px;
+  padding-top: 15px;
   height: 120vh;
   width: 140vw;
   margin-left: auto;
   margin-right: auto;
   text-align: center;
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
 }
 
 
@@ -193,6 +203,7 @@ section {
 
 #map-div {
   margin-bottom: -25%;
+  padding-top: 0px !important;
 }
 
 .item.donation.options {
@@ -305,7 +316,7 @@ th {
 }
 
 .ui.fluid.dropdown{
-  width: 30% !important;
+  width: 40% !important;
 }
 
 .profile-section .sixteen {

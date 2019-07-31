@@ -240,7 +240,7 @@ class MapBrowser extends Component {
   render() {
     return (
       <div className="app-div">
-        <Navbar logout={this.logout}/>
+        <Navbar activeItem='map' logout={this.logout}/>
         <Grid divided='vertically'>
           <Grid.Row columns={1} id="map-div">
             <Grid.Column>

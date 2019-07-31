@@ -101,15 +101,14 @@ class Profile extends Component {
         {document.body.style = 'background: white;'}
         return(
           <section class = "profile-section">
-           <Navbar logout={this.logout}/>
+           <Navbar activeItem='profile' logout={this.logout}/>
             <Grid>
               <Grid.Row>
                 <Grid.Column width={16}>
-                  <Segment circular style={this.state.square}>
                   <div class='profile-header'>
-                    <h2 class="ui header highlight">
+                    {/* <h2 class="ui header highlight">
                       {localStorage.getItem('username')}
-                    </h2>
+                    </h2> */}
                     <h2 class="ui header highlight">
                       <i class="user icon"></i>
                     </h2>
@@ -117,7 +116,6 @@ class Profile extends Component {
                       {localStorage.first_name} {localStorage.last_name}
                     </h2>
                   </div>
-                </Segment>
                 </Grid.Column>
               </Grid.Row>
               <Grid.Row>

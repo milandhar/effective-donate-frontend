@@ -131,7 +131,7 @@ class ProjectBrowser extends Component {
   render() {
     return(
       <div className="app-div">
-        <Navbar logout={this.logout}/>
+        <Navbar activeItem='projects' logout={this.logout}/>
         <div>
           <Header as='h2' icon textAlign='center'>
             <Icon name='tasks' circular />
@@ -154,7 +154,7 @@ class ProjectBrowser extends Component {
                 value={this.state.selectedCountry}
               />
           </Grid.Column>
-            <Grid.Column>
+            <Grid.Column className="theme-dropdown-div">
               <Header as='h3' textAlign='center'>
                 <Header.Content>Themes</Header.Content>
               </Header>

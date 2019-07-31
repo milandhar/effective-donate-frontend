@@ -6,12 +6,12 @@ import { withRouter } from 'react-router-dom'
 
 class Navbar extends Component {
 
-    constructor() {
-      super();
+    constructor(props) {
+      super(props);
         this.state = {
         user_id: null,
         username: '',
-        activeItem: 'map'
+        activeItem: this.props.activeItem
       };
     }
 
@@ -29,28 +29,32 @@ class Navbar extends Component {
 
     handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
-    // active={this.state.activeItem === 'map'}
     render() {
         return(
           <Segment inverted>
             <Menu inverted pointing secondary>
-              <Menu.Item
-                name='map'
-                active= 'true'
-                onClick={this.redirect} />
-              <Menu.Item
-                name='projects'
-                onClick={this.redirect}
-              />
-              <Menu.Item
-                name='profile'
-                onClick={this.redirect}
-              />
-              <Menu.Item>
-                <Button primary name='logout' onClick={this.redirect}>
-                  Log Out
-                </Button>
-              </Menu.Item>
+              <Menu.Item header>EffectiveDonate</Menu.Item>
+              <Menu.Menu position='right'>
+                <Menu.Item
+                  name='map'
+                  active={this.state.activeItem === 'map'}
+                  onClick={this.redirect} />
+                <Menu.Item
+                  name='projects'
+                  active={this.state.activeItem === 'projects'}
+                  onClick={this.redirect}
+                />
+                <Menu.Item
+                  name='profile'
+                  active={this.state.activeItem === 'profile'}
+                  onClick={this.redirect}
+                />
+                <Menu.Item>
+                  <Button primary name='logout' onClick={this.redirect}>
+                    Log Out
+                  </Button>
+                </Menu.Item>
+              </Menu.Menu>
             </Menu>
           </Segment>
 
