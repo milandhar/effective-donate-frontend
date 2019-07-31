@@ -1,5 +1,5 @@
 import React, { Component} from 'react'
-import { Button, Form, Grid, Header, Checkbox, List, Icon } from 'semantic-ui-react'
+import { Dropdown, Button, Form, Grid, Header, Checkbox, List, Icon } from 'semantic-ui-react'
 import { Redirect, Link } from 'react-router-dom'
 
 export default class CreateUserForm extends Component {
@@ -8,7 +8,9 @@ export default class CreateUserForm extends Component {
         super();
         this.state = {
           themes: [],
-          topThemes: []
+          topThemes: [],
+          selectedCountry: "",
+          countryList: []
         };
         this.username = React.createRef()
         this.password = React.createRef()
@@ -20,6 +22,38 @@ export default class CreateUserForm extends Component {
 
     componentDidMount(){
       this.getThemes()
+      this.fetchCountries()
+    }
+
+    fetchCountries = () => {
+      const url = `http://localhost:3000/api/v1/countries`
+      const getCountryISO2 = require("country-iso-3-to-2");
+      let countryArray = []
+      fetch(url)
+      .then(res=>res.json())
+      .then(json=>{
+        json.forEach((country, idx) => {
+            let iso2 = getCountryISO2(country.iso3166CountryCode)
+            if(iso2 && country.name){
+            countryArray.push({
+              key: iso2.toLowerCase(),
+              value: country.iso3166CountryCode,
+              flag: iso2.toLowerCase(),
+              text: country.name
+            })
+          }
+        })
+        const sortJsonArray = require('sort-json-array');
+        if(this.props.location && this.props.location.state && this.props.location.state.countryCode){
+          // if(this.state.selectedCountry === ""){
+        this.setState({
+          countryList: sortJsonArray(countryArray, 'text')},
+          this.setSelectedCountry)
+          // }
+        } else {
+          this.setState({countryList: sortJsonArray(countryArray, 'text')})
+        }
+      })
     }
 
     getThemes = () => {
@@ -39,10 +73,6 @@ export default class CreateUserForm extends Component {
         } else if (!theme_id_3) {
           theme_id_3 = null
         }
-
-        console.log(theme_id_1)
-        console.log(theme_id_2)
-        console.log(theme_id_3)
 
         const headers = {
             method: 'POST',
@@ -127,7 +157,9 @@ export default class CreateUserForm extends Component {
           )
         })
       }
-
+    handleChange = (ev, data) => {
+      this.setState({selectedCountry: data.value})
+    }
 
     render() {
         return(
@@ -178,6 +210,19 @@ export default class CreateUserForm extends Component {
                     </div>
                   </Form.Group>
                 </div>
+                <Form.Group className="country-drop-div" flex>
+                  <label id="default-country">Default Country</label>
+                  <Dropdown
+                    className="create-country-drop"
+                    fluid
+                    search
+                    selection
+                    placeholder="Country"
+                    options={this.state.countryList}
+                    onChange={this.handleChange}
+                    value={this.state.selectedCountry}
+                  />
+                </Form.Group>
                      <div id="button-div">
                        <Form.Field>
                          <Button>Create Profile</Button>

@@ -43,10 +43,10 @@ class StarredProjectsList extends Component {
               Funding: ${project.funding.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} / Goal: ${project.goal.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}
               </Table.Cell>
               <Table.Cell>
-                <Button onClick={()=>this.handleRemove(project)} icon>
+                <Button color='red' onClick={()=>this.handleRemove(project)} icon>
                   <Icon name='close' />
                 </Button>
-                <Button onClick={()=>this.goToDonation(project)} icon>
+                <Button color='green' onClick={()=>this.goToDonation(project)} icon>
                   <Icon name='dollar sign' />
                 </Button>
               </Table.Cell>

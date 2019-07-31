@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Grid, Header, Icon, Radio, Form, Button } from 'semantic-ui-react'
+import { Grid, Header, Icon, Radio, Form, Button, Message } from 'semantic-ui-react'
 import FavoriteThemes from './FavoriteThemes'
 import DonationOptionsList from './DonationOptionsList'
 
@@ -40,6 +40,7 @@ export default class DonatePage extends Component {
     localStorage.setItem('email_address', '')
     localStorage.setItem('first_name', '')
     localStorage.setItem('last_name', '')
+    localStorage.setItem('selectedProject', '')
     this.props.history.push("/")
     return false
   }
@@ -184,6 +185,14 @@ export default class DonatePage extends Component {
           </Grid.Row>
           <Grid.Row columns={1}>
             <Grid.Column>
+              <Message positive>
+                <Message.Header>On-Site Payment Coming Soon!</Message.Header>
+                  <p>You may complete your donation on <a target="_blank" href={this.state.selectedProject.projectLink}>GlobalGiving</a></p>
+              </Message>
+            </Grid.Column>
+          </Grid.Row>
+          <Grid.Row columns={1}>
+            <Grid.Column>
               <Form onSubmit={this.handleSubmit}>
                 <div id="payment-div">
                   <Form.Group>
@@ -197,7 +206,6 @@ export default class DonatePage extends Component {
                     <Form.Input onChange={this.handleChange} name='code' value={this.state.code} label='Code' placeholder='Code' width={3} />
                   </Form.Group>
                   <Form.Checkbox label='I agree to the Terms and Conditions' />
-                  {/*Add validation ternary here */}
                   <Button type='submit'>Complete Donation</Button>
                 </div>
               </Form>

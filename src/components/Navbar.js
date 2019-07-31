@@ -22,6 +22,8 @@ class Navbar extends Component {
     redirect = (ev, data) => {
       if(data.name === 'logout'){
         this.logout()
+      } else if (data.name === localStorage.getItem("first_name")){
+        this.props.history.push(`/profile`)
       } else{
         this.props.history.push(`/${data.name}`)
       }
@@ -45,7 +47,7 @@ class Navbar extends Component {
                   onClick={this.redirect}
                 />
                 <Menu.Item
-                  name='profile'
+                  name={localStorage.getItem("first_name")}
                   active={this.state.activeItem === 'profile'}
                   onClick={this.redirect}
                 />

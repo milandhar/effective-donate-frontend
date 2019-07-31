@@ -8,8 +8,37 @@ section {
   height: 100vh !important;
 }
 
+.profile-section .grid {
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-bottom: 40px;
+}
+
+.country-drop-div{
+  margin-top: 18px !important;
+  flex-direction: column !important;
+  width: 50%;
+}
+
 #gg-logo {
   max-width: 15%;
+}
+
+#default-country{
+  font-size: 1.3em !important;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.ui.positive{
+  width: 40%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.dropdown-container div {
+  margin-left: 30px;
+  margin-right: 30px;
 }
 
 .gg-attribution {
@@ -167,7 +196,7 @@ section {
 }
 
 .menu .header {
-  font-size: 16px;
+  font-size: 17px;
 }
 
 
@@ -291,6 +320,7 @@ section {
   margin-top: 20px;
   display: flex;
   flex-direction: row;
+  margin-bottom: 300px;
 }
 
 #top-themes {
@@ -307,7 +337,7 @@ section {
 }
 
 th {
-  font-size: 1.5em;
+  font-size: 1.7em;
 }
 
 .ui.circular.segment {
@@ -315,16 +345,29 @@ th {
   margin-right: auto;
 }
 
-.ui.fluid.dropdown{
-  width: 40% !important;
+.profile-section .ui.fluid.dropdown{
+  width: 20% !important;
 }
+
+.map-dropdown-div .ui.fluid.dropdown{
+  width: 30% !important;
+}
+
+.ui.fluid.dropdown div{
+  margin: 0 !important;
+}
+
 
 .profile-section .sixteen {
   margin-top: 20px !important;
 }
 
 td {
-  font-weight: bold;
+  font-size: 1.3em;
+}
+
+#map-btns {
+    margin-top: 500px;
 }
 
 @media only screen and (max-width: 1300px) {

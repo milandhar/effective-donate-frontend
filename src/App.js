@@ -128,15 +128,6 @@ class App extends Component {
           </Router>
       </div>
 
-
-      // <div className="app-div" style={{
-      //   height:"50vh",
-      //   width: "50vw"
-      // }}>
-      //   <button onClick={this.findLastProject} id="refreshBtn">Get New Projects</button>
-      //   <button onClick={this.refreshMap} id="refreshBtn">Refresh Projects</button>
-      //   <ChoroplethMap data={this.state.data}/>
-      // </div>
     );
   }
 }

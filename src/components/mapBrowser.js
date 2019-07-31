@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Grid, Image, Button } from 'semantic-ui-react'
+import { Grid, Image, Button, Loader } from 'semantic-ui-react'
 import logo from '../logo.svg';
 import '../App.css';
 import ChoroplethMap from './choroplethMap.js'
@@ -147,6 +147,12 @@ class MapBrowser extends Component {
     return false
   }
 
+  deleteProjects = () => {
+    const url = "http://localhost:3000/api/v1/delete_all"
+    return fetch(url)
+    .then(res=>res.json())
+    .then(json =>this.refreshMap())
+  }
 
   refreshMap = () => {
     const url = "http://localhost:3000/api/v1/fetch_projects"
@@ -248,7 +254,7 @@ class MapBrowser extends Component {
               ? <div>
                   <ChoroplethMap toggleDropdownUpdated={this.toggleDropdownUpdated} dropdownUpdated={this.state.dropdownUpdated} history={this.props.history} handleClick={this.goToProjects} data={this.state.data}/>
                 </div>
-              : <div>Loading Thing</div>}
+              : <Loader active inline='centered' />}
             </Grid.Column>
           </Grid.Row>
           <Grid.Row className="map-dropdown-div"columns={1}>
@@ -263,14 +269,14 @@ class MapBrowser extends Component {
                 <h1>Select Theme(s)</h1>
                 {(this.state.updatedMapThemes)
                 ? <ThemesDropdownMultiple updateMapThemes={this.updateMapThemes} themes={this.props.themes} mapThemes={this.state.mapThemes} className="map-dropdown"/>
-              : <div>loading</div>}
+                : <Loader active inline='centered' />}
               </div>
             </Grid.Column>
           </Grid.Row>
         </Grid>
-        <div>
+        <div id="map-btns">
           <Button onClick={this.findLastProject} id="refreshBtn">Get New Projects</Button>
-          <Button onClick={this.refreshMap} id="refreshBtn">Refresh Projects</Button>
+          <Button onClick={this.deleteProjects} id="refreshBtn">Refresh Projects</Button>
         </div>
       </div>
     );
