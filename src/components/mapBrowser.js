@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Grid, Image } from 'semantic-ui-react'
+import { Grid, Image, Button } from 'semantic-ui-react'
 import logo from '../logo.svg';
 import '../App.css';
 import ChoroplethMap from './choroplethMap.js'
@@ -241,10 +241,6 @@ class MapBrowser extends Component {
     return (
       <div className="app-div">
         <Navbar logout={this.logout}/>
-        <div>
-          <button onClick={this.findLastProject} id="refreshBtn">Get New Projects</button>
-          <button onClick={this.refreshMap} id="refreshBtn">Refresh Projects</button>
-        </div>
         <Grid divided='vertically'>
           <Grid.Row columns={1} id="map-div">
             <Grid.Column>
@@ -257,21 +253,25 @@ class MapBrowser extends Component {
           </Grid.Row>
           <Grid.Row className="map-dropdown-div"columns={1}>
             <Grid.Column>
-              <div>
-                <div class="attribution-div">
-                  <a href="https://www.globalgiving.org/" target="_blank">
-                    <img id="gg-logo" src={require('../img/GG2015_Logo_horizontal_4color.png')} />
-                  </a>
-                  <p class="gg-attribution">Project Data</p>
-                </div>
+              <div class="attribution-div">
+                <a href="https://www.globalgiving.org/" target="_blank">
+                  <img id="gg-logo" src={require('../img/GG2015_Logo_horizontal_4color.png')} />
+                </a>
+                <p class="gg-attribution">Project Data</p>
               </div>
-              <h1>Select Theme(s)</h1>
-              {(this.state.updatedMapThemes)
-              ? <ThemesDropdownMultiple updateMapThemes={this.updateMapThemes} themes={this.props.themes} mapThemes={this.state.mapThemes} className="map-dropdown"/>
-            : <div>loading</div>}
+              <div>
+                <h1>Select Theme(s)</h1>
+                {(this.state.updatedMapThemes)
+                ? <ThemesDropdownMultiple updateMapThemes={this.updateMapThemes} themes={this.props.themes} mapThemes={this.state.mapThemes} className="map-dropdown"/>
+              : <div>loading</div>}
+              </div>
             </Grid.Column>
           </Grid.Row>
         </Grid>
+        <div>
+          <Button onClick={this.findLastProject} id="refreshBtn">Get New Projects</Button>
+          <Button onClick={this.refreshMap} id="refreshBtn">Refresh Projects</Button>
+        </div>
       </div>
     );
   }

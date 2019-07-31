@@ -3,6 +3,7 @@
   height: 100vh !important;
 }
 
+
 section {
   height: 100vh !important;
 }
@@ -13,6 +14,8 @@ section {
 
 .gg-attribution {
   font-family: 'Open Sans', sans-serif;
+  width: 15%;
+  text-align: center !important;
 }
 
 .App-logo {
@@ -26,7 +29,10 @@ section {
 }
 
 .attribution-div{
-  text-align: center;
+  position: absolute;
+  left: 4 !important;
+  text-align: left;
+  width: auto;
 }
 
 .celled{
@@ -291,6 +297,19 @@ section {
 
 th {
   font-size: 1.5em;
+}
+
+.ui.circular.segment {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.ui.fluid.dropdown{
+  width: 30% !important;
+}
+
+.profile-section .sixteen {
+  margin-top: 20px !important;
 }
 
 td {

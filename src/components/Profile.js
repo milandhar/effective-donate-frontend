@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Grid, Image } from 'semantic-ui-react'
+import { Grid, Image, Segment } from 'semantic-ui-react'
 import FavoriteThemes from './FavoriteThemes'
 import Navbar from './Navbar'
 import StarredProjectsList from './StarredProjectsList'
@@ -11,7 +11,8 @@ class Profile extends Component {
         super(props);
         this.state = {
             selected: '',
-            projectArray: []
+            projectArray: [],
+            square: { width: 175, height: 175 }
           }
           // this.getProfile()
         };
@@ -103,7 +104,8 @@ class Profile extends Component {
            <Navbar logout={this.logout}/>
             <Grid>
               <Grid.Row>
-                <Grid.Column width={3}>
+                <Grid.Column width={16}>
+                  <Segment circular style={this.state.square}>
                   <div class='profile-header'>
                     <h2 class="ui header highlight">
                       {localStorage.getItem('username')}
@@ -115,8 +117,11 @@ class Profile extends Component {
                       {localStorage.first_name} {localStorage.last_name}
                     </h2>
                   </div>
+                </Segment>
                 </Grid.Column>
-                <Grid.Column width={13}>
+              </Grid.Row>
+              <Grid.Row>
+                <Grid.Column width={16}>
                   <h1 class="ui center aligned header highlight">
                     Favorite Themes:
                   </h1>
@@ -124,9 +129,7 @@ class Profile extends Component {
                 </Grid.Column>
               </Grid.Row>
               <Grid.Row>
-                <Grid.Column width={3}>
-                </Grid.Column>
-                <Grid.Column width={13}>
+                <Grid.Column width={16}>
                   <h1 class="ui center aligned header highlight">
                     Starred Projects:
                   </h1>
