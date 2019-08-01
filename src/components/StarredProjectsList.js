@@ -1,11 +1,8 @@
 import React, { Component } from 'react'
-import { Image, Button, Icon, Table, Flag } from 'semantic-ui-react'
+import { Button, Icon, Table, Flag } from 'semantic-ui-react'
 import { withRouter } from 'react-router-dom'
 
 class StarredProjectsList extends Component {
-  constructor(props){
-    super(props)
-  }
 
   handleRemove = (project) => {
     console.log(project)

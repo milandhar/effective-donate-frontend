@@ -1,10 +1,7 @@
 import React, { Component } from 'react'
-import { Image, List, Button, Icon } from 'semantic-ui-react'
+import { List, Button } from 'semantic-ui-react'
 
 export default class DonationOptionsList extends Component {
-  constructor(props){
-    super(props)
-  }
 
   handleClick = (amount) => {
     this.props.updateChosenAmount(amount)

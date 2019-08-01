@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Grid, Image, Button, Loader } from 'semantic-ui-react'
-import logo from '../logo.svg';
+import { Grid, Button, Loader } from 'semantic-ui-react'
 import '../App.css';
 import ChoroplethMap from './choroplethMap.js'
 import ThemesDropdownMultiple from './ThemesDropdownMultiple'
@@ -95,58 +94,13 @@ class MapBrowser extends Component {
 
   getArrayIndex(array, item) {
       for (var i = 0; i < array.length; i++) {
-          if (array[i][0] == item[0]) {
+          if (array[i][0] === item[0]) {
               return i;  //return the index
           }
       }
       return false;   // Not found
   }
 
-  // getThemes = () => {
-  //   const url = 'http://localhost:3000/api/v1/themes'
-  //   fetch(url)
-  //   .then(res=>res.json())
-  //   .then(json => {
-  //     this.setState({themes: json}, this.fetchUserThemes)
-  //   })
-  // }
-
-  // getThemeFromId = (themeId) => {
-  //   let theme = this.state.themes.find(theme=>theme.id===themeId)
-  //   return theme
-  // }
-
-  // fetchUserThemes = () => {
-  //   let themeArray = []
-  //   let token = localStorage.getItem("jwt")
-  //     fetch('http://localhost:3000/api/v1/profile', {
-  //       headers: {
-  //         'Authorization': 'Bearer ' + token
-  //       }
-  //     })
-  //     .then(res=>res.json())
-  //     .then(json=> {
-  //       themeArray.push(this.getThemeFromId(json.user.theme1))
-  //       themeArray.push(this.getThemeFromId(json.user.theme2))
-  //       themeArray.push(this.getThemeFromId(json.user.theme3))
-  //       this.setState({
-  //         filteredThemes: themeArray
-  //       })
-  //     })
-  //     // .then(() => this.renderThemeField())
-  //     // return themeArray
-  // }
-
-  // logout = () => {
-  //   localStorage.setItem('jwt', '')
-  //   localStorage.setItem('username', '')
-  //   localStorage.setItem('email_address', '')
-  //   localStorage.setItem('userid', '')
-  //   localStorage.setItem('first_name', '')
-  //   localStorage.setItem('last_name', '')
-  //   this.props.history.push("/")
-  //   return false
-  // }
 
   deleteProjects = () => {
     const url = "http://localhost:3000/api/v1/delete_all"
@@ -171,7 +125,6 @@ class MapBrowser extends Component {
 
   findLastProject = () => {
     const url = "http://localhost:3000/api/v1/find_last_project"
-    let maxId
     return fetch(url)
     .then(res => res.json())
     .then(x => this.getNextProjects(x))
@@ -214,9 +167,6 @@ class MapBrowser extends Component {
           hasNextFlag = true
           this.refreshMapLoop(json, url)
         }
-        // else{
-        //   hasNextFlag = false
-        // }
       })
     }
   }

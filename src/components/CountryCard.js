@@ -105,7 +105,7 @@ class CountryCard extends Component {
         {this.state.starred ? <Icon className="active" name='star' /> : <Icon name='star' />}
       </a>
       <a onClick={()=>this.handleDollar(this.props)}>
-        <Icon name='dollar sign' />
+        <Icon name='dollar' />
       </a>
     </Card.Content>
   </Card>

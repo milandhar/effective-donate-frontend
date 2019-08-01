@@ -190,7 +190,11 @@ export default class DonatePage extends Component {
             <Grid.Column>
               <Message positive>
                 <Message.Header>On-Site Payment Coming Soon!</Message.Header>
-                  <p>You may complete your donation on <a target="_blank" href={this.state.selectedProject.projectLink}>GlobalGiving</a></p>
+                {console.log(this.state.selectedProject)}
+                {(this.state.selectedProject.project_link)
+                ? <p>You may complete your donation on <a target="_blank" href={this.state.selectedProject.project_link}>GlobalGiving</a></p>
+                : <p>You may complete your donation on <a target="_blank" href={this.state.selectedProject.projectLink}>GlobalGiving</a></p>}
+
               </Message>
             </Grid.Column>
           </Grid.Row>
