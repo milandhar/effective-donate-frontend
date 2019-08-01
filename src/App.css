@@ -17,6 +17,10 @@ section {
   height: 100vh !important;
 }
 
+.project .flag {
+  margin-left: 8px !important;
+}
+
 .profile-section .grid {
   padding-left: 40px;
   padding-right: 40px;
@@ -325,19 +329,22 @@ section {
 }
 
 .card-div{
-  margin-bottom: 20px !important;
+  margin-bottom: 80px !important;
   padding-left: .25rem;
   padding-right: .25rem;
-  width: 20% !important;
 }
 
 .card-row{
   justify-content: center !important;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  /* padding-left: 130px !important; */
 }
 
 .ui.card{
-  margin-left: auto !important;
-  margin-right: auto !important;
+  margin-left: 30px !important;
+  margin-right: 30px !important;
 }
 
 .ui.progress {

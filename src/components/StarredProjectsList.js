@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Image, Button, Icon, Table } from 'semantic-ui-react'
+import { Image, Button, Icon, Table, Flag } from 'semantic-ui-react'
 import { withRouter } from 'react-router-dom'
 
 class StarredProjectsList extends Component {
@@ -31,10 +31,10 @@ class StarredProjectsList extends Component {
         </Table.Header>
         <Table.Body>
           {this.props.projectArray.map((project, idx) => {
-            {console.log(project)}
             return (<Table.Row key={project.id} className="project">
               <Table.Cell>
                 {project.country.name}
+                <Flag name={project.country.name.toLowerCase()}/>
               </Table.Cell>
               <Table.Cell>
                 {project.title}

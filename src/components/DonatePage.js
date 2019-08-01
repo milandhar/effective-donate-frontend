@@ -34,17 +34,6 @@ export default class DonatePage extends Component {
     this.checkIfStarred()
   }
 
-  // logout = () => {
-  //   localStorage.setItem('jwt', '')
-  //   localStorage.setItem('username', '')
-  //   localStorage.setItem('email_address', '')
-  //   localStorage.setItem('first_name', '')
-  //   localStorage.setItem('last_name', '')
-  //   localStorage.setItem('selectedProject', '')
-  //   this.props.history.push("/")
-  //   return false
-  // }
-
   findDonationOptions = () => {
     let projectId = this.state.selectedProject.id
     const url = `http://localhost:3000/api/v1/find_donation_options`
@@ -133,6 +122,16 @@ export default class DonatePage extends Component {
       })
   }
 
+  getFlagName = () => {
+    let flag = ""
+    if(this.state.selectedProject.country.name){
+      flag = this.state.selectedProject.country.name.toLowerCase()
+    } else if(this.state.selectedProject.country){
+      flag = this.state.selectedProject.country.toLowerCase()
+    }
+    return flag
+  }
+
   render() {
     return(
       <section>
@@ -146,7 +145,7 @@ export default class DonatePage extends Component {
           <Grid.Row columns={1}>
             <Grid.Column id="donate-header">
               <div id="flag-div">
-                <Flag name={this.state.selectedProject.country.toLowerCase()}/>
+                <Flag name={this.getFlagName()}/>
               </div>
               <Header id="donate-header-div" as='h1' textAlign='center'>
                 <Header.Content>{this.state.selectedProject.title}</Header.Content>

@@ -95,6 +95,7 @@ class App extends Component {
   }
 
   handleDonate = (project) => {
+    console.log(project)
     this.setState({selectedProject: project})
     localStorage.removeItem('selectedProject')
     localStorage.setItem('selectedProject', JSON.stringify(project))
