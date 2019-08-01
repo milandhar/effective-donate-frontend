@@ -137,16 +137,16 @@ class MapBrowser extends Component {
   //     // return themeArray
   // }
 
-  logout = () => {
-    localStorage.setItem('jwt', '')
-    localStorage.setItem('username', '')
-    localStorage.setItem('email_address', '')
-    localStorage.setItem('userid', '')
-    localStorage.setItem('first_name', '')
-    localStorage.setItem('last_name', '')
-    this.props.history.push("/")
-    return false
-  }
+  // logout = () => {
+  //   localStorage.setItem('jwt', '')
+  //   localStorage.setItem('username', '')
+  //   localStorage.setItem('email_address', '')
+  //   localStorage.setItem('userid', '')
+  //   localStorage.setItem('first_name', '')
+  //   localStorage.setItem('last_name', '')
+  //   this.props.history.push("/")
+  //   return false
+  // }
 
   deleteProjects = () => {
     const url = "http://localhost:3000/api/v1/delete_all"
@@ -245,7 +245,7 @@ class MapBrowser extends Component {
   render() {
     return (
       <div className="app-div">
-        <Navbar activeItem='map' logout={this.logout}/>
+        <Navbar activeItem='map' logout={this.props.logout}/>
         <Grid divided='vertically'>
           <Grid.Row columns={1} id="map-div">
             <Grid.Column>

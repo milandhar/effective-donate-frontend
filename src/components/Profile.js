@@ -64,16 +64,16 @@ class Profile extends Component {
          }))
      }
 
-     logout = () => {
-       localStorage.setItem('userid', '')
-       localStorage.setItem('jwt', '')
-       localStorage.setItem('username', '')
-       localStorage.setItem('email_address', '')
-       localStorage.setItem('first_name', '')
-       localStorage.setItem('last_name', '')
-       this.props.history.push("/")
-       return false
-     }
+     // logout = () => {
+     //   localStorage.setItem('userid', '')
+     //   localStorage.setItem('jwt', '')
+     //   localStorage.setItem('username', '')
+     //   localStorage.setItem('email_address', '')
+     //   localStorage.setItem('first_name', '')
+     //   localStorage.setItem('last_name', '')
+     //   this.props.history.push("/")
+     //   return false
+     // }
 
      removeFavorite = (projectId) => {
        const userId = localStorage.userid
@@ -101,7 +101,7 @@ class Profile extends Component {
         {document.body.style = 'background: white;'}
         return(
           <section class = "profile-section">
-           <Navbar activeItem='profile' logout={this.logout}/>
+           <Navbar activeItem='profile' logout={this.props.logout}/>
             <Grid>
               <Grid.Row>
                 <Grid.Column width={16}>

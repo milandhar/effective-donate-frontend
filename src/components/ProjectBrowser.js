@@ -102,16 +102,16 @@ class ProjectBrowser extends Component {
     this.setState({selectedCountry: data.value}, this.fetchThemeProjects)
   }
 
-  logout = () => {
-    localStorage.setItem('userid', '')
-    localStorage.setItem('jwt', '')
-    localStorage.setItem('username', '')
-    localStorage.setItem('email_address', '')
-    localStorage.setItem('first_name', '')
-    localStorage.setItem('last_name', '')
-    this.props.history.push("/")
-    return false
-  }
+  // logout = () => {
+  //   localStorage.setItem('userid', '')
+  //   localStorage.setItem('jwt', '')
+  //   localStorage.setItem('username', '')
+  //   localStorage.setItem('email_address', '')
+  //   localStorage.setItem('first_name', '')
+  //   localStorage.setItem('last_name', '')
+  //   this.props.history.push("/")
+  //   return false
+  // }
 
   updateProjectThemes = (themes) => {
     this.props.updateAppThemes(themes)
@@ -121,7 +121,7 @@ class ProjectBrowser extends Component {
   render() {
     return(
       <div className="app-div">
-        <Navbar activeItem='projects' logout={this.logout}/>
+        <Navbar activeItem='projects' logout={this.props.logout}/>
         <div>
           <Header as='h2' icon textAlign='center'>
             <Icon name='tasks' circular />

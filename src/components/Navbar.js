@@ -16,7 +16,9 @@ class Navbar extends Component {
     }
 
     logout = () => {
-      this.props.logout()
+      if(this.props.logout()) {
+        this.props.history.push("/")
+      }
     }
 
     redirect = (ev, data) => {

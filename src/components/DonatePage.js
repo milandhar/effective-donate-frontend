@@ -34,16 +34,16 @@ export default class DonatePage extends Component {
     this.checkIfStarred()
   }
 
-  logout = () => {
-    localStorage.setItem('jwt', '')
-    localStorage.setItem('username', '')
-    localStorage.setItem('email_address', '')
-    localStorage.setItem('first_name', '')
-    localStorage.setItem('last_name', '')
-    localStorage.setItem('selectedProject', '')
-    this.props.history.push("/")
-    return false
-  }
+  // logout = () => {
+  //   localStorage.setItem('jwt', '')
+  //   localStorage.setItem('username', '')
+  //   localStorage.setItem('email_address', '')
+  //   localStorage.setItem('first_name', '')
+  //   localStorage.setItem('last_name', '')
+  //   localStorage.setItem('selectedProject', '')
+  //   this.props.history.push("/")
+  //   return false
+  // }
 
   findDonationOptions = () => {
     let projectId = this.state.selectedProject.id
@@ -136,7 +136,7 @@ export default class DonatePage extends Component {
   render() {
     return(
       <section>
-        <Navbar logout={this.logout}/>
+        <Navbar logout={this.props.logout}/>
           <div>
             <Header as='h2' icon textAlign='center'>
               <Icon name='dollar sign' circular />
