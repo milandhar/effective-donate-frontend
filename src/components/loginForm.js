@@ -29,8 +29,6 @@ export default class LoginForm extends Component {
     .then(res=>res.json())
     .then(json=> {
       this.setState({user: json.user})
-      // this.props.onLogin(json.user);
-      // localStorage.setItem("user_id", json.user.id)
     })
   }
 
@@ -69,7 +67,10 @@ export default class LoginForm extends Component {
             this.getProfile()
             this.setState(prevState => ({
               loggedIn: true
-            }), ()=> this.props.setUser(json.user), this.props.updateSelectedCountry(json.user.default_country));
+            }), ()=> {
+              this.props.setUser(json.user);
+              this.props.updateSelectedCountry(json.user.default_country);
+            });
             this.props.history.push("/map")
           }else{
             console.log('nope!')

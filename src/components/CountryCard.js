@@ -21,7 +21,6 @@ class CountryCard extends Component {
   static defaultProps = {size: `large`,}
 
   showImage = () => {
-    console.log('in show image')
     this.setState({show: true})
   }
 
@@ -79,7 +78,6 @@ class CountryCard extends Component {
 
   render(){
     const { size } = this.props
-    {console.log(this.state.show)}
     if (!this.state.show) {
         return (
         <div className="visiblity-div">

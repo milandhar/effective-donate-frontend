@@ -24,6 +24,7 @@ class MapBrowser extends Component {
   //loop through the prevState 2D array and determine which index the ["XYZ", 0] subarray is located
 
   componentDidMount(){
+    console.log('in did mount')
     this.setState({
       mapThemes: this.props.userThemes,
       updatedMapThemes: true
@@ -140,6 +141,7 @@ class MapBrowser extends Component {
     localStorage.setItem('jwt', '')
     localStorage.setItem('username', '')
     localStorage.setItem('email_address', '')
+    localStorage.setItem('userid', '')
     localStorage.setItem('first_name', '')
     localStorage.setItem('last_name', '')
     this.props.history.push("/")
@@ -228,7 +230,6 @@ class MapBrowser extends Component {
   }
 
   updateMapThemes = (themes) => {
-    console.log('in update map themes')
     this.props.updateAppThemes(themes)
     this.setState({mapThemes: themes}, this.getThemeProjectCount)
   }
@@ -238,8 +239,7 @@ class MapBrowser extends Component {
   }
 
   toggleUpdatedData = () => {
-    console.log('in toggle updated data')
-    this.setState({updatedData: false}, console.log('set updated data to false'))
+    this.setState({updatedData: false})
   }
 
   render() {
@@ -253,7 +253,7 @@ class MapBrowser extends Component {
               ? <div>
                   <ChoroplethMap toggleDropdownUpdated={this.toggleDropdownUpdated} dropdownUpdated={this.state.dropdownUpdated} history={this.props.history} handleClick={this.goToProjects} data={this.state.data}/>
                 </div>
-              : <Loader active inline='centered' />}
+              : <div id="map-loader"><Loader active inline='centered' /></div>}
             </Grid.Column>
           </Grid.Row>
           <Grid.Row className="map-dropdown-div"columns={1}>

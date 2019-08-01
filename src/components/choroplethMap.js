@@ -119,7 +119,6 @@ class ChoroplethMap extends Component {
             })
           }
       })
-      console.log('created')
       // this.setState({state: this.state}, this.props.toggleDropdownUpdated, console.log(dataset), map.updateChoropleth(dataset))
     }
 
@@ -127,8 +126,6 @@ class ChoroplethMap extends Component {
       // this.props.handleClick()
       const parentNode = document.getElementById('choropleth_map')
       const childNode = document.getElementsByClassName('datamap')
-      console.log(parentNode)
-      console.log(childNode)
       d3.select("svg").remove();
       // if(parentNode && childNode){
       //   parentNode.removeChild(childNode)

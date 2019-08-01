@@ -3,8 +3,17 @@
   height: 100vh !important;
 }
 
+.ui{
+  /* font-family: 'Open Sans', sans-serif !important; */
+}
+
 
 section {
+  height: 100vh !important;
+}
+
+#map-loader{
+  padding-top: 30vh !important;
   height: 100vh !important;
 }
 
@@ -14,8 +23,13 @@ section {
   padding-bottom: 40px;
 }
 
+.ui.inverted.segment{
+  height: 5.2em;
+}
+
 .visiblity-div {
-  height: 500px !important;
+  padding-top: 300px;
+  height: 1000px !important;
 }
 
 .user.icon{
@@ -157,11 +171,9 @@ section {
   align-items: center;
 }
 
-.map-dropdown-div .column{
-  /* bottom: 600px !important; */
-  /* display: flex !important;
-  flex-direction: row !important;
-  justify-content: flex-start !important; */
+.map-dropdown-div{
+  padding: 0 !important;
+  margin-top: 15px !important;
 }
 
 .map-dropdown-div .multiple.dropdown{

@@ -54,6 +54,7 @@ class App extends Component {
       })
       .then(res=>res.json())
       .then(json=> {
+        console.log(json)
         if(!json["error"]){
           if(json.user.theme1){
             themeArray.push(this.getThemeFromId(json.user.theme1).name)
@@ -64,18 +65,19 @@ class App extends Component {
           if(json.user.theme3) {
             themeArray.push(this.getThemeFromId(json.user.theme3).name)
           }
+          console.log(themeArray)
           this.setState({
             userThemes: themeArray,
             updatedThemes: true
           })
         }
       })
-      // .then(() => this.renderThemeField())
-      // return themeArray
   }
 
   updateAppThemes = (themes) => {
+    console.log(themes)
     this.setState({userThemes: themes})
+
   }
 
   updateSelectedCountry = (country) => {

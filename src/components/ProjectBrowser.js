@@ -103,6 +103,7 @@ class ProjectBrowser extends Component {
   }
 
   logout = () => {
+    localStorage.setItem('userid', '')
     localStorage.setItem('jwt', '')
     localStorage.setItem('username', '')
     localStorage.setItem('email_address', '')

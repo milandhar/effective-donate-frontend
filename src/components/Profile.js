@@ -14,7 +14,6 @@ class Profile extends Component {
             projectArray: [],
             square: { width: 175, height: 175 }
           }
-          // this.getProfile()
         };
 
     componentDidMount(){
@@ -53,7 +52,7 @@ class Profile extends Component {
         }
         this.setState(prevState => ({
             selected: event.target.name
-        }), ()=> console.log('hello',  this.state.selected))
+        }))
 
      }
 
@@ -62,10 +61,11 @@ class Profile extends Component {
              profileInfo: {...prevState.profileInfo,
                  message_template
              }
-         }), ()=> console.log(this.state.profileInfo))
+         }))
      }
 
      logout = () => {
+       localStorage.setItem('userid', '')
        localStorage.setItem('jwt', '')
        localStorage.setItem('username', '')
        localStorage.setItem('email_address', '')
@@ -106,9 +106,6 @@ class Profile extends Component {
               <Grid.Row>
                 <Grid.Column width={16}>
                   <div class='profile-header'>
-                    {/* <h2 class="ui header highlight">
-                      {localStorage.getItem('username')}
-                    </h2> */}
                     <h2 class="ui header highlight">
                       <i class="user icon"></i>
                     </h2>

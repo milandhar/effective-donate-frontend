@@ -24,11 +24,9 @@ export default class ThemesDropdownMultiple extends Component {
         themeNamesArray.push(theme["name"])
       })
       newOptions.unshift({key: "All", text: "All", value: "All"})
-      console.log(newOptions)
     })
     .then(() => this.changeState(newOptions), this.setState({themeNamesArray: themeNamesArray}))
   }
-
 
   changeState = (newOptions) => {
     this.setState({options: newOptions})
@@ -42,8 +40,6 @@ export default class ThemesDropdownMultiple extends Component {
       this.setState({filteredThemes: data.value})
       this.props.updateMapThemes(data.value)
     }
-
-    console.log(data)
   }
 
   render(){

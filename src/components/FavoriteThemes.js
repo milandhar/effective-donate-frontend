@@ -79,7 +79,6 @@ export default class FavoriteThemes extends Component {
 
   findDefaults = () => {
     // let userThemeId = this.state.userThemes[i]
-    console.log('in find defaults')
     let themes = this.state.themes
     let defaults = []
     this.state.userThemes.forEach((theme, idx) => {
@@ -120,17 +119,23 @@ export default class FavoriteThemes extends Component {
       let newThemeId = this.getThemeFromName(newThemeName).id
       let prevUserThemes = this.state.userThemes
       let unique = true
+      let themeNamesArray = []
 
       if (prevUserThemes[0] != undefined && prevUserThemes[1] != undefined && prevUserThemes[2] != undefined){
+        console.log(prevUserThemes)
         prevUserThemes.forEach(theme => {
           if(theme.name === newThemeName){
             unique = false
+          } else {
+            themeNamesArray.push(theme.name)
           }
         })
       }
       if(unique){
         prevUserThemes.splice(userThemeNumber, 1, {id: newThemeId, name: newThemeName})
-        this.props.updateAppThemes(prevUserThemes)
+        themeNamesArray.splice(userThemeNumber, 1, newThemeName)
+        console.log(prevUserThemes)
+        this.props.updateAppThemes(themeNamesArray)
         this.setState({prevUserThemes})
         this.postUserThemes(userThemeNumber, newThemeId)
       } else{
@@ -141,7 +146,6 @@ export default class FavoriteThemes extends Component {
     postUserThemes = (themeNumber, themeId) => {
       let bodyHash = {}
       bodyHash[`theme${themeNumber+1}`] = themeId
-      console.log(bodyHash)
       const URL = `http://localhost:3000/api/v1/users/${localStorage.userid}`
       const headers = {
           method: 'Put',
@@ -149,9 +153,10 @@ export default class FavoriteThemes extends Component {
               'Content-Type': 'application/json'
           },
           body: JSON.stringify(bodyHash)
-      }
+        }
       fetch(URL, headers)
           .then(res=>res.json())
+          .then(json=>console.log(json))
         }
 
   render(){

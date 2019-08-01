@@ -197,17 +197,17 @@ export default class DonatePage extends Component {
               <Form onSubmit={this.handleSubmit}>
                 <div id="payment-div">
                   <Form.Group>
-                    <Form.Input onChange={this.handleChange} name='firstName' value={this.state.firstName} label='First Name' placeholder='First Name' width={4} />
-                    <Form.Input onChange={this.handleChange} name='lastNAme' value={this.state.lastNAme} label='Last Name' placeholder='Last Name' width={4} />
-                    <Form.Input onChange={this.handleChange} name='email' value={this.state.email} type='email' label='Email Address' placeholder='Email Address' width={8} />
+                    <Form.Input disabled="true" onChange={this.handleChange} name='firstName' value={this.state.firstName} label='First Name' placeholder='First Name' width={4} />
+                    <Form.Input disabled="true" onChange={this.handleChange} name='lastNAme' value={this.state.lastNAme} label='Last Name' placeholder='Last Name' width={4} />
+                    <Form.Input disabled="true" onChange={this.handleChange} name='email' value={this.state.email} type='email' label='Email Address' placeholder='Email Address' width={8} />
                   </Form.Group>
                   <Form.Group>
-                    <Form.Input onChange={this.handleChange} name='cardNumber' value={this.state.cardNumber} type='tel' label='Card Number' placeholder='Card Number' width={8} />
-                    <Form.Input onChange={this.handleChange} name='expiration' value={this.state.expiration} label='Expiration' placeholder='MM/YY' width={5} />
-                    <Form.Input onChange={this.handleChange} name='code' value={this.state.code} label='Code' placeholder='Code' width={3} />
+                    <Form.Input disabled="true" onChange={this.handleChange} name='cardNumber' value={this.state.cardNumber} type='tel' label='Card Number' placeholder='Card Number' width={8} />
+                    <Form.Input disabled="true" onChange={this.handleChange} name='expiration' value={this.state.expiration} label='Expiration' placeholder='MM/YY' width={5} />
+                    <Form.Input disabled="true" onChange={this.handleChange} name='code' value={this.state.code} label='Code' placeholder='Code' width={3} />
                   </Form.Group>
-                  <Form.Checkbox label='I agree to the Terms and Conditions' />
-                  <Button type='submit'>Complete Donation</Button>
+                  <Form.Checkbox disabled="true" label='I agree to the Terms and Conditions' />
+                  <Button disabled="true" type='submit'>Complete Donation</Button>
                 </div>
               </Form>
             </Grid.Column>
