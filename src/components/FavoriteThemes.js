@@ -144,6 +144,8 @@ export default class FavoriteThemes extends Component {
     }
 
     postUserThemes = (themeNumber, themeId) => {
+      console.log(themeNumber)
+      console.log(themeId)
       let bodyHash = {}
       bodyHash[`theme${themeNumber+1}`] = themeId
       const URL = `http://localhost:3000/api/v1/users/${localStorage.userid}`
@@ -156,7 +158,7 @@ export default class FavoriteThemes extends Component {
         }
       fetch(URL, headers)
           .then(res=>res.json())
-          .then(json=>console.log(json))
+          .then(json=>this.props.getThemes())
         }
 
   render(){

@@ -23,6 +23,32 @@ section {
   padding-bottom: 40px;
 }
 
+#donate-header{
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+#donate-header-div{
+  margin-top: 5px !important;
+}
+
+#flag-div{
+  text-align: center;
+}
+
+#donate-div{
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.ui.divided.middle.aligned.list{
+  padding-right:10px;
+}
+
+.ui.center.aligned.header{
+  margin-top: 5px !important;
+}
+
 .ui.inverted.segment{
   height: 5.2em;
 }

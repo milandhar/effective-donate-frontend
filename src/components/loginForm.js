@@ -9,11 +9,14 @@ export default class LoginForm extends Component {
 
     this.username = React.createRef()
     this.password = React.createRef()
-
-    if (this.getToken()) {
-        this.getProfile()
-      }
+    // if (this.getToken()) {
+    //     this.getProfile()
+    //   }
     }
+
+  componentDidMount(){
+    this.props.resetState()
+  }
 
   getToken(jwt) {
     return localStorage.getItem('jwt')
@@ -70,10 +73,11 @@ export default class LoginForm extends Component {
             }), ()=> {
               this.props.setUser(json.user);
               this.props.updateSelectedCountry(json.user.default_country);
+              this.props.getThemes()
             });
             this.props.history.push("/map")
           }else{
-            console.log('nope!')
+            alert("Incorrect Login Information")
           }
         })
       }
@@ -101,9 +105,9 @@ export default class LoginForm extends Component {
                 <input id='loginpassword' name='password' type="password" placeholder='password' ref={this.password} required />
                 </Form.Field>
                 <Form.Field>
-                <input type="submit" class="large ui button" value="Log In" onClick={this.login}/>
+                <input type="submit" class="large ui blue button" value="Log In" onClick={this.login}/>
                 <Link to="/create_user" replace>
-                  <input type="submit" class="large ui button" value="Create Profile"/>
+                  <input type="submit" class="large ui blue button" value="Create Profile"/>
                 </Link>
                 </Form.Field>
                 </Form>

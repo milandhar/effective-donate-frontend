@@ -34,6 +34,7 @@ class App extends Component {
 
 
   getThemeFromId = (themeId) => {
+    console.log(themeId)
     let theme = this.state.themes.find(theme=>theme.id===themeId)
     return theme
   }
@@ -48,6 +49,7 @@ class App extends Component {
   }
 
   fetchUserThemes = () => {
+    console.log('in app get themes')
     let themeArray = []
     let token = localStorage.getItem("jwt")
       fetch('http://localhost:3000/api/v1/profile', {
@@ -58,6 +60,7 @@ class App extends Component {
       .then(res=>res.json())
       .then(json=> {
         if(!json["error"]){
+          console.log(json)
           if(json.user.theme1){
             themeArray.push(this.getThemeFromId(json.user.theme1).name)
           }
@@ -75,12 +78,14 @@ class App extends Component {
       })
   }
 
+
   updateAppThemes = (themes) => {
     this.setState({userThemes: themes})
 
   }
 
   updateSelectedCountry = (country) => {
+    console.log('in update selected')
     if(country){
       this.setState({
         updatedSelectedCountry: true,
@@ -102,11 +107,16 @@ class App extends Component {
     localStorage.setItem('first_name', '')
     localStorage.setItem('last_name', '')
     localStorage.setItem('selectedProject', '')
-    this.setState(initialState)
+    this.resetState()
     return true
   }
 
+  resetState = () =>{
+    this.setState(initialState)
+  }
+
   setUser = (user) => {
+    console.log('in set user')
     this.setState({user: user, selectedCountry: user.defaultCountry})
   }
 
@@ -118,9 +128,11 @@ class App extends Component {
             exact path="/"
             render={(props) => (
             <LoginForm {...props}
+              resetState={this.resetState}
               onLogin={this.updateUser}
               setUser={this.setUser}
-              updateSelectedCountry={this.updateSelectedCountry}/>
+              updateSelectedCountry={this.updateSelectedCountry}
+              getThemes={this.getThemes}/>
               )}
             />
           {(this.state.updatedThemes)
@@ -137,13 +149,19 @@ class App extends Component {
             />
           : <div></div>}
             <Route
-              path={'/create_user'} component={CreateUserForm} />
+              path={'/create_user'}
+              render={()=><CreateUserForm
+              getThemes={this.getThemes}
+              themes={this.state.themes}
+              />}
+            />
             <Route
               path={'/profile'}
               render={()=><Profile
                             updateAppThemes={this.updateAppThemes}
                             handleDonate={this.handleDonate}
                             logout={this.logout}
+                            getThemes={this.fetchUserThemes}
                           />}
             />
             {(this.state.updatedThemes)

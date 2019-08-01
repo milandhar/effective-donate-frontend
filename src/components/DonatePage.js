@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Grid, Header, Icon, Radio, Form, Button, Message } from 'semantic-ui-react'
+import { Grid, Header, Icon, Radio, Form, Button, Message, Flag } from 'semantic-ui-react'
 import FavoriteThemes from './FavoriteThemes'
 import DonationOptionsList from './DonationOptionsList'
 
@@ -144,8 +144,11 @@ export default class DonatePage extends Component {
           </div>
         <Grid>
           <Grid.Row columns={1}>
-            <Grid.Column>
-              <Header as='h1' textAlign='center'>
+            <Grid.Column id="donate-header">
+              <div id="flag-div">
+                <Flag name={this.state.selectedProject.country.toLowerCase()}/>
+              </div>
+              <Header id="donate-header-div" as='h1' textAlign='center'>
                 <Header.Content>{this.state.selectedProject.title}</Header.Content>
               </Header>
               <a onClick={this.handleStar}>
@@ -153,7 +156,7 @@ export default class DonatePage extends Component {
               </a>
             </Grid.Column>
           </Grid.Row>
-          <Grid.Row columns={2}>
+          <Grid.Row id="donate-div" columns={2}>
             <Grid.Column>
               <Form>
                 <Form.Field>

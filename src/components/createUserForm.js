@@ -1,8 +1,9 @@
 import React, { Component} from 'react'
 import { Dropdown, Button, Form, Grid, Header, Checkbox, List, Icon } from 'semantic-ui-react'
 import { Redirect, Link } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 
-export default class CreateUserForm extends Component {
+class CreateUserForm extends Component {
 
     constructor() {
         super();
@@ -21,8 +22,9 @@ export default class CreateUserForm extends Component {
 
 
     componentDidMount(){
-      this.getThemes()
+      this.props.getThemes()
       this.fetchCountries()
+      this.setState({themes:this.props.themes})
     }
 
     fetchCountries = () => {
@@ -73,7 +75,6 @@ export default class CreateUserForm extends Component {
         } else if (!theme_id_3) {
           theme_id_3 = null
         }
-
         const headers = {
             method: 'POST',
             headers: {
@@ -115,7 +116,6 @@ export default class CreateUserForm extends Component {
     }
 
     backToLogin = () => {
-      // window.location.replace("http://localhost:3001/");
       this.props.history.push("/")
     }
 
@@ -143,8 +143,8 @@ export default class CreateUserForm extends Component {
     }
 
     renderThemeField = () => {
-      let themes = this.state.themes.sort(this.compare)
-      return this.state.themes.map((theme)=> {
+      let themes = this.props.themes.sort(this.compare)
+      return this.props.themes.map((theme)=> {
         return(
           <List.Item>
             <Form.Field
@@ -152,12 +152,15 @@ export default class CreateUserForm extends Component {
               label={theme.name}
               value={theme.id}
               checked={this.state.checked}
+              onChange={this.handleChange}
           />
           </List.Item>
           )
         })
       }
-    handleChange = (ev, data) => {
+
+    handleCountryChange = (ev, data) => {
+      console.log('in handle country change')
       this.setState({selectedCountry: data.value})
     }
 
@@ -220,7 +223,7 @@ export default class CreateUserForm extends Component {
                     selection
                     placeholder="Country"
                     options={this.state.countryList}
-                    onChange={this.handleChange}
+                    onChange={this.handleCountryChange}
                     value={this.state.selectedCountry}
                   />
                 </Form.Field>
@@ -242,3 +245,5 @@ export default class CreateUserForm extends Component {
         )
     }
 }
+
+export default withRouter(CreateUserForm);

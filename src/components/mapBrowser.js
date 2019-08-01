@@ -24,7 +24,7 @@ class MapBrowser extends Component {
   //loop through the prevState 2D array and determine which index the ["XYZ", 0] subarray is located
 
   componentDidMount(){
-    console.log('in did mount')
+    console.log('in mapBrowser did mount')
     this.setState({
       mapThemes: this.props.userThemes,
       updatedMapThemes: true
