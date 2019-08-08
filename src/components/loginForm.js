@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Form, Header, Icon  } from 'semantic-ui-react'
-import { Link, Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 export default class LoginForm extends Component {
 
@@ -105,9 +105,9 @@ export default class LoginForm extends Component {
                 <input id='loginpassword' name='password' type="password" placeholder='password' ref={this.password} required />
                 </Form.Field>
                 <Form.Field>
-                <input type="submit" class="large ui blue button" value="Log In" onClick={this.login}/>
+                <input type="submit" className="large ui blue button" value="Log In" onClick={this.login}/>
                 <Link to="/create_user" replace>
-                  <input type="submit" class="large ui blue button" value="Create Profile"/>
+                  <input type="submit" className="large ui blue button" value="Create Profile"/>
                 </Link>
                 </Form.Field>
                 </Form>

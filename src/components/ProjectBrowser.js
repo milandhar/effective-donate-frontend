@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import { Grid, Image, Dropdown, Header, Icon, Loader } from 'semantic-ui-react'
-import logo from '../logo.svg';
+import { Grid, Dropdown, Header, Icon, Loader } from 'semantic-ui-react'
 import '../App.css';
-import ChoroplethMap from './choroplethMap.js'
 import CountryCard from './CountryCard.js'
 import ThemesDropdownMultiple from './ThemesDropdownMultiple'
 import Navbar from './Navbar.js'

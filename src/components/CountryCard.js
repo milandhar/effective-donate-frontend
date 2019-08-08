@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Loader, Visibility, Card, Icon, Image, Rating, Progress } from 'semantic-ui-react'
+import { Loader, Visibility, Card, Icon, Image, Progress } from 'semantic-ui-react'
 import { withRouter } from 'react-router-dom'
 
 

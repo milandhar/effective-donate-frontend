@@ -1,6 +1,5 @@
 import React, { Component} from 'react'
 import { Dropdown, Button, Form, Grid, Header, Checkbox, List, Icon } from 'semantic-ui-react'
-import { Redirect, Link } from 'react-router-dom'
 import { withRouter } from 'react-router-dom'
 
 class CreateUserForm extends Component {
@@ -134,16 +133,17 @@ class CreateUserForm extends Component {
     }
 
     handleChange = (ev, data) =>{
-      console.log(data)
       let prevThemes = this.state.topThemes
-      // if (prevThemes.length < 3){
-        prevThemes.push(data.value)
+        if(data.checked){
+          prevThemes.push(data.value)
+        } else{
+          let i = prevThemes.indexOf(data.value)
+          prevThemes.splice(i, 1)
+        }
         this.setState({topThemes: prevThemes})
-      // }
     }
 
     renderThemeField = () => {
-      let themes = this.props.themes.sort(this.compare)
       return this.props.themes.map((theme)=> {
         return(
           <List.Item>
@@ -153,6 +153,7 @@ class CreateUserForm extends Component {
               value={theme.id}
               checked={this.state.checked}
               onChange={this.handleChange}
+              onClick={this.handleClick}
           />
           </List.Item>
           )

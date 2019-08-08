@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import MapBrowser from './components/mapBrowser.js';
 import LoginForm from './components/loginForm';
@@ -7,9 +6,7 @@ import Profile from './components/Profile';
 import CreateUserForm from './components/createUserForm';
 import ProjectBrowser from './components/ProjectBrowser';
 import DonatePage from './components/DonatePage';
-import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import { Loader } from 'semantic-ui-react'
 
 const initialState = {
   userThemes: [],

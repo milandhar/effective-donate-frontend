@@ -98,7 +98,7 @@ class ChoroplethMap extends Component {
           setProjection: function (element) {
               var projection = d3.geo.mercator()
                   .center([0, 20]) // always in [East Latitude, North Longitude]
-                  .scale(220)
+                  .scale(180)
                   .translate([element.offsetWidth / 3, element.offsetHeight / 3]);
 
               var path = d3.geo.path().projection(projection);
@@ -107,15 +107,8 @@ class ChoroplethMap extends Component {
           done: function(map){
             map.svg.selectAll('.datamaps-subunit').on('click', function(geography) {
               let link = geography.id
-              // link to the country component here. Might need a callback to mapBrowser first
-              // could use localStorage as a backup
+
               props.handleClick(geography)
-              // props.history.push({
-              //   pathname: "/country",
-              //   state: {link: geography}
-              // })
-              // this.clickCountry()
-              // console.log(link)
             })
           }
       })
