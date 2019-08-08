@@ -1,14 +1,16 @@
 import React, { Component} from 'react'
-import { Button, Form, Grid, Header, Checkbox, List, Icon } from 'semantic-ui-react'
-import { Redirect, Link } from 'react-router-dom'
+import { Dropdown, Button, Form, Grid, Header, Checkbox, List, Icon } from 'semantic-ui-react'
+import { withRouter } from 'react-router-dom'
 
-export default class CreateUserForm extends Component {
+class CreateUserForm extends Component {
 
     constructor() {
         super();
         this.state = {
           themes: [],
-          topThemes: []
+          topThemes: [],
+          selectedCountry: "",
+          countryList: []
         };
         this.username = React.createRef()
         this.password = React.createRef()
@@ -19,7 +21,40 @@ export default class CreateUserForm extends Component {
 
 
     componentDidMount(){
-      this.getThemes()
+      this.props.getThemes()
+      this.fetchCountries()
+      this.setState({themes:this.props.themes})
+    }
+
+    fetchCountries = () => {
+      const url = `http://localhost:3000/api/v1/countries`
+      const getCountryISO2 = require("country-iso-3-to-2");
+      let countryArray = []
+      fetch(url)
+      .then(res=>res.json())
+      .then(json=>{
+        json.forEach((country, idx) => {
+            let iso2 = getCountryISO2(country.iso3166CountryCode)
+            if(iso2 && country.name){
+            countryArray.push({
+              key: iso2.toLowerCase(),
+              value: country.iso3166CountryCode,
+              flag: iso2.toLowerCase(),
+              text: country.name
+            })
+          }
+        })
+        const sortJsonArray = require('sort-json-array');
+        if(this.props.location && this.props.location.state && this.props.location.state.countryCode){
+          // if(this.state.selectedCountry === ""){
+        this.setState({
+          countryList: sortJsonArray(countryArray, 'text')})
+          // ,this.setSelectedCountry)
+          // }
+        } else {
+          this.setState({countryList: sortJsonArray(countryArray, 'text')})
+        }
+      })
     }
 
     getThemes = () => {
@@ -39,11 +74,6 @@ export default class CreateUserForm extends Component {
         } else if (!theme_id_3) {
           theme_id_3 = null
         }
-
-        console.log(theme_id_1)
-        console.log(theme_id_2)
-        console.log(theme_id_3)
-
         const headers = {
             method: 'POST',
             headers: {
@@ -55,6 +85,7 @@ export default class CreateUserForm extends Component {
                first_name: this.firstname.current.form[2].value,
                last_name: this.lastname.current.form[3].value,
                email_address: this.emailaddress.current.form[4].value,
+               default_country: this.state.selectedCountry,
                theme1: theme_id_1,
                theme2: theme_id_2,
                theme3: theme_id_3
@@ -84,7 +115,6 @@ export default class CreateUserForm extends Component {
     }
 
     backToLogin = () => {
-      // window.location.replace("http://localhost:3001/");
       this.props.history.push("/")
     }
 
@@ -103,31 +133,37 @@ export default class CreateUserForm extends Component {
     }
 
     handleChange = (ev, data) =>{
-      console.log(data)
       let prevThemes = this.state.topThemes
-      // if (prevThemes.length < 3){
-        prevThemes.push(data.value)
+        if(data.checked){
+          prevThemes.push(data.value)
+        } else{
+          let i = prevThemes.indexOf(data.value)
+          prevThemes.splice(i, 1)
+        }
         this.setState({topThemes: prevThemes})
-      // }
     }
 
     renderThemeField = () => {
-      let themes = this.state.themes.sort(this.compare)
-      return this.state.themes.map((theme)=> {
+      return this.props.themes.map((theme)=> {
         return(
           <List.Item>
             <Form.Field
               control={Checkbox}
               label={theme.name}
               value={theme.id}
-              onClick={this.handleChange}
               checked={this.state.checked}
+              onChange={this.handleChange}
+              onClick={this.handleClick}
           />
           </List.Item>
           )
         })
       }
 
+    handleCountryChange = (ev, data) => {
+      console.log('in handle country change')
+      this.setState({selectedCountry: data.value})
+    }
 
     render() {
         return(
@@ -178,6 +214,21 @@ export default class CreateUserForm extends Component {
                     </div>
                   </Form.Group>
                 </div>
+                <Form.Group className="country-drop-div" flex>
+                  <Form.Field required>
+                  <label id="default-country">Default Country</label>
+                  <Dropdown
+                    className="create-country-drop"
+                    fluid
+                    search
+                    selection
+                    placeholder="Country"
+                    options={this.state.countryList}
+                    onChange={this.handleCountryChange}
+                    value={this.state.selectedCountry}
+                  />
+                </Form.Field>
+                </Form.Group>
                      <div id="button-div">
                        <Form.Field>
                          <Button>Create Profile</Button>
@@ -195,3 +246,5 @@ export default class CreateUserForm extends Component {
         )
     }
 }
+
+export default withRouter(CreateUserForm);

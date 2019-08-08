@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Grid, Image } from 'semantic-ui-react'
+import { Grid } from 'semantic-ui-react'
 import FavoriteThemes from './FavoriteThemes'
 import Navbar from './Navbar'
 import StarredProjectsList from './StarredProjectsList'
@@ -11,9 +11,9 @@ class Profile extends Component {
         super(props);
         this.state = {
             selected: '',
-            projectArray: []
+            projectArray: [],
+            square: { width: 175, height: 175 }
           }
-          // this.getProfile()
         };
 
     componentDidMount(){
@@ -52,7 +52,7 @@ class Profile extends Component {
         }
         this.setState(prevState => ({
             selected: event.target.name
-        }), ()=> console.log('hello',  this.state.selected))
+        }))
 
      }
 
@@ -61,17 +61,7 @@ class Profile extends Component {
              profileInfo: {...prevState.profileInfo,
                  message_template
              }
-         }), ()=> console.log(this.state.profileInfo))
-     }
-
-     logout = () => {
-       localStorage.setItem('jwt', '')
-       localStorage.setItem('username', '')
-       localStorage.setItem('email_address', '')
-       localStorage.setItem('first_name', '')
-       localStorage.setItem('last_name', '')
-       this.props.history.push("/")
-       return false
+         }))
      }
 
      removeFavorite = (projectId) => {
@@ -97,37 +87,33 @@ class Profile extends Component {
      }
 
     render() {
-        {document.body.style = 'background: white;'}
         return(
           <section class = "profile-section">
-           <Navbar logout={this.logout}/>
+           <Navbar activeItem='profile' logout={this.props.logout}/>
             <Grid>
               <Grid.Row>
-                <Grid.Column width={3}>
-                  <div class='profile-header'>
-                    <h2 class="ui header highlight">
-                      {localStorage.getItem('username')}
+                <Grid.Column width={16}>
+                  <div className='profile-header'>
+                    <h2 className="ui header highlight">
+                      <i className="user icon"></i>
                     </h2>
-                    <h2 class="ui header highlight">
-                      <i class="user icon"></i>
-                    </h2>
-                    <h2 class="ui header highlight">
+                    <h2 className="ui header highlight">
                       {localStorage.first_name} {localStorage.last_name}
                     </h2>
                   </div>
                 </Grid.Column>
-                <Grid.Column width={13}>
+              </Grid.Row>
+              <Grid.Row>
+                <Grid.Column width={16}>
                   <h1 class="ui center aligned header highlight">
                     Favorite Themes:
                   </h1>
-                  <FavoriteThemes />
+                  <FavoriteThemes getThemes={this.props.getThemes} updateAppThemes={this.props.updateAppThemes} />
                 </Grid.Column>
               </Grid.Row>
               <Grid.Row>
-                <Grid.Column width={3}>
-                </Grid.Column>
-                <Grid.Column width={13}>
-                  <h1 class="ui center aligned header highlight">
+                <Grid.Column width={16}>
+                  <h1 className="ui center aligned header highlight">
                     Starred Projects:
                   </h1>
                   <StarredProjectsList handleDonate={this.props.handleDonate} removeFavorite={this.removeFavorite} projectArray={this.state.projectArray}/>

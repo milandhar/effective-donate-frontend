@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Grid, Image } from 'semantic-ui-react'
-import logo from '../logo.svg';
+import { Grid, Button, Loader } from 'semantic-ui-react'
 import '../App.css';
 import ChoroplethMap from './choroplethMap.js'
 import ThemesDropdownMultiple from './ThemesDropdownMultiple'
@@ -24,6 +23,7 @@ class MapBrowser extends Component {
   //loop through the prevState 2D array and determine which index the ["XYZ", 0] subarray is located
 
   componentDidMount(){
+    console.log('in mapBrowser did mount')
     this.setState({
       mapThemes: this.props.userThemes,
       updatedMapThemes: true
@@ -31,7 +31,6 @@ class MapBrowser extends Component {
   }
 
   getThemeProjectCount = () => {
-    console.log('in get theme project count')
     const url = "http://localhost:3000/api/v1/get_project_theme_count"
     let prevData = this.state.data
     // let [theme1, theme2, theme3, theme4, theme5, theme6, theme7, theme8, theme9, theme10, theme11, theme12, theme13, theme14, theme15, theme16, theme17, theme18] = this.state.mapThemes
@@ -95,58 +94,20 @@ class MapBrowser extends Component {
 
   getArrayIndex(array, item) {
       for (var i = 0; i < array.length; i++) {
-          if (array[i][0] == item[0]) {
+          if (array[i][0] === item[0]) {
               return i;  //return the index
           }
       }
       return false;   // Not found
   }
 
-  // getThemes = () => {
-  //   const url = 'http://localhost:3000/api/v1/themes'
-  //   fetch(url)
-  //   .then(res=>res.json())
-  //   .then(json => {
-  //     this.setState({themes: json}, this.fetchUserThemes)
-  //   })
-  // }
 
-  // getThemeFromId = (themeId) => {
-  //   let theme = this.state.themes.find(theme=>theme.id===themeId)
-  //   return theme
-  // }
-
-  // fetchUserThemes = () => {
-  //   let themeArray = []
-  //   let token = localStorage.getItem("jwt")
-  //     fetch('http://localhost:3000/api/v1/profile', {
-  //       headers: {
-  //         'Authorization': 'Bearer ' + token
-  //       }
-  //     })
-  //     .then(res=>res.json())
-  //     .then(json=> {
-  //       themeArray.push(this.getThemeFromId(json.user.theme1))
-  //       themeArray.push(this.getThemeFromId(json.user.theme2))
-  //       themeArray.push(this.getThemeFromId(json.user.theme3))
-  //       this.setState({
-  //         filteredThemes: themeArray
-  //       })
-  //     })
-  //     // .then(() => this.renderThemeField())
-  //     // return themeArray
-  // }
-
-  logout = () => {
-    localStorage.setItem('jwt', '')
-    localStorage.setItem('username', '')
-    localStorage.setItem('email_address', '')
-    localStorage.setItem('first_name', '')
-    localStorage.setItem('last_name', '')
-    this.props.history.push("/")
-    return false
+  deleteProjects = () => {
+    const url = "http://localhost:3000/api/v1/delete_all"
+    return fetch(url)
+    .then(res=>res.json())
+    .then(json =>this.refreshMap())
   }
-
 
   refreshMap = () => {
     const url = "http://localhost:3000/api/v1/fetch_projects"
@@ -164,7 +125,6 @@ class MapBrowser extends Component {
 
   findLastProject = () => {
     const url = "http://localhost:3000/api/v1/find_last_project"
-    let maxId
     return fetch(url)
     .then(res => res.json())
     .then(x => this.getNextProjects(x))
@@ -207,9 +167,6 @@ class MapBrowser extends Component {
           hasNextFlag = true
           this.refreshMapLoop(json, url)
         }
-        // else{
-        //   hasNextFlag = false
-        // }
       })
     }
   }
@@ -223,7 +180,6 @@ class MapBrowser extends Component {
   }
 
   updateMapThemes = (themes) => {
-    console.log('in update map themes')
     this.props.updateAppThemes(themes)
     this.setState({mapThemes: themes}, this.getThemeProjectCount)
   }
@@ -233,18 +189,13 @@ class MapBrowser extends Component {
   }
 
   toggleUpdatedData = () => {
-    console.log('in toggle updated data')
-    this.setState({updatedData: false}, console.log('set updated data to false'))
+    this.setState({updatedData: false})
   }
 
   render() {
     return (
       <div className="app-div">
-        <Navbar logout={this.logout}/>
-        <div>
-          <button onClick={this.findLastProject} id="refreshBtn">Get New Projects</button>
-          <button onClick={this.refreshMap} id="refreshBtn">Refresh Projects</button>
-        </div>
+        <Navbar activeItem='map' logout={this.props.logout}/>
         <Grid divided='vertically'>
           <Grid.Row columns={1} id="map-div">
             <Grid.Column>
@@ -252,26 +203,30 @@ class MapBrowser extends Component {
               ? <div>
                   <ChoroplethMap toggleDropdownUpdated={this.toggleDropdownUpdated} dropdownUpdated={this.state.dropdownUpdated} history={this.props.history} handleClick={this.goToProjects} data={this.state.data}/>
                 </div>
-              : <div>Loading Thing</div>}
+              : <div id="map-loader"><Loader active inline='centered' /></div>}
             </Grid.Column>
           </Grid.Row>
           <Grid.Row className="map-dropdown-div"columns={1}>
             <Grid.Column>
-              <div>
-                <div class="attribution-div">
-                  <a href="https://www.globalgiving.org/" target="_blank">
-                    <img id="gg-logo" src={require('../img/GG2015_Logo_horizontal_4color.png')} />
-                  </a>
-                  <p class="gg-attribution">Project Data</p>
-                </div>
+              <div class="attribution-div">
+                <a href="https://www.globalgiving.org/" target="_blank">
+                  <img id="gg-logo" src={require('../img/GG2015_Logo_horizontal_4color.png')} />
+                </a>
+                <p class="gg-attribution">Project Data</p>
               </div>
-              <h1>Select Theme(s)</h1>
-              {(this.state.updatedMapThemes)
-              ? <ThemesDropdownMultiple updateMapThemes={this.updateMapThemes} themes={this.props.themes} mapThemes={this.state.mapThemes} className="map-dropdown"/>
-            : <div>loading</div>}
+              <div>
+                <h1>Select Theme(s)</h1>
+                {(this.state.updatedMapThemes)
+                ? <ThemesDropdownMultiple updateMapThemes={this.updateMapThemes} themes={this.props.themes} mapThemes={this.state.mapThemes} className="map-dropdown"/>
+                : <Loader active inline='centered' />}
+              </div>
             </Grid.Column>
           </Grid.Row>
         </Grid>
+        <div id="map-btns">
+          <Button onClick={this.findLastProject} id="refreshBtn">Get New Projects</Button>
+          <Button onClick={this.deleteProjects} id="refreshBtn">Refresh Projects</Button>
+        </div>
       </div>
     );
   }

@@ -14,16 +14,12 @@ class ChoroplethMap extends Component {
     }
 
     componentDidUpdate(){
-      console.log('in choropleth didUpdate')
-      console.log(this.props.data[231])
       // if(this.props.dropdownUpdated){
       this.renderMap(this.props)
       // }
     }
 
     componentDidMount() {
-      console.log('in choropleth didMount')
-      console.log(this.props.data[231])
       this.renderMap(this.props)
     }
 
@@ -102,7 +98,7 @@ class ChoroplethMap extends Component {
           setProjection: function (element) {
               var projection = d3.geo.mercator()
                   .center([0, 20]) // always in [East Latitude, North Longitude]
-                  .scale(240)
+                  .scale(180)
                   .translate([element.offsetWidth / 3, element.offsetHeight / 3]);
 
               var path = d3.geo.path().projection(projection);
@@ -111,19 +107,11 @@ class ChoroplethMap extends Component {
           done: function(map){
             map.svg.selectAll('.datamaps-subunit').on('click', function(geography) {
               let link = geography.id
-              // link to the country component here. Might need a callback to mapBrowser first
-              // could use localStorage as a backup
+
               props.handleClick(geography)
-              // props.history.push({
-              //   pathname: "/country",
-              //   state: {link: geography}
-              // })
-              // this.clickCountry()
-              // console.log(link)
             })
           }
       })
-      console.log('created')
       // this.setState({state: this.state}, this.props.toggleDropdownUpdated, console.log(dataset), map.updateChoropleth(dataset))
     }
 
@@ -131,8 +119,6 @@ class ChoroplethMap extends Component {
       // this.props.handleClick()
       const parentNode = document.getElementById('choropleth_map')
       const childNode = document.getElementsByClassName('datamap')
-      console.log(parentNode)
-      console.log(childNode)
       d3.select("svg").remove();
       // if(parentNode && childNode){
       //   parentNode.removeChild(childNode)

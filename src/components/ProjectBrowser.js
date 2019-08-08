@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import { Grid, Image, Dropdown, Header, Icon } from 'semantic-ui-react'
-import logo from '../logo.svg';
+import { Grid, Dropdown, Header, Icon, Loader } from 'semantic-ui-react'
 import '../App.css';
-import ChoroplethMap from './choroplethMap.js'
 import CountryCard from './CountryCard.js'
 import ThemesDropdownMultiple from './ThemesDropdownMultiple'
 import Navbar from './Navbar.js'
@@ -29,17 +27,14 @@ class ProjectBrowser extends Component {
   }
 
   setSelectedCountry = () => {
-    console.log('in set selected country')
     if(this.props.location && this.props.location.state && this.props.location.state.countryCode){
       if(this.state.selectedCountry === ""){
         this.setState({selectedCountry: this.props.location.state.countryCode}, this.fetchThemeProjects)
-        console.log('setting country state')
       }
     }
   }
 
   fetchCountries = () => {
-    console.log('in fetchCountries')
     const url = `http://localhost:3000/api/v1/countries`
     const getCountryISO2 = require("country-iso-3-to-2");
     let countryArray = []
@@ -71,7 +66,6 @@ class ProjectBrowser extends Component {
   }
 
   fetchProjects = () => {
-    console.log('in fetch projects')
     const countryCode = this.state.selectedCountry
     const url = `http://localhost:3000/api/v1/get_projects?countryCode=${countryCode}`
     fetch(url)
@@ -82,9 +76,7 @@ class ProjectBrowser extends Component {
   }
 
   fetchThemeProjects = () => {
-    console.log('in fetch theme projects')
     const countryCode = this.state.selectedCountry
-    console.log(countryCode)
     // const [theme1, theme2, theme3, theme4, theme5, theme6, theme7, theme8, theme9, theme10, theme11, theme12, theme13, theme14, theme15, theme16, theme17, theme18] = this.state.projectThemes
     const url = `http://localhost:3000/api/v1/get_theme_projects`
     return fetch(url, {
@@ -108,22 +100,18 @@ class ProjectBrowser extends Component {
     this.setState({selectedCountry: data.value}, this.fetchThemeProjects)
   }
 
-  addFavorite = (ev, data) => {
-
-  }
-
-  logout = () => {
-    localStorage.setItem('jwt', '')
-    localStorage.setItem('username', '')
-    localStorage.setItem('email_address', '')
-    localStorage.setItem('first_name', '')
-    localStorage.setItem('last_name', '')
-    this.props.history.push("/")
-    return false
-  }
+  // logout = () => {
+  //   localStorage.setItem('userid', '')
+  //   localStorage.setItem('jwt', '')
+  //   localStorage.setItem('username', '')
+  //   localStorage.setItem('email_address', '')
+  //   localStorage.setItem('first_name', '')
+  //   localStorage.setItem('last_name', '')
+  //   this.props.history.push("/")
+  //   return false
+  // }
 
   updateProjectThemes = (themes) => {
-    console.log('in update project themes')
     this.props.updateAppThemes(themes)
     this.setState({projectThemes: themes}, this.fetchThemeProjects)
   }
@@ -131,7 +119,7 @@ class ProjectBrowser extends Component {
   render() {
     return(
       <div className="app-div">
-        <Navbar logout={this.logout}/>
+        <Navbar activeItem='projects' logout={this.props.logout}/>
         <div>
           <Header as='h2' icon textAlign='center'>
             <Icon name='tasks' circular />
@@ -154,20 +142,20 @@ class ProjectBrowser extends Component {
                 value={this.state.selectedCountry}
               />
           </Grid.Column>
-            <Grid.Column>
+            <Grid.Column className="theme-dropdown-div">
               <Header as='h3' textAlign='center'>
                 <Header.Content>Themes</Header.Content>
               </Header>
               <ThemesDropdownMultiple updateMapThemes={this.updateProjectThemes} themes={this.props.themes} mapThemes={this.state.projectThemes} />
             </Grid.Column>
           </Grid.Row>
-          {(this.state.themesUpdated && this.state.countryProjects != [])
+          {(this.state.themesUpdated && !this.state.countryProjects["error"])
             ? <Grid.Row className="card-row" columns = {4}>
                 {this.state.countryProjects.map((project) => {
-                  return <div className="column card-div"> <CountryCard id={project.id} handleDonate={this.props.handleDonate} orgUrl={project.organization.url} organization={project.organization.name} handleStar={this.addFavorite()} funding={project.funding} longTermImpact={project.long_term_impact} summary={project.summary} goal={project.goal} key={project.id} image={project.image_url} theme={project.theme.name} title={project.title} country={project.country.name}/></div>
+                  return <div className="column card-div"> <CountryCard id={project.id} projectLink={project.project_link} handleDonate={this.props.handleDonate} orgUrl={project.organization.url} organization={project.organization.name} funding={project.funding} longTermImpact={project.long_term_impact} activities={project.activities} summary={project.summary} goal={project.goal} key={project.id} image={project.image_url} theme={project.theme.name} title={project.title} country={project.country.name}/></div>
               })}
             </Grid.Row>
-            : <div>loading</div>
+            : <Loader active inline='centered' />
           }
         </Grid>
       </div>

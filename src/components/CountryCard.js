@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { Card, Icon, Image, Rating, Progress } from 'semantic-ui-react'
+import PropTypes from 'prop-types'
+import { Loader, Visibility, Card, Icon, Image, Progress } from 'semantic-ui-react'
 import { withRouter } from 'react-router-dom'
 
 
@@ -7,8 +8,20 @@ class CountryCard extends Component {
   constructor(props){
     super(props)
     this.state = {
-      starred: false
+      starred: false,
+      show: false
     }
+  }
+
+  static propTypes = {
+        src: PropTypes.string.isRequired,
+        size: PropTypes.string
+    }
+
+  static defaultProps = {size: `large`,}
+
+  showImage = () => {
+    this.setState({show: true})
   }
 
   componentDidMount(){
@@ -64,6 +77,16 @@ class CountryCard extends Component {
   }
 
   render(){
+    const { size } = this.props
+    if (!this.state.show) {
+        return (
+        <div className="visiblity-div">
+          <Visibility as="span" onTopVisible={this.showImage}>
+            <Loader active inline="centered" size={size} />
+          </Visibility>
+        </div>
+      )
+    }
     return(
     <Card>
     <Image src={this.props.image} wrapped ui={false} />
@@ -82,7 +105,7 @@ class CountryCard extends Component {
         {this.state.starred ? <Icon className="active" name='star' /> : <Icon name='star' />}
       </a>
       <a onClick={()=>this.handleDollar(this.props)}>
-        <Icon name='dollar sign' />
+        <Icon name='dollar' />
       </a>
     </Card.Content>
   </Card>

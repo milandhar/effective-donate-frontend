@@ -1,10 +1,7 @@
 import React, { Component } from 'react'
-import { Image, List, Button, Icon } from 'semantic-ui-react'
+import { List, Button } from 'semantic-ui-react'
 
 export default class DonationOptionsList extends Component {
-  constructor(props){
-    super(props)
-  }
 
   handleClick = (amount) => {
     this.props.updateChosenAmount(amount)
@@ -16,7 +13,7 @@ export default class DonationOptionsList extends Component {
       {this.props.donationOptions.map((option, idx) => {
         return (<List.Item key={option.id} className="donation options">
           <List.Content className="donation amount">
-          <Button onClick={() => this.handleClick(option.amount)} circular>${option.amount}</Button>
+          <Button color='green' onClick={() => this.handleClick(option.amount)} circular>${option.amount}</Button>
           </List.Content>
           <List.Content className="donation description">
             <List.Header> {option.description} </List.Header>

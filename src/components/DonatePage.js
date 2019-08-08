@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Grid, Header, Icon, Radio, Form, Button } from 'semantic-ui-react'
+import { Grid, Header, Icon, Radio, Form, Button, Message, Flag } from 'semantic-ui-react'
 import FavoriteThemes from './FavoriteThemes'
 import DonationOptionsList from './DonationOptionsList'
 
@@ -32,16 +32,6 @@ export default class DonatePage extends Component {
   componentDidMount(){
     this.findDonationOptions()
     this.checkIfStarred()
-  }
-
-  logout = () => {
-    localStorage.setItem('jwt', '')
-    localStorage.setItem('username', '')
-    localStorage.setItem('email_address', '')
-    localStorage.setItem('first_name', '')
-    localStorage.setItem('last_name', '')
-    this.props.history.push("/")
-    return false
   }
 
   findDonationOptions = () => {
@@ -132,10 +122,20 @@ export default class DonatePage extends Component {
       })
   }
 
+  getFlagName = () => {
+    let flag = ""
+    if(this.state.selectedProject.country.name){
+      flag = this.state.selectedProject.country.name.toLowerCase()
+    } else if(this.state.selectedProject.country){
+      flag = this.state.selectedProject.country.toLowerCase()
+    }
+    return flag
+  }
+
   render() {
     return(
       <section>
-        <Navbar logout={this.logout}/>
+        <Navbar logout={this.props.logout}/>
           <div>
             <Header as='h2' icon textAlign='center'>
               <Icon name='dollar sign' circular />
@@ -143,8 +143,11 @@ export default class DonatePage extends Component {
           </div>
         <Grid>
           <Grid.Row columns={1}>
-            <Grid.Column>
-              <Header as='h2' textAlign='center'>
+            <Grid.Column id="donate-header">
+              <div id="flag-div">
+                <Flag name={this.getFlagName()}/>
+              </div>
+              <Header id="donate-header-div" as='h1' textAlign='center'>
                 <Header.Content>{this.state.selectedProject.title}</Header.Content>
               </Header>
               <a onClick={this.handleStar}>
@@ -152,12 +155,13 @@ export default class DonatePage extends Component {
               </a>
             </Grid.Column>
           </Grid.Row>
-          <Grid.Row columns={2}>
+          <Grid.Row id="donate-div" columns={2}>
             <Grid.Column>
               <Form>
                 <Form.Field>
                   <label>Amount:</label>
                   <input
+                    id='amount-input'
                     placeholder='Donation Amount'
                     value={this.state.chosenAmount}
                     onChange={this.handleAmountChange}
@@ -184,21 +188,32 @@ export default class DonatePage extends Component {
           </Grid.Row>
           <Grid.Row columns={1}>
             <Grid.Column>
+              <Message positive>
+                <Message.Header>On-Site Payment Coming Soon!</Message.Header>
+                {console.log(this.state.selectedProject)}
+                {(this.state.selectedProject.project_link)
+                ? <p>You may complete your donation on <a target="_blank" href={this.state.selectedProject.project_link}>GlobalGiving</a></p>
+                : <p>You may complete your donation on <a target="_blank" href={this.state.selectedProject.projectLink}>GlobalGiving</a></p>}
+
+              </Message>
+            </Grid.Column>
+          </Grid.Row>
+          <Grid.Row columns={1}>
+            <Grid.Column>
               <Form onSubmit={this.handleSubmit}>
                 <div id="payment-div">
                   <Form.Group>
-                    <Form.Input onChange={this.handleChange} name='firstName' value={this.state.firstName} label='First Name' placeholder='First Name' width={4} />
-                    <Form.Input onChange={this.handleChange} name='lastNAme' value={this.state.lastNAme} label='Last Name' placeholder='Last Name' width={4} />
-                    <Form.Input onChange={this.handleChange} name='email' value={this.state.email} type='email' label='Email Address' placeholder='Email Address' width={8} />
+                    <Form.Input disabled="true" onChange={this.handleChange} name='firstName' value={this.state.firstName} label='First Name' placeholder='First Name' width={4} />
+                    <Form.Input disabled="true" onChange={this.handleChange} name='lastNAme' value={this.state.lastNAme} label='Last Name' placeholder='Last Name' width={4} />
+                    <Form.Input disabled="true" onChange={this.handleChange} name='email' value={this.state.email} type='email' label='Email Address' placeholder='Email Address' width={8} />
                   </Form.Group>
                   <Form.Group>
-                    <Form.Input onChange={this.handleChange} name='cardNumber' value={this.state.cardNumber} type='tel' label='Card Number' placeholder='Card Number' width={8} />
-                    <Form.Input onChange={this.handleChange} name='expiration' value={this.state.expiration} label='Expiration' placeholder='MM/YY' width={5} />
-                    <Form.Input onChange={this.handleChange} name='code' value={this.state.code} label='Code' placeholder='Code' width={3} />
+                    <Form.Input disabled="true" onChange={this.handleChange} name='cardNumber' value={this.state.cardNumber} type='tel' label='Card Number' placeholder='Card Number' width={8} />
+                    <Form.Input disabled="true" onChange={this.handleChange} name='expiration' value={this.state.expiration} label='Expiration' placeholder='MM/YY' width={5} />
+                    <Form.Input disabled="true" onChange={this.handleChange} name='code' value={this.state.code} label='Code' placeholder='Code' width={3} />
                   </Form.Group>
-                  <Form.Checkbox label='I agree to the Terms and Conditions' />
-                  {/*Add validation ternary here */}
-                  <Button type='submit'>Complete Donation</Button>
+                  <Form.Checkbox disabled="true" label='I agree to the Terms and Conditions' />
+                  <Button disabled="true" type='submit'>Complete Donation</Button>
                 </div>
               </Form>
             </Grid.Column>

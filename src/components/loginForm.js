@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Form, Header, Icon  } from 'semantic-ui-react'
-import { Link, Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 export default class LoginForm extends Component {
 
@@ -9,11 +9,14 @@ export default class LoginForm extends Component {
 
     this.username = React.createRef()
     this.password = React.createRef()
-
-    if (this.getToken()) {
-        this.getProfile()
-      }
+    // if (this.getToken()) {
+    //     this.getProfile()
+    //   }
     }
+
+  componentDidMount(){
+    this.props.resetState()
+  }
 
   getToken(jwt) {
     return localStorage.getItem('jwt')
@@ -29,8 +32,6 @@ export default class LoginForm extends Component {
     .then(res=>res.json())
     .then(json=> {
       this.setState({user: json.user})
-      // this.props.onLogin(json.user);
-      // localStorage.setItem("user_id", json.user.id)
     })
   }
 
@@ -44,6 +45,7 @@ export default class LoginForm extends Component {
     localStorage.setItem('email_address', json["user"]["email_address"])
     localStorage.setItem('first_name', json["user"]["first_name"])
     localStorage.setItem('last_name', json["user"]["last_name"])
+    localStorage.setItem('default_country', json["user"]["default_country"])
   }
 
   login = (ev) => {
@@ -68,10 +70,14 @@ export default class LoginForm extends Component {
             this.getProfile()
             this.setState(prevState => ({
               loggedIn: true
-            }), ()=> console.log(this.state.loggedIn));
+            }), ()=> {
+              this.props.setUser(json.user);
+              this.props.updateSelectedCountry(json.user.default_country);
+              this.props.getThemes()
+            });
             this.props.history.push("/map")
           }else{
-            console.log('nope!')
+            alert("Incorrect Login Information")
           }
         })
       }
@@ -99,11 +105,9 @@ export default class LoginForm extends Component {
                 <input id='loginpassword' name='password' type="password" placeholder='password' ref={this.password} required />
                 </Form.Field>
                 <Form.Field>
-                {/*<Link to ="/browse"> */}
-                <input type="submit" class="large ui button" value="Log In" onClick={this.login}/>
-                {/*</Link> */}
+                <input type="submit" className="large ui blue button" value="Log In" onClick={this.login}/>
                 <Link to="/create_user" replace>
-                  <input type="submit" class="large ui button" value="Create Profile"/>
+                  <input type="submit" className="large ui blue button" value="Create Profile"/>
                 </Link>
                 </Form.Field>
                 </Form>
