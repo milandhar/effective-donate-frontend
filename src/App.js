@@ -37,7 +37,7 @@ class App extends Component {
   }
 
   getThemes = () => {
-    const url = 'http://localhost:3000/api/v1/themes'
+    const url = 'https://damp-everglades-59702.herokuapp.com/api/v1/themes'
     fetch(url)
     .then(res=>res.json())
     .then(json => {
@@ -49,7 +49,7 @@ class App extends Component {
     console.log('in app get themes')
     let themeArray = []
     let token = localStorage.getItem("jwt")
-      fetch('http://localhost:3000/api/v1/profile', {
+      fetch('https://damp-everglades-59702.herokuapp.com/api/v1/profile', {
         headers: {
           'Authorization': 'Bearer ' + token
         }
