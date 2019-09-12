@@ -31,7 +31,6 @@ class App extends Component {
 
 
   getThemeFromId = (themeId) => {
-    console.log(themeId)
     let theme = this.state.themes.find(theme=>theme.id===themeId)
     return theme
   }
@@ -41,12 +40,20 @@ class App extends Component {
     fetch(url)
     .then(res=>res.json())
     .then(json => {
-      this.setState({themes: json}, this.fetchUserThemes())
+      if (json.length != 0) {
+        this.setState({themes: json})
+        // this.setState({themes: json}, this.fetchUserThemes())
+      }
+      console.log(this.state.user.keys)
+      if (this.state.user.keys){
+        this.fetchUserThemes()
+      }
     })
   }
 
   fetchUserThemes = () => {
-    console.log('in app get themes')
+    console.log('in fetch user themes')
+    console.log(this.state.user)
     let themeArray = []
     let token = localStorage.getItem("jwt")
       fetch('https://damp-everglades-59702.herokuapp.com/api/v1/profile', {
@@ -57,7 +64,6 @@ class App extends Component {
       .then(res=>res.json())
       .then(json=> {
         if(!json["error"]){
-          console.log(json)
           if(json.user.theme1){
             themeArray.push(this.getThemeFromId(json.user.theme1).name)
           }
@@ -82,7 +88,6 @@ class App extends Component {
   }
 
   updateSelectedCountry = (country) => {
-    console.log('in update selected')
     if(country){
       this.setState({
         updatedSelectedCountry: true,
