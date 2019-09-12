@@ -22,7 +22,7 @@ class Profile extends Component {
 
     fetchProjects = () => {
       let userId = localStorage.userid
-      const url = `http://localhost:3000/api/v1/get_user_projects`
+      const url = `https://damp-everglades-59702.herokuapp.com/api/v1/get_user_projects`
       const headers = {
           method: 'POST',
           headers: {
@@ -66,7 +66,7 @@ class Profile extends Component {
 
      removeFavorite = (projectId) => {
        const userId = localStorage.userid
-       const url = `http://localhost:3000/api/v1/remove_project`
+       const url = `https://damp-everglades-59702.herokuapp.com/api/v1/remove_project`
        const headers = {
            method: 'POST',
            headers: {

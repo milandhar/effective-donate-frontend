@@ -24,7 +24,7 @@ export default class LoginForm extends Component {
 
   getProfile = () => {
     let token = this.getToken()
-    fetch('http://localhost:3000/api/v1/profile', {
+    fetch('https://damp-everglades-59702.herokuapp.com/api/v1/profile', {
       headers: {
         'Authorization': 'Bearer ' + token
       }
@@ -53,7 +53,7 @@ export default class LoginForm extends Component {
     const username = this.username.current.value
     const password = this.password.current.value
 
-    const URL = 'http://localhost:3000/api/v1/login/'
+    const URL = 'https://damp-everglades-59702.herokuapp.com/api/v1/login/'
     const headers = {
         method: 'POST',
         headers: {

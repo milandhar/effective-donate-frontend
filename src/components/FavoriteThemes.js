@@ -26,7 +26,7 @@ export default class FavoriteThemes extends Component {
 
   getThemes = () => {
     console.log('in themes')
-    const url = 'http://localhost:3000/api/v1/themes'
+    const url = 'https://damp-everglades-59702.herokuapp.com/api/v1/themes'
     fetch(url)
     .then(res=>res.json())
     .then(json => {
@@ -43,7 +43,7 @@ export default class FavoriteThemes extends Component {
   fetchUserThemes = () => {
     let themeArray = []
     let token = localStorage.getItem("jwt")
-      fetch('http://localhost:3000/api/v1/profile', {
+      fetch('https://damp-everglades-59702.herokuapp.com/api/v1/profile', {
         headers: {
           'Authorization': 'Bearer ' + token
         }
@@ -148,7 +148,7 @@ export default class FavoriteThemes extends Component {
       console.log(themeId)
       let bodyHash = {}
       bodyHash[`theme${themeNumber+1}`] = themeId
-      const URL = `http://localhost:3000/api/v1/users/${localStorage.userid}`
+      const URL = `https://damp-everglades-59702.herokuapp.com/api/v1/users/${localStorage.userid}`
       const headers = {
           method: 'Put',
           headers: {
