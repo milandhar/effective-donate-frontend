@@ -26,6 +26,7 @@ class App extends Component {
   }
 
   componentDidMount(){
+    console.log('in did mount')
     this.getThemes()
   }
 
@@ -36,6 +37,7 @@ class App extends Component {
   }
 
   getThemes = () => {
+    console.log('in get themes')
     const url = 'https://damp-everglades-59702.herokuapp.com/api/v1/themes'
     fetch(url)
     .then(res=>res.json())
@@ -45,7 +47,8 @@ class App extends Component {
         // this.setState({themes: json}, this.fetchUserThemes())
       }
       console.log(this.state.user.keys)
-      if (this.state.user.keys){
+      // if (this.state.user.keys){
+      if (localStorage.getItem("jwt")){
         this.fetchUserThemes()
       }
     })
@@ -135,7 +138,9 @@ class App extends Component {
               onLogin={this.updateUser}
               setUser={this.setUser}
               updateSelectedCountry={this.updateSelectedCountry}
-              getThemes={this.getThemes}/>
+              fetchUserThemes={this.fetchUserThemes}
+              getThemes={this.getThemes}
+              />
               )}
             />
           {(this.state.updatedThemes)
