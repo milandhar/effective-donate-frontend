@@ -114,6 +114,17 @@ export default class LoginForm extends Component {
               </article>
             </div>
           </div>
+          <div className="desc-div">
+            <Header as='h3'>
+                EffectiveDonate lets you:
+              <Header.Subheader>
+                <ul>
+                  <li>Browse hundreds of nonprofit projects in countries around the world</li>
+                  <li>Explore project themes you care about, like Economic Development, Technology, and Health</li>
+                </ul>
+              </Header.Subheader>
+            </Header>
+          </div>
         </div>
     )
   }

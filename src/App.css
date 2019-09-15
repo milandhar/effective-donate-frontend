@@ -21,6 +21,10 @@ section {
   margin-left: 8px !important;
 }
 
+.desc-div {
+  margin-top: 30px;
+}
+
 .profile-section .grid {
   padding-left: 40px;
   padding-right: 40px;
