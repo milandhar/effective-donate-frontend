@@ -32,7 +32,7 @@ class CountryCard extends Component {
     //post to user_starred_projects here
     const userId = localStorage.userid
     const projectId = this.props.id
-    const url = `http://localhost:3000/api/v1/user_starred_projects`
+    const url = `https://damp-everglades-59702.herokuapp.com/api/v1/user_starred_projects`
     const headers = {
         method: 'POST',
         headers: {
@@ -53,7 +53,7 @@ class CountryCard extends Component {
     let starred = false
     const userId = localStorage.userid
     const projectId = this.props.id
-    const url = `http://localhost:3000/api/v1/check_star`
+    const url = `https://damp-everglades-59702.herokuapp.com/api/v1/check_star`
     const headers = {
         method: 'POST',
         headers: {

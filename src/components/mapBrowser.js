@@ -31,7 +31,7 @@ class MapBrowser extends Component {
   }
 
   getThemeProjectCount = () => {
-    const url = "http://localhost:3000/api/v1/get_project_theme_count"
+    const url = "https://damp-everglades-59702.herokuapp.com/api/v1/get_project_theme_count"
     let prevData = this.state.data
     // let [theme1, theme2, theme3, theme4, theme5, theme6, theme7, theme8, theme9, theme10, theme11, theme12, theme13, theme14, theme15, theme16, theme17, theme18] = this.state.mapThemes
     const getCountryISO3 = require("country-iso-2-to-3");
@@ -63,7 +63,7 @@ class MapBrowser extends Component {
   }
 
   getProjectCount = () => {
-    const url = "http://localhost:3000/api/v1/get_project_count"
+    const url = "https://damp-everglades-59702.herokuapp.com/api/v1/get_project_count"
     let prevData = this.state.data
     const getCountryISO3 = require("country-iso-2-to-3");
     return fetch(url, {
@@ -103,14 +103,14 @@ class MapBrowser extends Component {
 
 
   deleteProjects = () => {
-    const url = "http://localhost:3000/api/v1/delete_all"
+    const url = "https://damp-everglades-59702.herokuapp.com/api/v1/delete_all"
     return fetch(url)
     .then(res=>res.json())
     .then(json =>this.refreshMap())
   }
 
   refreshMap = () => {
-    const url = "http://localhost:3000/api/v1/fetch_projects"
+    const url = "https://damp-everglades-59702.herokuapp.com/api/v1/fetch_projects"
     return fetch(url, {
       method: 'POST',
       headers: {
@@ -124,14 +124,14 @@ class MapBrowser extends Component {
   }
 
   findLastProject = () => {
-    const url = "http://localhost:3000/api/v1/find_last_project"
+    const url = "https://damp-everglades-59702.herokuapp.com/api/v1/find_last_project"
     return fetch(url)
     .then(res => res.json())
     .then(x => this.getNextProjects(x))
   }
 
   getNextProjects = (maxId) => {
-    const url = "http://localhost:3000/api/v1/fetch_projects"
+    const url = "https://damp-everglades-59702.herokuapp.com/api/v1/fetch_projects"
     //find last project id in projects table here
     return fetch(url, {
       method: 'POST',

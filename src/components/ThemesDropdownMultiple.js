@@ -13,7 +13,7 @@ export default class ThemesDropdownMultiple extends Component {
   }
 
   componentDidMount(){
-    const url = "http://localhost:3000/api/v1/themes"
+    const url = "https://damp-everglades-59702.herokuapp.com/api/v1/themes"
     let newOptions = []
     let themeNamesArray = []
     fetch(url)

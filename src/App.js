@@ -26,30 +26,40 @@ class App extends Component {
   }
 
   componentDidMount(){
+    console.log('in did mount')
     this.getThemes()
   }
 
 
   getThemeFromId = (themeId) => {
-    console.log(themeId)
     let theme = this.state.themes.find(theme=>theme.id===themeId)
     return theme
   }
 
   getThemes = () => {
-    const url = 'http://localhost:3000/api/v1/themes'
+    console.log('in get themes')
+    const url = 'https://damp-everglades-59702.herokuapp.com/api/v1/themes'
     fetch(url)
     .then(res=>res.json())
     .then(json => {
-      this.setState({themes: json}, this.fetchUserThemes())
+      if (json.length != 0) {
+        this.setState({themes: json})
+        // this.setState({themes: json}, this.fetchUserThemes())
+      }
+      console.log(this.state.user.keys)
+      // if (this.state.user.keys){
+      if (localStorage.getItem("jwt")){
+        this.fetchUserThemes()
+      }
     })
   }
 
   fetchUserThemes = () => {
-    console.log('in app get themes')
+    console.log('in fetch user themes')
+    console.log(this.state.user)
     let themeArray = []
     let token = localStorage.getItem("jwt")
-      fetch('http://localhost:3000/api/v1/profile', {
+      fetch('https://damp-everglades-59702.herokuapp.com/api/v1/profile', {
         headers: {
           'Authorization': 'Bearer ' + token
         }
@@ -57,7 +67,6 @@ class App extends Component {
       .then(res=>res.json())
       .then(json=> {
         if(!json["error"]){
-          console.log(json)
           if(json.user.theme1){
             themeArray.push(this.getThemeFromId(json.user.theme1).name)
           }
@@ -82,7 +91,6 @@ class App extends Component {
   }
 
   updateSelectedCountry = (country) => {
-    console.log('in update selected')
     if(country){
       this.setState({
         updatedSelectedCountry: true,
@@ -130,7 +138,9 @@ class App extends Component {
               onLogin={this.updateUser}
               setUser={this.setUser}
               updateSelectedCountry={this.updateSelectedCountry}
-              getThemes={this.getThemes}/>
+              fetchUserThemes={this.fetchUserThemes}
+              getThemes={this.getThemes}
+              />
               )}
             />
           {(this.state.updatedThemes)

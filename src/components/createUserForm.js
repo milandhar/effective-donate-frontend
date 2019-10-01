@@ -27,7 +27,7 @@ class CreateUserForm extends Component {
     }
 
     fetchCountries = () => {
-      const url = `http://localhost:3000/api/v1/countries`
+      const url = `https://damp-everglades-59702.herokuapp.com/api/v1/countries`
       const getCountryISO2 = require("country-iso-3-to-2");
       let countryArray = []
       fetch(url)
@@ -58,14 +58,14 @@ class CreateUserForm extends Component {
     }
 
     getThemes = () => {
-      const url = 'http://localhost:3000/api/v1/themes'
+      const url = 'https://damp-everglades-59702.herokuapp.com/api/v1/themes'
       fetch(url)
       .then(res=>res.json())
       .then(json => {this.setState({themes: json})})
     }
 
     createUser = () => {
-        const URL = 'http://localhost:3000/api/v1/users'
+        const URL = 'https://damp-everglades-59702.herokuapp.com/api/v1/users'
         let[theme_id_1, theme_id_2, theme_id_3] = this.state.topThemes
         if(!theme_id_1){
           theme_id_1 = null
