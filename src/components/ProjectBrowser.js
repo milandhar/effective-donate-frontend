@@ -5,6 +5,8 @@ import CountryCard from './CountryCard.js'
 import ThemesDropdownMultiple from './ThemesDropdownMultiple'
 import Navbar from './Navbar.js'
 import { withRouter } from 'react-router-dom'
+import * as Scroll from 'react-scroll';
+import { Link, Element , Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
 
 
 class ProjectBrowser extends Component {
@@ -24,6 +26,11 @@ class ProjectBrowser extends Component {
   componentDidMount(){
     this.fetchCountries()
     this.fetchThemeProjects()
+    scroll.scrollTo(200)
+  }
+
+  componentDidUpdate(){
+    scroll.scrollTo(200)
   }
 
   setSelectedCountry = () => {
