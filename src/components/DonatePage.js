@@ -47,7 +47,6 @@ export default class DonatePage extends Component {
     fetch(url, headers)
       .then(res=>res.json())
       .then(json => {
-        console.log(json)
         if(json && json[0]){
           this.setState({donationOptions: json, chosenAmount: json[0].amount})
         }
@@ -93,7 +92,6 @@ export default class DonatePage extends Component {
     fetch(url, headers)
     .then(res=>res.json())
     .then(json => {
-      console.log(json)
         if(json["status"] === "Star"){
           starred = true
           this.setState({starred:true})
@@ -190,7 +188,6 @@ export default class DonatePage extends Component {
             <Grid.Column>
               <Message positive>
                 <Message.Header>On-Site Payment Coming Soon!</Message.Header>
-                {console.log(this.state.selectedProject)}
                 {(this.state.selectedProject.project_link)
                 ? <p>You may complete your donation on <a target="_blank" href={this.state.selectedProject.project_link}>GlobalGiving</a></p>
                 : <p>You may complete your donation on <a target="_blank" href={this.state.selectedProject.projectLink}>GlobalGiving</a></p>}

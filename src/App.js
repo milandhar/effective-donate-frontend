@@ -26,7 +26,6 @@ class App extends Component {
   }
 
   componentDidMount(){
-    console.log('in did mount')
     this.getThemes()
   }
 
@@ -37,7 +36,6 @@ class App extends Component {
   }
 
   getThemes = () => {
-    console.log('in get themes')
     const url = 'https://damp-everglades-59702.herokuapp.com/api/v1/themes'
     fetch(url)
     .then(res=>res.json())
@@ -46,7 +44,6 @@ class App extends Component {
         this.setState({themes: json})
         // this.setState({themes: json}, this.fetchUserThemes())
       }
-      console.log(this.state.user.keys)
       // if (this.state.user.keys){
       if (localStorage.getItem("jwt")){
         this.fetchUserThemes()
@@ -55,10 +52,9 @@ class App extends Component {
   }
 
   fetchUserThemes = () => {
-    console.log('in fetch user themes')
-    console.log(this.state.user)
     let themeArray = []
     let token = localStorage.getItem("jwt")
+
       fetch('https://damp-everglades-59702.herokuapp.com/api/v1/profile', {
         headers: {
           'Authorization': 'Bearer ' + token
