@@ -9,8 +9,11 @@ class ChoroplethMap extends Component {
     constructor(props){
       super(props)
       this.state = {
-        needsUpdate: false
+        needsUpdate: false,
+        width: 0,
+        height: 0,
       }
+      this.mapRef = React.createRef();
     }
 
     componentDidUpdate(){
@@ -20,7 +23,36 @@ class ChoroplethMap extends Component {
     }
 
     componentDidMount() {
-      this.renderMap(this.props)
+      let width = this.getWidth()
+      let height = this.getHeight()
+      this.setState({width: width, height: height}, ()=> {
+            this.renderMap(this.props);
+        });
+      let resizedFn
+
+      window.addEventListener("resize", () => {
+        clearTimeout(resizedFn)
+        resizedFn = setTimeout(() => {
+                this.redrawMap();
+            }, 200)
+      })
+    }
+
+    redrawMap() {
+        let width = this.getWidth()
+        let height = this.getHeight()
+        this.setState({width: width, height: height});
+        d3.select("svg").remove();
+        this.renderMap = this.renderMap.bind(this);
+        this.renderMap(this.props);
+      }
+
+    getWidth() {
+    return this.mapRef.current.parentElement.offsetWidth;
+    }
+
+    getHeight() {
+        return this.mapRef.current.parentElement.offsetHeight;
     }
 
     renderMap = (props) => {
@@ -98,7 +130,7 @@ class ChoroplethMap extends Component {
           setProjection: function (element) {
               var projection = d3.geo.mercator()
                   .center([0, 20]) // always in [East Latitude, North Longitude]
-                  .scale(180)
+                  .scale(160)
                   .translate([element.offsetWidth / 3, element.offsetHeight / 3]);
 
               var path = d3.geo.path().projection(projection);
@@ -120,10 +152,6 @@ class ChoroplethMap extends Component {
       const parentNode = document.getElementById('choropleth_map')
       const childNode = document.getElementsByClassName('datamap')
       d3.select("svg").remove();
-      // if(parentNode && childNode){
-      //   parentNode.removeChild(childNode)
-      //   console.log('removed child')
-      // }
     }
 
 
@@ -132,7 +160,7 @@ class ChoroplethMap extends Component {
         return (
             <div id="choropleth_parent">
               {this.removeDiv()}
-              <div id="choropleth_map"></div>
+              <div ref={this.mapRef} id="choropleth_map"></div>
             </div>
         );
     }
