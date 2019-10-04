@@ -440,6 +440,19 @@ td {
     margin-bottom: -5%;
   }
 }
+
+@media only screen and (max-width: 768px) {
+  #choropleth_map {
+    margin-top: 200px;
+  }
+  .ui.secondary.inverted.menu a.item {
+    color: #000 !important;
+  }
+
+  .ui.secondary.inverted.menu .active.item {
+    color: #000 !important;
+  }
+}
 /*
 @media only screen and (max-width: 500px) {
   #map-div {

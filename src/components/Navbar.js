@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Menu, Segment, Button } from 'semantic-ui-react'
+import { Menu, Segment, Button, Responsive, Sidebar } from 'semantic-ui-react'
 import { withRouter } from 'react-router-dom'
 
 
@@ -35,7 +35,7 @@ class Navbar extends Component {
     render() {
         return(
           <Segment inverted>
-            <Menu inverted pointing secondary>
+            <Menu stackable inverted pointing secondary>
               <Menu.Item header>EffectiveDonate</Menu.Item>
               <Menu.Menu position='right'>
                 <Menu.Item
