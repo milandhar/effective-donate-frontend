@@ -4,17 +4,17 @@ import Navbar from './Navbar.js'
 import { Grid, Button } from 'semantic-ui-react'
 import '../App.css'
 
-class MobileBrowser extends Component {
+class MobileLanding extends Component {
   constructor(props){
     super(props)
     this.state = {
-      browserThemes: []
+      mobileThemes: []
     }
   }
 
-  updateBrowserThemes = (themes) => {
+  updateMobileThemes = (themes) => {
     this.props.updateAppThemes(themes)
-    this.setState({browserThemes: themes})
+    this.setState({mobileThemes: themes})
   }
 
   render(){
@@ -24,7 +24,7 @@ class MobileBrowser extends Component {
         <Grid>
           <Grid.Row>
             <Grid.Column>
-              <ThemesDropdownMultiple updateMapThemes={this.updateBrowserThemes} themes={this.props.themes} mapThemes={this.state.browserThemes} />
+              <ThemesDropdownMultiple updateMapThemes={this.updateMobileThemes} themes={this.props.themes} mapThemes={this.state.mobileThemes} />
             </Grid.Column>
           </Grid.Row>
         </Grid>

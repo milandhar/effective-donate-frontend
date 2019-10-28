@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import MapBrowser from './components/mapBrowser.js';
-import MobileBrowser from './components/MobileBrowser.js'
+import MobileLanding from './components/MobileLanding.js'
 import LoginForm from './components/loginForm';
 import Profile from './components/Profile';
 import CreateUserForm from './components/createUserForm';
@@ -139,6 +139,17 @@ class App extends Component {
               getThemes={this.getThemes}
               />
               )}
+            />
+          <Route
+            path={'/mobile_landing'}
+            render={()=><MobileLanding
+              updateSelectedCountry={this.updateSelectedCountry}
+              updateAppThemes={this.updateAppThemes}
+              themes={this.state.themes}
+              userThemes={this.state.userThemes}
+              fetchUserThemes={this.fetchUserThemes}
+              logout={this.logout}
+            />}
             />
           {(this.state.updatedThemes)
             ? <Route
