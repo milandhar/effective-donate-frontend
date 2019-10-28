@@ -16,7 +16,7 @@ const initialState = {
   selectedCountry: "",
   updatedSelectedCountry: false,
   selectedProject: {},
-  user: {}
+  user: {},
 }
 
 class App extends Component {
@@ -140,7 +140,8 @@ class App extends Component {
               />
               )}
             />
-          <Route
+          {(this.state.updatedThemes)
+          ? <Route
             path={'/mobile_landing'}
             render={()=><MobileLanding
               updateSelectedCountry={this.updateSelectedCountry}
@@ -149,8 +150,10 @@ class App extends Component {
               userThemes={this.state.userThemes}
               fetchUserThemes={this.fetchUserThemes}
               logout={this.logout}
+              appSelectedCountry={this.state.selectedCountry}
             />}
             />
+          : <div></div>}
           {(this.state.updatedThemes)
             ? <Route
               path={'/map'}
@@ -161,6 +164,7 @@ class App extends Component {
                 userThemes={this.state.userThemes}
                 fetchUserThemes={this.fetchUserThemes}
                 logout={this.logout}
+                appSelectedCountry={this.state.selectedCountry}
               />}
             />
           : <div></div>}

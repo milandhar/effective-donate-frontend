@@ -144,6 +144,8 @@ class ProjectBrowser extends Component {
                 search
                 selection
                 placeholder="Country"
+                fetchThemeProjects = {this.fetchThemeProjects}
+                onProjectBrowser = {true}
                 options={this.state.countryList}
                 onChange={this.handleChange}
                 value={this.state.selectedCountry}
