@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import MapBrowser from './components/mapBrowser.js';
+import MobileLanding from './components/MobileLanding.js'
 import LoginForm from './components/loginForm';
 import Profile from './components/Profile';
 import CreateUserForm from './components/createUserForm';
@@ -15,7 +16,7 @@ const initialState = {
   selectedCountry: "",
   updatedSelectedCountry: false,
   selectedProject: {},
-  user: {}
+  user: {},
 }
 
 class App extends Component {
@@ -87,6 +88,7 @@ class App extends Component {
   }
 
   updateSelectedCountry = (country) => {
+    console.log(country)
     if(country){
       this.setState({
         updatedSelectedCountry: true,
@@ -140,6 +142,20 @@ class App extends Component {
               )}
             />
           {(this.state.updatedThemes)
+          ? <Route
+            path={'/mobile_landing'}
+            render={()=><MobileLanding
+              updateSelectedCountry={this.updateSelectedCountry}
+              updateAppThemes={this.updateAppThemes}
+              themes={this.state.themes}
+              userThemes={this.state.userThemes}
+              fetchUserThemes={this.fetchUserThemes}
+              logout={this.logout}
+              appSelectedCountry={this.state.selectedCountry}
+            />}
+            />
+          : <div></div>}
+          {(this.state.updatedThemes)
             ? <Route
               path={'/map'}
               render={()=><MapBrowser
@@ -149,6 +165,7 @@ class App extends Component {
                 userThemes={this.state.userThemes}
                 fetchUserThemes={this.fetchUserThemes}
                 logout={this.logout}
+                appSelectedCountry={this.state.selectedCountry}
               />}
             />
           : <div></div>}
