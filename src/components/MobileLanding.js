@@ -25,6 +25,10 @@ class MobileLanding extends Component {
     this.setState({mobileThemes: themes})
   }
 
+  handleClick = () => {
+    this.props.history.push(`/projects`)
+  }
+
   handleChange = (ev, data) => {
     this.setState({selectedCountry: data.value})
     this.props.updateSelectedCountry(data.value)
@@ -94,6 +98,11 @@ class MobileLanding extends Component {
                 themes={this.props.themes}
                 mapThemes={this.state.mobileThemes} />
             </Grid.Column>
+          </Grid.Row>
+          <Grid.Row>
+              <Grid.Column>
+                <Button secondary onClick={this.handleClick}>View Projects</Button>
+              </Grid.Column>
           </Grid.Row>
         </Grid>
       </div>

@@ -88,6 +88,7 @@ class App extends Component {
   }
 
   updateSelectedCountry = (country) => {
+    console.log(country)
     if(country){
       this.setState({
         updatedSelectedCountry: true,
