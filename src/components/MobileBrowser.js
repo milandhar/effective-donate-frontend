@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import ThemesDropdownMultiple from './ThemesDropdownMultiple'
 import Navbar from './Navbar.js'
+import { Grid, Button } from 'semantic-ui-react'
 import '../App.css'
 
 class MobileBrowser extends Component {

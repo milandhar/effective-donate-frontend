@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import MapBrowser from './components/mapBrowser.js';
+import MobileBrowser from './components/MobileBrowser.js'
 import LoginForm from './components/loginForm';
 import Profile from './components/Profile';
 import CreateUserForm from './components/createUserForm';
@@ -125,7 +126,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Router>  
+        <Router>
           <Route
             exact path="/"
             render={(props) => (
