@@ -125,7 +125,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Router>
+        <Router>  
           <Route
             exact path="/"
             render={(props) => (
