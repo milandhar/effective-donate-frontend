@@ -197,7 +197,7 @@ class MapBrowser extends Component {
       <div className="app-div">
         <Navbar activeItem='map' logout={this.props.logout}/>
         <Grid divided='vertically'>
-          <Grid.Row columns={1} id="map-div">
+          <Grid.Row columns={1} id="map-div" only='computer tablet'>
             <Grid.Column>
               {(this.state.updatedData)
               ? <div>
@@ -206,7 +206,7 @@ class MapBrowser extends Component {
               : <div id="map-loader"><Loader active inline='centered' /></div>}
             </Grid.Column>
           </Grid.Row>
-          <Grid.Row className="map-dropdown-div"columns={1}>
+          <Grid.Row className="map-dropdown-div"columns={1} only='computer tablet'>
             <Grid.Column>
               <div class="attribution-div">
                 <a href="https://www.globalgiving.org/" target="_blank">
@@ -219,6 +219,13 @@ class MapBrowser extends Component {
                 {(this.state.updatedMapThemes)
                 ? <ThemesDropdownMultiple updateMapThemes={this.updateMapThemes} themes={this.props.themes} mapThemes={this.state.mapThemes} className="map-dropdown"/>
                 : <Loader active inline='centered' />}
+              </div>
+            </Grid.Column>
+          </Grid.Row>
+          <Grid.Row only='mobile'>
+            <Grid.Column>
+              <div>
+                <h2>Please view on a computer or tablet to see world map!</h2>
               </div>
             </Grid.Column>
           </Grid.Row>
