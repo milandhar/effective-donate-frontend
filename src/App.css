@@ -435,6 +435,22 @@ td {
     margin-top: 500px;
 }
 
+.mobile-btn-row {
+  margin-top: 100px;
+}
+
+.ui.massive.vertical.menu {
+  margin: 0;
+  width: 100vw;
+}
+
+.ui.fluid.search.mobile-country-drop {
+  text-align: center;
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 @media only screen and (max-width: 1300px) {
   #map-div {
     margin-bottom: -5%;
