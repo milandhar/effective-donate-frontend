@@ -88,7 +88,6 @@ class App extends Component {
   }
 
   updateSelectedCountry = (country) => {
-    console.log(country)
     if(country){
       this.setState({
         updatedSelectedCountry: true,
@@ -121,7 +120,7 @@ class App extends Component {
 
   setUser = (user) => {
     console.log('in set user')
-    this.setState({user: user, selectedCountry: user.defaultCountry})
+    this.setState({user: user, selectedCountry: user.default_country})
   }
 
   render() {

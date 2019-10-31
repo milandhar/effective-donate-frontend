@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Menu, Segment, Button, Responsive, Sidebar } from 'semantic-ui-react'
+import { Grid, Menu, Segment, Button, Responsive, Sidebar } from 'semantic-ui-react'
 import { withRouter } from 'react-router-dom'
 
 
@@ -25,7 +25,10 @@ class Navbar extends Component {
         this.logout()
       } else if (data.name === localStorage.getItem("first_name")){
         this.props.history.push(`/profile`)
-      } else{
+      }
+        else if (data.name === 'select'){
+        this.props.history.push(`/mobile_landing`)
+      }else{
         this.props.history.push(`/${data.name}`)
       }
     }
@@ -34,66 +37,66 @@ class Navbar extends Component {
 
     render() {
         return(
-          <Segment inverted>
-            <Menu stackable inverted pointing secondary>
-              <Menu.Item header>EffectiveDonate</Menu.Item>
-              <Menu.Menu position='right'>
-                <Menu.Item
-                  name='map'
-                  active={this.state.activeItem === 'map'}
-                  onClick={this.redirect} />
-                <Menu.Item
-                  name='projects'
-                  active={this.state.activeItem === 'projects'}
-                  onClick={this.redirect}
-                />
-                <Menu.Item
-                  name={localStorage.getItem("first_name")}
-                  active={this.state.activeItem === 'profile'}
-                  onClick={this.redirect}
-                />
-                <Menu.Item>
-                  <Button primary name='logout' onClick={this.redirect}>
-                    Log Out
-                  </Button>
-                </Menu.Item>
-              </Menu.Menu>
-            </Menu>
-          </Segment>
-
-            //   <div>
-            //   <div class="ui seven fluid item top attached menu borderless">
-            //     <a class="item">
-            //     <Link to="/map" replace>
-            //     <i class="globe icon"></i>
-            //     Map
-            //     </Link>
-            //     </a>
-            //     <a class="item">
-            //       <Link to="/projects" replace>
-            //     <i class="tasks icon"></i>
-            //     Projects
-            //     </Link>
-            //     </a>
-            //     <a class='item'></a>
-            //     <a class='item bark-font'>
-            //       <h2 className='bark-font'>         EffectiveDonate         </h2>
-            //     </a>
-            //     <a class='item'></a>
-            //
-            //       <a class="item">
-            //         <Link to="/profile" replace>
-            //         <i class='user icon'></i>
-            //           {localStorage.getItem('username')}
-            //         </Link>
-            //       </a>
-            //
-            //     <div class="item">
-            //       <div onClick={this.logout} class="ui blue button">Log Out</div>
-            //     </div>
-            //   </div>
-            // </div>
-
+          <Grid className="menu-grid">
+            <Grid.Row columns={1} only='computer tablet'>
+              <Grid.Column>
+                <Segment inverted>
+                  <Menu stackable inverted pointing secondary>
+                    <Menu.Item header>EffectiveDonate</Menu.Item>
+                    <Menu.Menu position='right'>
+                      <Menu.Item
+                        name='map'
+                        active={this.state.activeItem === 'map'}
+                        onClick={this.redirect} />
+                      <Menu.Item
+                        name='projects'
+                        active={this.state.activeItem === 'projects'}
+                        onClick={this.redirect}
+                      />
+                      <Menu.Item
+                        name={localStorage.getItem("first_name")}
+                        active={this.state.activeItem === 'profile'}
+                        onClick={this.redirect}
+                      />
+                      <Menu.Item>
+                        <Button primary name='logout' onClick={this.redirect}>
+                          Log Out
+                        </Button>
+                      </Menu.Item>
+                    </Menu.Menu>
+                  </Menu>
+                </Segment>
+              </Grid.Column>
+            </Grid.Row>
+            <Grid.Row columns={1} only='mobile'>
+              <Grid.Column>
+                  <Menu size='massive' vertical inverted>
+                    <Menu.Item header>EffectiveDonate</Menu.Item>
+                    <Menu.Menu position='right'>
+                      <Menu.Item
+                        name='select'
+                        active={this.state.activeItem === 'mobileLanding'}
+                        onClick={this.redirect} />
+                      <Menu.Item
+                        name='projects'
+                        active={this.state.activeItem === 'projects'}
+                        onClick={this.redirect}
+                      />
+                      <Menu.Item
+                        name={localStorage.getItem("first_name")}
+                        active={this.state.activeItem === 'profile'}
+                        onClick={this.redirect}
+                      />
+                      <Menu.Item>
+                        <Button primary name='logout' onClick={this.redirect}>
+                          Log Out
+                        </Button>
+                      </Menu.Item>
+                    </Menu.Menu>
+                  </Menu>
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
           )
         }
       }

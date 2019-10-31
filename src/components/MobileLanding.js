@@ -53,7 +53,6 @@ class MobileLanding extends Component {
         }
       })
       const sortJsonArray = require('sort-json-array');
-      console.log(countryArray)
       if(this.props.location && this.props.location.state && this.props.location.state.countryCode){
         // if(this.state.selectedCountry === ""){
       this.setState({
@@ -69,7 +68,7 @@ class MobileLanding extends Component {
   render(){
     return (
       <div className="app-div">
-        <Navbar activeItem='map' logout={this.props.logout}/>
+        <Navbar activeItem='mobileLanding' logout={this.props.logout}/>
         <Grid>
           <Grid.Row>
             <Grid.Column>
@@ -77,7 +76,7 @@ class MobileLanding extends Component {
                 <Header.Content>Select Country</Header.Content>
               </Header>
               <Dropdown
-                className="country-drop"
+                className="mobile-country-drop"
                 fluid
                 search
                 selection
@@ -99,7 +98,7 @@ class MobileLanding extends Component {
                 mapThemes={this.state.mobileThemes} />
             </Grid.Column>
           </Grid.Row>
-          <Grid.Row>
+          <Grid.Row className="mobile-btn-row">
               <Grid.Column>
                 <Button secondary onClick={this.handleClick}>View Projects</Button>
               </Grid.Column>
