@@ -21,6 +21,14 @@ section {
   padding: 0 !important;
 }
 
+.mobile.only .column {
+  padding-right: 0 !important;
+}
+
+.mobile.only .column .menu {
+  margin-right: 0px !important;
+}
+
 .project .flag {
   margin-left: 8px !important;
 }

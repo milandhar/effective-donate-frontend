@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Form, Header, Icon  } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
+import Media from 'react-media'
 
 export default class LoginForm extends Component {
 
