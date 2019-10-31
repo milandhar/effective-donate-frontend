@@ -53,7 +53,6 @@ class MobileLanding extends Component {
         }
       })
       const sortJsonArray = require('sort-json-array');
-      console.log(countryArray)
       if(this.props.location && this.props.location.state && this.props.location.state.countryCode){
         // if(this.state.selectedCountry === ""){
       this.setState({

@@ -48,11 +48,15 @@ class ChoroplethMap extends Component {
       }
 
     getWidth() {
-    return this.mapRef.current.parentElement.offsetWidth;
+      if (this && this.map && this.map.current && this.mapRef && this.mapRef.current && this.mapRef.current.parentElement){
+        return this.mapRef.current.parentElement.offsetWidth;
+      }
     }
 
     getHeight() {
+      if (this && this.map && this.map.current && this.mapRef && this.mapRef.current && this.mapRef.current.parentElement){
         return this.mapRef.current.parentElement.offsetHeight;
+      }
     }
 
     renderMap = (props) => {

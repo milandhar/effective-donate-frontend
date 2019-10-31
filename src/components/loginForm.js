@@ -9,17 +9,26 @@ export default class LoginForm extends Component {
 
     this.username = React.createRef()
     this.password = React.createRef()
-    // if (this.getToken()) {
-    //     this.getProfile()
-    //   }
+    this.state = {
+      mobile: false
     }
+  }
 
   componentDidMount(){
     this.props.resetState()
+    window.addEventListener("resize", this.resize.bind(this));
+    this.resize();
   }
 
   getToken(jwt) {
     return localStorage.getItem('jwt')
+  }
+
+  resize() {
+    let currentMobile = (window.innerWidth <= 760);
+    if (currentMobile !== this.state.mobile) {
+      this.setState({mobile: currentMobile});
+    }
   }
 
   getProfile = () => {
@@ -76,7 +85,12 @@ export default class LoginForm extends Component {
               this.props.getThemes()
               this.props.fetchUserThemes()
             });
-            this.props.history.push("/map")
+            // push to mobile_landing on small screen
+              if (this.state.mobile === true) {
+                this.props.history.push("/mobile_landing")
+              } else {
+                this.props.history.push("/map")
+              }
           }else{
             alert("Incorrect Login Information")
           }

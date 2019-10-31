@@ -17,6 +17,10 @@ section {
   height: 100vh !important;
 }
 
+.menu-grid {
+  padding: 0 !important;
+}
+
 .project .flag {
   margin-left: 8px !important;
 }
