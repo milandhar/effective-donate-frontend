@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Form, Header, Icon  } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
+import Media from 'react-media'
 
 export default class LoginForm extends Component {
 
@@ -25,7 +26,7 @@ export default class LoginForm extends Component {
   }
 
   resize() {
-    let currentMobile = (window.innerWidth <= 760);
+    let currentMobile = (window.innerWidth <= 768);
     if (currentMobile !== this.state.mobile) {
       this.setState({mobile: currentMobile});
     }
@@ -86,7 +87,7 @@ export default class LoginForm extends Component {
               this.props.fetchUserThemes()
             });
             // push to mobile_landing on small screen
-              if (this.state.mobile === true) {
+              if (this.state.mobile) {
                 this.props.history.push("/mobile_landing")
               } else {
                 this.props.history.push("/map")
