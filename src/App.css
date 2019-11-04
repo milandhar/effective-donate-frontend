@@ -373,7 +373,7 @@ section {
   width: 60% !important;
   margin-left: auto !important;
   margin-right: auto !important;
-  text-align: center !important;
+  text-align: left !important;
 }
 
 .ui.form.create-form{
@@ -482,7 +482,26 @@ td {
   }
 }
 
-@media only screen and (max-width: 376px) {
+@media only screen and (max-width: 415px) {
+
+  /* increase width of dropdowns */
+  .ui.grid>[class*="two column"].row>.column {
+    width: 80% !important;
+  }
+
+  .project-dropdown-row .country-drop {
+    min-width: 70% !important;
+  }
+
+  .project-dropdown-row .themes-drop {
+      min-width: 70% !important;
+  }
+  /* stack dropdowns ontop of each other and center them */
+  .ui.grid .project-dropdown-row {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
   .ui.form {
       margin-top: 2em;
   }
