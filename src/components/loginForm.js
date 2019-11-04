@@ -120,7 +120,7 @@ export default class LoginForm extends Component {
                 <label>Password</label>
                 <input id='loginpassword' name='password' type="password" placeholder='password' ref={this.password} required />
                 </Form.Field>
-                <Form.Field>
+                <Form.Field className="login-buttons">
                 <input type="submit" className="large ui blue button" value="Log In" onClick={this.login}/>
                 <Link to="/create_user" replace>
                   <input type="submit" className="large ui blue button" value="Create Profile"/>

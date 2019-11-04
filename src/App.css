@@ -481,12 +481,27 @@ td {
     color: #000 !important;
   }
 }
-/*
-@media only screen and (max-width: 500px) {
-  #map-div {
-    margin-bottom: -22%;
+
+@media only screen and (max-width: 376px) {
+  .ui.form {
+      margin-top: 2em;
   }
-} */
+  .ui.form .field {
+    margin-bottom: 2em !important;
+    width: 50% !important;
+    text-align: center;
+  }
+  .ui.form .field .large.ui {
+    width: 80%;
+  }
+
+  .ui.form .field.login-buttons {
+    margin-top: 1em;
+  }
+  .ui.form .field.login-buttons input {
+    margin-top: .5em;
+  }
+}
 
 @keyframes App-logo-spin {
   from {
