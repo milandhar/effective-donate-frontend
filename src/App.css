@@ -7,6 +7,17 @@
   /* font-family: 'Open Sans', sans-serif !important; */
 }
 
+.computer.only.tablet.only.four.column {
+  margin-right: 6vw;
+}
+
+.mobile.only.one.column.card-row {
+  margin-right: 4vw;
+}
+
+.project-dropdown-row {
+  margin-bottom: 40px;
+}
 
 section {
   height: 100vh !important;
@@ -448,7 +459,7 @@ td {
 }
 
 .mobile-btn-row {
-  margin-top: 100px;
+  margin-top: 25px;
 }
 
 .ui.massive.vertical.menu {
@@ -487,6 +498,17 @@ td {
   /* increase width of dropdowns */
   .ui.grid>[class*="two column"].row>.column {
     width: 80% !important;
+  }
+
+  /* center cards  */
+  .card-div .ui.card {
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  .card-row {
+    align-items: center !important;
+    justify-content: center !important;
   }
 
   .project-dropdown-row .country-drop {
