@@ -375,7 +375,7 @@ section {
 }
 
 .country-drop {
-  width: 28% !important;
+  width: 25vw !important;
   margin-left: auto !important;
   margin-right: auto !important;
 }
@@ -504,6 +504,21 @@ td {
   .card-div .ui.card {
     margin-left: auto !important;
     margin-right: auto !important;
+  }
+
+  /* arrange theme dropdowns in a column for mobile  */
+  .dropdown-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* increase the width of theme dropdowns on mobile */
+  .profile-section .ui.fluid.dropdown {
+    width: 60vw !important;
+  }
+
+  .ui.table:not(.unstackable) {
+    width: 50%
   }
 
   .card-row {

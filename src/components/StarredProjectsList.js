@@ -33,7 +33,7 @@ class StarredProjectsList extends Component {
                 {project.country.name}
                 <Flag name={project.country.name.toLowerCase()}/>
               </Table.Cell>
-              <Table.Cell>
+              <Table.Cell width={5}>
                 {project.title}
               </Table.Cell>
               <Table.Cell>
