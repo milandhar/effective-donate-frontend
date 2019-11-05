@@ -29,9 +29,11 @@ export default class DonatePage extends Component {
     }
   }
 
+
   componentDidMount(){
     this.findDonationOptions()
     this.checkIfStarred()
+    window.scrollTo(0, 0)
   }
 
   findDonationOptions = () => {

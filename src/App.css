@@ -531,6 +531,20 @@ td {
     width: 78vw !important;
   }
 
+
+  /* centering donate page */
+  #donate-header-div .content {
+    text-align: center;
+  }
+  #donate-div {
+    justify-content: center;
+  }
+
+  .disabled.field {
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
   .card-row {
     align-items: center !important;
     justify-content: center !important;
