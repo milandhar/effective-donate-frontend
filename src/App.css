@@ -517,8 +517,18 @@ td {
     width: 60vw !important;
   }
 
+  /* change the whitespace from nowrap to normal */
+  .ui.table[class*="single line"]  {
+    white-space: normal !important;
+    word-wrap: break-word;
+  }
+
+  .fundingCell {
+    font-size: 1em;
+  }
+
   .ui.table:not(.unstackable) {
-    width: 50%
+    width: 78vw !important;
   }
 
   .card-row {
