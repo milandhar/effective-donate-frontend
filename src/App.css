@@ -72,6 +72,10 @@ section {
   padding-right:10px;
 }
 
+.login-field label {
+  text-align: center;
+}
+
 .ui.center.aligned.header{
   margin-top: 5px !important;
 }
@@ -126,6 +130,22 @@ section {
 .dropdown-container div {
   margin-left: 30px;
   margin-right: 30px;
+}
+
+.login-section {
+  padding-top: 5vh;
+}
+
+.login-div {
+  padding-top: 3vh;
+}
+
+.user.icon {
+  margin-top: 2vh !important;
+}
+
+.globe.icon {
+  margin-top: 2vh !important;
 }
 
 .gg-attribution {
@@ -389,8 +409,12 @@ section {
 
 .ui.form.create-form{
   flex-direction: column !important;
-  width: 50% !important;
+  width: 80vw !important;
 }
+
+/* .ui.form.create-form #form-group-div {
+  justify-content: space-between !important;
+} */
 
 .equal.width.fields{
   flex-direction: column !important;
@@ -488,6 +512,54 @@ td {
     color: #000 !important;
   }
 
+  /* stack create user form */
+
+  #form-group-div {
+    flex-direction: column;
+  }
+
+  #fields-div .field {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100% !important;
+  }
+
+  .country-drop-div {
+    width: 100% !important;
+  }
+
+  #root .App #form-group-div .ui.form .country-drop-div .required.field {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    width: 100% !important;
+  }
+
+  .ui.form .fields {
+    align-items: center;
+  }
+
+  #default-country {
+    display: flex;
+    justify-content: center;
+  }
+
+  /* stack buttons on mobile  */
+
+  #button-div {
+    flex-direction: column;
+    align-items: center;
+    width: 50vw;
+  }
+
+  #button-div .field{
+    width: 80% !important;
+  }
+
+
+  .ui.fluid.search.selection.dropdown.create-country-drop {
+    width: 50vw;
+  }
+
   .ui.secondary.inverted.menu .active.item {
     color: #000 !important;
   }
@@ -543,6 +615,11 @@ td {
   .disabled.field {
     margin-left: auto !important;
     margin-right: auto !important;
+  }
+
+  #remove-donate-div {
+    display: flex !important;
+    justify-content: space-evenly;
   }
 
   .card-row {
