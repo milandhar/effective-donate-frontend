@@ -7,6 +7,17 @@
   /* font-family: 'Open Sans', sans-serif !important; */
 }
 
+.computer.only.tablet.only.four.column {
+  margin-right: 6vw;
+}
+
+.mobile.only.one.column.card-row {
+  margin-right: 4vw;
+}
+
+.project-dropdown-row {
+  margin-bottom: 40px;
+}
 
 section {
   height: 100vh !important;
@@ -59,6 +70,10 @@ section {
 
 .ui.divided.middle.aligned.list{
   padding-right:10px;
+}
+
+.login-field label {
+  text-align: center;
 }
 
 .ui.center.aligned.header{
@@ -115,6 +130,22 @@ section {
 .dropdown-container div {
   margin-left: 30px;
   margin-right: 30px;
+}
+
+.login-section {
+  padding-top: 5vh;
+}
+
+.login-div {
+  padding-top: 3vh;
+}
+
+.user.icon {
+  margin-top: 2vh !important;
+}
+
+.globe.icon {
+  margin-top: 2vh !important;
 }
 
 .gg-attribution {
@@ -364,7 +395,7 @@ section {
 }
 
 .country-drop {
-  width: 28% !important;
+  width: 25vw !important;
   margin-left: auto !important;
   margin-right: auto !important;
 }
@@ -373,13 +404,17 @@ section {
   width: 60% !important;
   margin-left: auto !important;
   margin-right: auto !important;
-  text-align: center !important;
+  text-align: left !important;
 }
 
 .ui.form.create-form{
   flex-direction: column !important;
-  width: 50% !important;
+  width: 80vw !important;
 }
+
+/* .ui.form.create-form #form-group-div {
+  justify-content: space-between !important;
+} */
 
 .equal.width.fields{
   flex-direction: column !important;
@@ -448,7 +483,7 @@ td {
 }
 
 .mobile-btn-row {
-  margin-top: 100px;
+  margin-top: 25px;
 }
 
 .ui.massive.vertical.menu {
@@ -477,16 +512,153 @@ td {
     color: #000 !important;
   }
 
+  /* stack create user form */
+
+  #form-group-div {
+    flex-direction: column;
+  }
+
+  #fields-div .field {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100% !important;
+  }
+
+  .country-drop-div {
+    width: 100% !important;
+  }
+
+  #root .App #form-group-div .ui.form .country-drop-div .required.field {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    width: 100% !important;
+  }
+
+  .ui.form .fields {
+    align-items: center;
+  }
+
+  #default-country {
+    display: flex;
+    justify-content: center;
+  }
+
+  /* stack buttons on mobile  */
+
+  #button-div {
+    flex-direction: column;
+    align-items: center;
+    width: 50vw;
+  }
+
+  #button-div .field{
+    width: 80% !important;
+  }
+
+
+  .ui.fluid.search.selection.dropdown.create-country-drop {
+    width: 50vw;
+  }
+
   .ui.secondary.inverted.menu .active.item {
     color: #000 !important;
   }
 }
-/*
-@media only screen and (max-width: 500px) {
-  #map-div {
-    margin-bottom: -22%;
+
+@media only screen and (max-width: 415px) {
+
+  /* increase width of dropdowns */
+  .ui.grid>[class*="two column"].row>.column {
+    width: 80% !important;
   }
-} */
+
+  /* center cards  */
+  .card-div .ui.card {
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  /* arrange theme dropdowns in a column for mobile  */
+  .dropdown-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* increase the width of theme dropdowns on mobile */
+  .profile-section .ui.fluid.dropdown {
+    width: 60vw !important;
+  }
+
+  /* change the whitespace from nowrap to normal */
+  .ui.table[class*="single line"]  {
+    white-space: normal !important;
+    word-wrap: break-word;
+  }
+
+  .fundingCell {
+    font-size: 1em;
+  }
+
+  .ui.table:not(.unstackable) {
+    width: 78vw !important;
+  }
+
+
+  /* centering donate page */
+  #donate-header-div .content {
+    text-align: center;
+  }
+  #donate-div {
+    justify-content: center;
+  }
+
+  .disabled.field {
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  #remove-donate-div {
+    display: flex !important;
+    justify-content: space-evenly;
+  }
+
+  .card-row {
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .project-dropdown-row .country-drop {
+    min-width: 70% !important;
+  }
+
+  .project-dropdown-row .themes-drop {
+      min-width: 70% !important;
+  }
+  /* stack dropdowns ontop of each other and center them */
+  .ui.grid .project-dropdown-row {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .ui.form {
+      margin-top: 2em;
+  }
+  .ui.form .field {
+    margin-bottom: 2em !important;
+    width: 50% !important;
+    text-align: center;
+  }
+  .ui.form .field .large.ui {
+    width: 80%;
+  }
+
+  .ui.form .field.login-buttons {
+    margin-top: 1em;
+  }
+  .ui.form .field.login-buttons input {
+    margin-top: .5em;
+  }
+}
 
 @keyframes App-logo-spin {
   from {

@@ -33,13 +33,13 @@ class StarredProjectsList extends Component {
                 {project.country.name}
                 <Flag name={project.country.name.toLowerCase()}/>
               </Table.Cell>
-              <Table.Cell>
+              <Table.Cell width={5}>
                 {project.title}
               </Table.Cell>
-              <Table.Cell>
+              <Table.Cell className="fundingCell">
               Funding: ${project.funding.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} / Goal: ${project.goal.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}
               </Table.Cell>
-              <Table.Cell>
+              <Table.Cell id="remove-donate-div">
                 <Button color='red' onClick={()=>this.handleRemove(project)} icon>
                   <Icon name='close' />
                 </Button>

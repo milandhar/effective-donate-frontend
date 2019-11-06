@@ -92,12 +92,11 @@ class App extends Component {
       this.setState({
         updatedSelectedCountry: true,
         selectedCountry: country
-      }, console.log(this.state.selectedCountry))
+      })
     }
   }
 
   handleDonate = (project) => {
-    console.log(project)
     this.setState({selectedProject: project})
     localStorage.removeItem('selectedProject')
     localStorage.setItem('selectedProject', JSON.stringify(project))

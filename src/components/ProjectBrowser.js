@@ -133,7 +133,7 @@ class ProjectBrowser extends Component {
           </Header>
         </div>
         <Grid>
-          <Grid.Row columns={2}>
+          <Grid.Row className="project-dropdown-row" columns={2}>
             <Grid.Column>
               <Header as='h3' textAlign='center'>
                 <Header.Content>Country</Header.Content>
@@ -159,11 +159,19 @@ class ProjectBrowser extends Component {
             </Grid.Column>
           </Grid.Row>
           {(this.state.themesUpdated && !this.state.countryProjects["error"])
-            ? <Grid.Row className="card-row" columns = {4}>
+            ? <Grid>
+              {/* made another grid and created a new row with only one column for mobile */}
+              <Grid.Row className="card-row" columns = {1} only='mobile'>
                 {this.state.countryProjects.map((project) => {
                   return <div className="column card-div"> <CountryCard id={project.id} projectLink={project.project_link} handleDonate={this.props.handleDonate} orgUrl={project.organization.url} organization={project.organization.name} funding={project.funding} longTermImpact={project.long_term_impact} activities={project.activities} summary={project.summary} goal={project.goal} key={project.id} image={project.image_url} theme={project.theme.name} title={project.title} country={project.country.name}/></div>
               })}
             </Grid.Row>
+            <Grid.Row className="card-row" columns = {4} only='computer tablet'>
+                {this.state.countryProjects.map((project) => {
+                  return <div className="column card-div"> <CountryCard id={project.id} projectLink={project.project_link} handleDonate={this.props.handleDonate} orgUrl={project.organization.url} organization={project.organization.name} funding={project.funding} longTermImpact={project.long_term_impact} activities={project.activities} summary={project.summary} goal={project.goal} key={project.id} image={project.image_url} theme={project.theme.name} title={project.title} country={project.country.name}/></div>
+              })}
+            </Grid.Row>
+            </Grid>
             : <Loader active inline='centered' />
           }
         </Grid>
