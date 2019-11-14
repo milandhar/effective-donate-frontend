@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Button, Icon, Table, Flag } from 'semantic-ui-react'
 import { withRouter } from 'react-router-dom'
-import { DragDropContext, Droppable } from 'react-beautiful-dnd'
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 
 class StarredProjectsList extends Component {
 
@@ -42,26 +42,37 @@ class StarredProjectsList extends Component {
               {...droppableProvided.droppableProps}
               >
               {this.props.projectArray.map((project, idx) => {
-                return (<Table.Row key={project.id} className="project">
-                  <Table.Cell>
-                    {project.country.name}
-                    <Flag name={project.country.name.toLowerCase()}/>
-                  </Table.Cell>
-                  <Table.Cell width={5}>
-                    {project.title}
-                  </Table.Cell>
-                  <Table.Cell className="fundingCell">
-                  Funding: ${project.funding.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} / Goal: ${project.goal.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}
-                  </Table.Cell>
-                  <Table.Cell id="remove-donate-div">
-                    <Button color='red' onClick={()=>this.handleRemove(project)} icon>
-                      <Icon name='close' />
-                    </Button>
-                    <Button color='green' onClick={()=>this.goToDonation(project)} icon>
-                      <Icon name='dollar sign' />
-                    </Button>
-                  </Table.Cell>
-                </Table.Row>)
+                return (
+                  <Draggable
+                    draggableId={project.id}
+                    index={idx}
+                    key={project.id}>
+                    {(
+                      provided: DraggableProvided,
+                      snapshot: DraggableStateSnapshot,
+                    ) => (
+                      <Table.Row key={project.id} className="project">
+                      <Table.Cell>
+                        {project.country.name}
+                        <Flag name={project.country.name.toLowerCase()}/>
+                      </Table.Cell>
+                      <Table.Cell width={5}>
+                        {project.title}
+                      </Table.Cell>
+                      <Table.Cell className="fundingCell">
+                      Funding: ${project.funding.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} / Goal: ${project.goal.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}
+                      </Table.Cell>
+                      <Table.Cell id="remove-donate-div">
+                        <Button color='red' onClick={()=>this.handleRemove(project)} icon>
+                          <Icon name='close' />
+                        </Button>
+                        <Button color='green' onClick={()=>this.goToDonation(project)} icon>
+                          <Icon name='dollar sign' />
+                        </Button>
+                      </Table.Cell>
+                    </Table.Row>
+                    )}
+                </Draggable>)
               })}
             </Table.Body>
           )}
