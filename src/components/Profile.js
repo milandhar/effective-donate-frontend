@@ -12,6 +12,7 @@ class Profile extends Component {
         this.state = {
             selected: '',
             projectArray: [],
+            projectArrayUpdated: false,
             square: { width: 175, height: 175 }
           }
         };
@@ -34,7 +35,7 @@ class Profile extends Component {
         .then(res=>res.json())
         .then(json => {
           if(!json.error){
-            this.setState({projectArray: json})
+            this.setState({projectArray: json, projectArrayUpdated: true})
           }
         })
     }
@@ -108,6 +109,7 @@ class Profile extends Component {
                   <h1 class="ui center aligned header highlight">
                     Favorite Themes:
                   </h1>
+
                   <FavoriteThemes getThemes={this.props.getThemes} updateAppThemes={this.props.updateAppThemes} />
                 </Grid.Column>
               </Grid.Row>
@@ -116,7 +118,9 @@ class Profile extends Component {
                   <h1 className="ui center aligned header highlight">
                     Starred Projects:
                   </h1>
-                  <StarredProjectsList handleDonate={this.props.handleDonate} removeFavorite={this.removeFavorite} projectArray={this.state.projectArray}/>
+                  {(this.state.projectArrayUpdated)
+                    ? <StarredProjectsList handleDonate={this.props.handleDonate} removeFavorite={this.removeFavorite} projectArray={this.state.projectArray}/>
+                    : <div></div> }
                 </Grid.Column>
               </Grid.Row>
             </Grid>

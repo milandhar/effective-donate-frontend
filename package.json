@@ -10,6 +10,7 @@
     "datamaps": "^0.5.9",
     "eslint-utils": ">=1.4.1",
     "react": "^16.9.0",
+    "react-beautiful-dnd": "^12.0.0",
     "react-dom": "^16.9.0",
     "react-media": "^1.10.0",
     "react-router-dom": "^5.0.0",
