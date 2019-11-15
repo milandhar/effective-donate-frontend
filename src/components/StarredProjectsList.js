@@ -8,7 +8,7 @@ class StarredProjectsList extends Component {
   constructor(props){
     super(props)
     this.state = {
-      starredProjects: this.props.projectArray,
+      starredProjects: props.projectArray,
       reorderEnabled: false,
       selectedRowIds: [],
       draggingRowId: null
@@ -47,7 +47,7 @@ class StarredProjectsList extends Component {
   }
 
   onDragStart = start => {
-    console.log(start)
+    console.log('in on drag start')
     const id = start.draggableId;
     const selected = this.state.selectedRowIds.find(selectedId => selectedId === id);
 
@@ -61,6 +61,89 @@ class StarredProjectsList extends Component {
     });
   }
 
+  unselect = () => {
+    this.unselectAll();
+  }
+
+  unselectAll = () => {
+    this.setState({
+      selectedRowIds: [],
+    });
+  }
+
+  onDragEnd = result => {
+    const { destination, source, reason } = result;
+
+    // Not a thing to do...
+    if (!destination || reason === 'CANCEL') {
+      this.setState({
+        draggingRowId: null,
+      });
+      return;
+    }
+
+    if (
+      destination.droppableId === source.droppableId &&
+      destination.index === source.index
+    ) {
+      return;
+    }
+
+    const starredProjects = Object.assign([], this.state.starredProjects);
+    const project = this.state.starredProjects[source.index];
+    starredProjects.splice(source.index, 1);
+    starredProjects.splice(destination.index, 0, project);
+    this.setState({
+      starredProjects
+    });
+  }
+
+  onWindowKeyDown = event => {
+    if (event.defaultPrevented) {
+      this.unselectAll();
+    }
+
+    if (event.key === `Escape`) {
+      this.unselectAll();
+    }
+  }
+
+  onWindowClick = event => {
+    if (event.defaultPrevented) {
+      return;
+    }
+    this.unselectAll();
+  }
+
+  onWindowTouchEnd = event => {
+    if (event.defaultPrevented) {
+      return;
+    }
+    this.unselectAll();
+  }
+
+  toggleSelection = rowId => () => {
+    const selectedRowIds = this.state.selectedRowIds;
+    const wasSelected = selectedRowIds.includes(rowId);
+
+    const newRowIds = (() => {
+      // Row was not previously selected, now will be the only selected row
+      if (!wasSelected) {
+        return [rowId];
+      }
+      // Row was part of a selected group of rows, will now become the only selected row
+      if (selectedRowIds.length > 1) {
+        return [rowId];
+      }
+      // Row was previously selected but not in a group, will now clear the selection
+      return [];
+    })();
+
+    this.setState({
+      selectedRowIds: newRowIds,
+    });
+  }
+
   handleRemove = (project) => {
     this.props.removeFavorite(project.id)
   }
@@ -68,11 +151,6 @@ class StarredProjectsList extends Component {
   goToDonation = (project) => {
     this.props.handleDonate(project)
     this.props.history.push("/donate")
-  }
-
-  onDragEnd = (result) => {
-    // ToDo: Reorder our table
-
   }
 
 
@@ -99,7 +177,7 @@ class StarredProjectsList extends Component {
             {(provided, snapshot) => (
               <Ref innerRef={provided.innerRef}>
                 <Table.Body {...provided.droppableProps}>
-                  {this.props.projectArray.map((project, idx) => {
+                  {this.state.starredProjects.map((project, idx) => {
                     return (
                       <Draggable
                         draggableId={project.id.toString()}
