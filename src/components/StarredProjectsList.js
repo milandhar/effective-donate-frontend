@@ -10,8 +10,55 @@ class StarredProjectsList extends Component {
     this.state = {
       starredProjects: this.props.projectArray,
       reorderEnabled: false,
+      selectedRowIds: [],
+      draggingRowId: null
     }
     this.onDragEnd = this.onDragEnd.bind(this);
+  }
+
+  componentDidMount () {
+    window.addEventListener('click', this.onWindowClick);
+    window.addEventListener('keydown', this.onWindowKeyDown);
+    window.addEventListener('touchend', this.onWindowTouchEnd);
+  }
+
+  componentWillUnmount () {
+    window.removeEventListener('click', this.onWindowClick);
+    window.removeEventListener('click', this.onWindowClick);
+    window.removeEventListener('click', this.onWindowClick);
+  }
+
+  getItemStyle = (isDragging, draggableStyle) => ({
+    background: isDragging && ("lightblue"),
+    ...draggableStyle,
+  })
+
+  reOrder = () => {
+    const { reorderEnabled } = this.state
+
+    this.setState({
+      reorderEnabled: !reorderEnabled
+    })
+  }
+
+  saveOrder = () => {
+    const { starredProjects } = this.state;
+    // Take new state of dispo group list and POST to endpoint
+  }
+
+  onDragStart = start => {
+    console.log(start)
+    const id = start.draggableId;
+    const selected = this.state.selectedRowIds.find(selectedId => selectedId === id);
+
+    // If dragging an item that is not selected, unselect all items
+    if (!selected) {
+      this.unselectAll();
+    }
+
+    this.setState({
+      draggingRowId: start.draggableId,
+    });
   }
 
   handleRemove = (project) => {
@@ -30,12 +77,18 @@ class StarredProjectsList extends Component {
 
 
   render(){
+    const { reOrder, saveOrder } = this;
+    const { StarredProjects, selectedRowIds, reorderEnabled } = this.state;
+    const selected = selectedRowIds;
     return(
-    <div>
+    <div style={{padding: "30px" }}>
+      <Button onClick={reOrder}>{reorderEnabled ? "Cancel Reorder" : "Toggle Reorder"}</Button>
+      <Button onClick={saveOrder}>Save New Order</Button>
       <DragDropContext onDragEnd={this.onDragEnd}>
         <Table singleLine>
           <Table.Header>
             <Table.Row>
+              {reorderEnabled && (<Table.HeaderCell />)}
               <Table.HeaderCell>Country</Table.HeaderCell>
               <Table.HeaderCell>Project Title</Table.HeaderCell>
               <Table.HeaderCell>Funding / Goal</Table.HeaderCell>
@@ -49,16 +102,28 @@ class StarredProjectsList extends Component {
                   {this.props.projectArray.map((project, idx) => {
                     return (
                       <Draggable
-                        draggableId={project.id}
+                        draggableId={project.id.toString()}
                         index={idx}
                         key={project.id}
                       >
                         {(provided, snapshot) => (
                         <Ref innerRef={provided.innerRef}>
-                          <Table.Row {...provided.draggableProps}
+                          <Table.Row
+                            {...provided.draggableProps}
                             {...provided.dragHandleProps}
+                            style={this.getItemStyle(
+                              snapshot.isDragging,
+                              provided.draggableProps.style
+                            )}
                             key={project.id}
                             className="project">
+                            {reorderEnabled && (<Table.Cell>{
+                                <Icon
+                                  name="bars"
+                                  color="grey"
+                                  className="ds__DispoGroup__row-drag"
+                                />
+                              }</Table.Cell>)}
                             <Table.Cell>
                               {project.country.name}
                               <Flag name={project.country.name.toLowerCase()}/>
