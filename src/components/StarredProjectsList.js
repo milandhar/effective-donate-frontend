@@ -160,8 +160,6 @@ class StarredProjectsList extends Component {
     const selected = selectedRowIds;
     return(
     <div style={{padding: "30px" }}>
-      <Button onClick={reOrder}>{reorderEnabled ? "Cancel Reorder" : "Toggle Reorder"}</Button>
-      <Button onClick={saveOrder}>Save New Order</Button>
       <DragDropContext onDragEnd={this.onDragEnd}>
         <Table singleLine>
           <Table.Header>
@@ -232,6 +230,8 @@ class StarredProjectsList extends Component {
           </Droppable>
         </Table>
       </DragDropContext>
+      {/*<Button onClick={reOrder}>{reorderEnabled ? "Cancel Reorder" : "Toggle Reorder"}</Button> */}
+      <Button onClick={saveOrder}>Save New Order</Button>
     </div>
     )
   }
