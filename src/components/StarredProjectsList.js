@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Button, Icon, Table, Flag, Ref } from 'semantic-ui-react'
 import { withRouter } from 'react-router-dom'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
+import config from 'react-global-configuration';
 
 class StarredProjectsList extends Component {
 
@@ -49,7 +50,7 @@ class StarredProjectsList extends Component {
     })
     // Take new state of dispo group list and POST to endpoint
     const userId = localStorage.userid
-    const url = `https://damp-everglades-59702.herokuapp.com/api/v1/update_star_orders`
+    const url = `${config.get('API_URL')}/api/v1/update_star_orders`
     const headers = {
         method: 'POST',
         headers: {

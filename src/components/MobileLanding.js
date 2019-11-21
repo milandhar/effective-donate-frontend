@@ -4,6 +4,7 @@ import Navbar from './Navbar.js'
 import { Grid, Button, Header, Dropdown } from 'semantic-ui-react'
 import '../App.css'
 import { withRouter } from 'react-router-dom'
+import config from 'react-global-configuration';
 
 class MobileLanding extends Component {
   constructor(props){
@@ -35,7 +36,7 @@ class MobileLanding extends Component {
   }
 
   fetchCountries = () => {
-    const url = `https://damp-everglades-59702.herokuapp.com/api/v1/countries`
+    const url = `${config.get('API_URL')}/api/v1/countries`
     const getCountryISO2 = require("country-iso-3-to-2");
     let countryArray = []
     fetch(url)

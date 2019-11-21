@@ -4,6 +4,7 @@ import FavoriteThemes from './FavoriteThemes'
 import Navbar from './Navbar'
 import StarredProjectsList from './StarredProjectsList'
 import { withRouter } from 'react-router-dom'
+import config from 'react-global-configuration';
 
 
 class Profile extends Component {
@@ -23,7 +24,7 @@ class Profile extends Component {
 
     fetchProjects = () => {
       let userId = localStorage.userid
-      const url = `https://damp-everglades-59702.herokuapp.com/api/v1/get_user_projects`
+      const url = `${config.get('API_URL')}/api/v1/get_user_projects`
       const headers = {
           method: 'POST',
           headers: {
@@ -68,7 +69,7 @@ class Profile extends Component {
 
      removeFavorite = (projectId) => {
        const userId = localStorage.userid
-       const url = `https://damp-everglades-59702.herokuapp.com/api/v1/remove_project`
+       const url = `${config.get('API_URL')}/api/v1/remove_project`
        const headers = {
            method: 'POST',
            headers: {

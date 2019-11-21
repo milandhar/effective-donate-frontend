@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Dropdown } from 'semantic-ui-react'
+import config from 'react-global-configuration';
 
 export default class ThemesDropdownMultiple extends Component {
   constructor(props){
@@ -13,7 +14,7 @@ export default class ThemesDropdownMultiple extends Component {
   }
 
   componentDidMount(){
-    const url = "https://damp-everglades-59702.herokuapp.com/api/v1/themes"
+    const url = `${config.get('API_URL')}/api/v1/themes`
     let newOptions = []
     let themeNamesArray = []
     fetch(url)

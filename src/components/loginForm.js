@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Form, Header, Icon  } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import Media from 'react-media'
+import config from 'react-global-configuration';
 
 export default class LoginForm extends Component {
 
@@ -34,7 +35,7 @@ export default class LoginForm extends Component {
 
   getProfile = () => {
     let token = this.getToken()
-    fetch('https://damp-everglades-59702.herokuapp.com/api/v1/profile', {
+    fetch(`${config.get('API_URL')}/api/v1/profile`, {
       headers: {
         'Authorization': 'Bearer ' + token
       }
@@ -63,7 +64,7 @@ export default class LoginForm extends Component {
     const username = this.username.current.value
     const password = this.password.current.value
 
-    const URL = 'https://damp-everglades-59702.herokuapp.com/api/v1/login/'
+    const URL = `${config.get('API_URL')}/api/v1/login/`
     const headers = {
         method: 'POST',
         headers: {

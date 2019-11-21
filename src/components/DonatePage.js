@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Grid, Header, Icon, Radio, Form, Button, Message, Flag } from 'semantic-ui-react'
 import FavoriteThemes from './FavoriteThemes'
 import DonationOptionsList from './DonationOptionsList'
-
+import config from 'react-global-configuration';
 import Navbar from './Navbar'
 
 export default class DonatePage extends Component {
@@ -38,7 +38,7 @@ export default class DonatePage extends Component {
 
   findDonationOptions = () => {
     let projectId = this.state.selectedProject.id
-    const url = `https://damp-everglades-59702.herokuapp.com/api/v1/find_donation_options`
+    const url = `${config.get('API_URL')}/api/v1/find_donation_options`
     const headers = {
         method: 'POST',
         headers: {
@@ -83,7 +83,7 @@ export default class DonatePage extends Component {
     let starred = false
     const userId = localStorage.userid
     const projectId = this.state.selectedProject.id
-    const url = `https://damp-everglades-59702.herokuapp.com/api/v1/check_star`
+    const url = `${config.get('API_URL')}/api/v1/check_star`
     const headers = {
         method: 'POST',
         headers: {
@@ -105,7 +105,7 @@ export default class DonatePage extends Component {
     //post to user_starred_projects here
     const userId = localStorage.userid
     const projectId = this.state.selectedProject.id
-    const url = `https://damp-everglades-59702.herokuapp.com/api/v1/user_starred_projects`
+    const url = `${config.get('API_URL')}/api/v1/user_starred_projects`
     const headers = {
         method: 'POST',
         headers: {

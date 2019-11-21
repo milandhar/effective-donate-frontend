@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Loader, Visibility, Card, Icon, Image, Progress } from 'semantic-ui-react'
 import { withRouter } from 'react-router-dom'
+import config from 'react-global-configuration';
 
 
 class CountryCard extends Component {
@@ -32,7 +33,7 @@ class CountryCard extends Component {
     //post to user_starred_projects here
     const userId = localStorage.userid
     const projectId = this.props.id
-    const url = `https://damp-everglades-59702.herokuapp.com/api/v1/user_starred_projects`
+    const url = `${config.get('API_URL')}/api/v1/user_starred_projects`
     const headers = {
         method: 'POST',
         headers: {
@@ -53,7 +54,7 @@ class CountryCard extends Component {
     let starred = false
     const userId = localStorage.userid
     const projectId = this.props.id
-    const url = `https://damp-everglades-59702.herokuapp.com/api/v1/check_star`
+    const url = `${config.get('API_URL')}/api/v1/check_star`
     const headers = {
         method: 'POST',
         headers: {
