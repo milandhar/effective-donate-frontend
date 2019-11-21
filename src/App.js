@@ -8,6 +8,9 @@ import CreateUserForm from './components/createUserForm';
 import ProjectBrowser from './components/ProjectBrowser';
 import DonatePage from './components/DonatePage';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import config from 'react-global-configuration';
+
+config.set({API_URL: 'http://localhost:3000'})
 
 const initialState = {
   userThemes: [],
