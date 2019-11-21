@@ -35,6 +35,7 @@ class Profile extends Component {
         .then(res=>res.json())
         .then(json => {
           if(!json.error){
+            console.log(json)
             this.setState({projectArray: json, projectArrayUpdated: true})
           }
         })
@@ -85,6 +86,7 @@ class Profile extends Component {
              this.fetchProjects()
            }
         })
+        this.setState({ state: this.state });
      }
 
     render() {

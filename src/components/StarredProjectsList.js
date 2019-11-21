@@ -43,7 +43,24 @@ class StarredProjectsList extends Component {
 
   saveOrder = () => {
     const { starredProjects } = this.state;
+    console.log(starredProjects)
     // Take new state of dispo group list and POST to endpoint
+    const userId = localStorage.userid
+    const url = `https://damp-everglades-59702.herokuapp.com/api/v1/update_star_orders`
+    const headers = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({user_id: userId, project_array: starredProjects})
+    }
+    fetch(url, headers)
+      .then(res=>res.json())
+      .then(json => {
+        if(!json.error){
+          alert("New order saved!")
+        }
+      })
   }
 
   onDragStart = start => {
