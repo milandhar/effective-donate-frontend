@@ -87,7 +87,7 @@ class Profile extends Component {
              this.fetchProjects()
            }
         })
-        this.setState({ state: this.state });
+        setTimeout(this.forceUpdate(), 1000)
      }
 
     render() {

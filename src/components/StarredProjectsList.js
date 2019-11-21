@@ -46,7 +46,7 @@ class StarredProjectsList extends Component {
     let { starredProjects } = this.state;
     let projectIds = []
     starredProjects.forEach(project => {
-      projectIds.push(project.id)
+      projectIds.unshift(project.id)
     })
     // Take new state of dispo group list and POST to endpoint
     const userId = localStorage.userid
@@ -181,8 +181,6 @@ class StarredProjectsList extends Component {
     const selected = selectedRowIds;
     return(
     <div style={{padding: "30px" }}>
-      <Button onClick={reOrder}>{reorderEnabled ? "Cancel Reorder" : "Toggle Reorder"}</Button>
-      <Button onClick={saveOrder}>Save New Order</Button>
       <DragDropContext onDragEnd={this.onDragEnd}>
         <Table singleLine>
           <Table.Header>
@@ -253,6 +251,8 @@ class StarredProjectsList extends Component {
           </Droppable>
         </Table>
       </DragDropContext>
+      {/*<Button onClick={reOrder}>{reorderEnabled ? "Cancel Reorder" : "Toggle Reorder"}</Button> */}
+      <Button onClick={saveOrder}>Save New Order</Button>
     </div>
     )
   }
