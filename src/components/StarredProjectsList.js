@@ -45,10 +45,12 @@ class StarredProjectsList extends Component {
   saveOrder = () => {
     let { starredProjects } = this.state;
     let projectIds = []
+
+    //go thru list of project objects and unshift their ids to the empty array
     starredProjects.forEach(project => {
       projectIds.unshift(project.id)
     })
-    // Take new state of dispo group list and POST to endpoint
+    // Take new state of starred project list and POST to endpoint
     const userId = localStorage.userid
     const url = `${config.get('API_URL')}/api/v1/update_star_orders`
     const headers = {
@@ -63,7 +65,6 @@ class StarredProjectsList extends Component {
       .then(json => {
         if(!json.error){
           alert("New order saved!")
-          this.setState({state: this.state})
         }
       })
   }

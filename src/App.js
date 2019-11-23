@@ -10,7 +10,7 @@ import DonatePage from './components/DonatePage';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import config from 'react-global-configuration';
 
-config.set({API_URL: 'http://localhost:3000'})
+config.set({API_URL: 'https://damp-everglades-59702.herokuapp.com/'})
 
 const initialState = {
   userThemes: [],
