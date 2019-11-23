@@ -8,6 +8,9 @@ import CreateUserForm from './components/createUserForm';
 import ProjectBrowser from './components/ProjectBrowser';
 import DonatePage from './components/DonatePage';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import config from 'react-global-configuration';
+
+config.set({API_URL: 'https://damp-everglades-59702.herokuapp.com/'})
 
 const initialState = {
   userThemes: [],
@@ -37,7 +40,7 @@ class App extends Component {
   }
 
   getThemes = () => {
-    const url = 'https://damp-everglades-59702.herokuapp.com/api/v1/themes'
+    const url = `${config.get('API_URL')}/api/v1/themes`
     fetch(url)
     .then(res=>res.json())
     .then(json => {
@@ -56,7 +59,7 @@ class App extends Component {
     let themeArray = []
     let token = localStorage.getItem("jwt")
 
-      fetch('https://damp-everglades-59702.herokuapp.com/api/v1/profile', {
+      fetch(`${config.get('API_URL')}/api/v1/profile`, {
         headers: {
           'Authorization': 'Bearer ' + token
         }

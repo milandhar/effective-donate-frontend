@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Dropdown } from 'semantic-ui-react'
+import config from 'react-global-configuration';
 
 export default class FavoriteThemes extends Component {
 
@@ -26,7 +27,7 @@ export default class FavoriteThemes extends Component {
 
   getThemes = () => {
     console.log('in themes')
-    const url = 'https://damp-everglades-59702.herokuapp.com/api/v1/themes'
+    const url = `${config.get('API_URL')}/api/v1/themes`
     fetch(url)
     .then(res=>res.json())
     .then(json => {
@@ -43,7 +44,7 @@ export default class FavoriteThemes extends Component {
   fetchUserThemes = () => {
     let themeArray = []
     let token = localStorage.getItem("jwt")
-      fetch('https://damp-everglades-59702.herokuapp.com/api/v1/profile', {
+      fetch(`${config.get('API_URL')}/api/v1/profile`, {
         headers: {
           'Authorization': 'Bearer ' + token
         }
@@ -148,7 +149,7 @@ export default class FavoriteThemes extends Component {
       console.log(themeId)
       let bodyHash = {}
       bodyHash[`theme${themeNumber+1}`] = themeId
-      const URL = `https://damp-everglades-59702.herokuapp.com/api/v1/users/${localStorage.userid}`
+      const URL = `${config.get('API_URL')}/api/v1/users/${localStorage.userid}`
       const headers = {
           method: 'Put',
           headers: {

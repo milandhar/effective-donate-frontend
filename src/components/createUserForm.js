@@ -1,6 +1,7 @@
 import React, { Component} from 'react'
 import { Dropdown, Button, Form, Grid, Header, Checkbox, List, Icon } from 'semantic-ui-react'
 import { withRouter } from 'react-router-dom'
+import config from 'react-global-configuration';
 
 class CreateUserForm extends Component {
 
@@ -27,7 +28,7 @@ class CreateUserForm extends Component {
     }
 
     fetchCountries = () => {
-      const url = `https://damp-everglades-59702.herokuapp.com/api/v1/countries`
+      const url = `${config.get('API_URL')}/api/v1/countries`
       const getCountryISO2 = require("country-iso-3-to-2");
       let countryArray = []
       fetch(url)
@@ -58,14 +59,14 @@ class CreateUserForm extends Component {
     }
 
     getThemes = () => {
-      const url = 'https://damp-everglades-59702.herokuapp.com/api/v1/themes'
+      const url = `${config.get('API_URL')}/api/v1/themes`
       fetch(url)
       .then(res=>res.json())
       .then(json => {this.setState({themes: json})})
     }
 
     createUser = () => {
-        const URL = 'https://damp-everglades-59702.herokuapp.com/api/v1/users'
+        const URL = `${config.get('API_URL')}/api/v1/users`
         let[theme_id_1, theme_id_2, theme_id_3] = this.state.topThemes
         if(!theme_id_1){
           theme_id_1 = null

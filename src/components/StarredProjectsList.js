@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Button, Icon, Table, Flag, Ref } from 'semantic-ui-react'
 import { withRouter } from 'react-router-dom'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
+import config from 'react-global-configuration';
 
 class StarredProjectsList extends Component {
 
@@ -44,12 +45,14 @@ class StarredProjectsList extends Component {
   saveOrder = () => {
     let { starredProjects } = this.state;
     let projectIds = []
+
+    //go thru list of project objects and unshift their ids to the empty array
     starredProjects.forEach(project => {
-      projectIds.push(project.id)
+      projectIds.unshift(project.id)
     })
-    // Take new state of dispo group list and POST to endpoint
+    // Take new state of starred project list and POST to endpoint
     const userId = localStorage.userid
-    const url = `https://damp-everglades-59702.herokuapp.com/api/v1/update_star_orders`
+    const url = `${config.get('API_URL')}/api/v1/update_star_orders`
     const headers = {
         method: 'POST',
         headers: {
@@ -62,7 +65,6 @@ class StarredProjectsList extends Component {
       .then(json => {
         if(!json.error){
           alert("New order saved!")
-          this.setState({state: this.state})
         }
       })
   }
@@ -180,8 +182,6 @@ class StarredProjectsList extends Component {
     const selected = selectedRowIds;
     return(
     <div style={{padding: "30px" }}>
-      <Button onClick={reOrder}>{reorderEnabled ? "Cancel Reorder" : "Toggle Reorder"}</Button>
-      <Button onClick={saveOrder}>Save New Order</Button>
       <DragDropContext onDragEnd={this.onDragEnd}>
         <Table singleLine>
           <Table.Header>
@@ -252,6 +252,8 @@ class StarredProjectsList extends Component {
           </Droppable>
         </Table>
       </DragDropContext>
+      {/*<Button onClick={reOrder}>{reorderEnabled ? "Cancel Reorder" : "Toggle Reorder"}</Button> */}
+      <Button onClick={saveOrder}>Save New Order</Button>
     </div>
     )
   }

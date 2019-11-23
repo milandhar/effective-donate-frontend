@@ -7,6 +7,7 @@ import Navbar from './Navbar.js'
 import { withRouter } from 'react-router-dom'
 import * as Scroll from 'react-scroll';
 import { Link, Element , Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
+import config from 'react-global-configuration';
 
 
 class ProjectBrowser extends Component {
@@ -42,7 +43,7 @@ class ProjectBrowser extends Component {
   }
 
   fetchCountries = () => {
-    const url = `https://damp-everglades-59702.herokuapp.com/api/v1/countries`
+    const url = `${config.get('API_URL')}/api/v1/countries`
     const getCountryISO2 = require("country-iso-3-to-2");
     let countryArray = []
     fetch(url)
@@ -74,7 +75,7 @@ class ProjectBrowser extends Component {
 
   fetchProjects = () => {
     const countryCode = this.state.selectedCountry
-    const url = `https://damp-everglades-59702.herokuapp.com/api/v1/get_projects?countryCode=${countryCode}`
+    const url = `${config.get('API_URL')}/api/v1/get_projects?countryCode=${countryCode}`
     fetch(url)
     .then(res=>res.json())
     .then(json=> {
@@ -85,7 +86,7 @@ class ProjectBrowser extends Component {
   fetchThemeProjects = () => {
     const countryCode = this.state.selectedCountry
     // const [theme1, theme2, theme3, theme4, theme5, theme6, theme7, theme8, theme9, theme10, theme11, theme12, theme13, theme14, theme15, theme16, theme17, theme18] = this.state.projectThemes
-    const url = `https://damp-everglades-59702.herokuapp.com/api/v1/get_theme_projects`
+    const url = `${config.get('API_URL')}/api/v1/get_theme_projects`
     return fetch(url, {
       method: 'POST',
       headers: {
