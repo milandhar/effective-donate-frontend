@@ -1,3 +1,15 @@
+## EffectiveDonate 
+A nonprofit discovery and donation tool, using data from [GlobalGiving's API](https://www.globalgiving.org/api/)
+
+EffectiveDonate allows users to filter active projects by theme and find them on a world map (desktop). It also enables users to save their favorite projects.
+
+View the website in production [here](https://mighty-beach-46515.herokuapp.com/). 
+
+
+
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
