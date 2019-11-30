@@ -6,7 +6,8 @@ EffectiveDonate allows users to filter active projects by theme and find them on
 View the website in production [here](https://mighty-beach-46515.herokuapp.com/). 
 
 
-
+### Demo
+[![EffectiveDonate Demo](https://i.ibb.co/tqRspqJ/https-i-ytimg-com-vi-k-Sz0-PQtuf-XE-maxresdefault.jpg)](https://youtu.be/kSz0PQtufXE "EffectiveDonate Demo")
 
 
 
