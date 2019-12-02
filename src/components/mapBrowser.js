@@ -231,10 +231,10 @@ class MapBrowser extends Component {
             </Grid.Column>
           </Grid.Row>
         </Grid>
-        <div id="map-btns">
+        {/*<div id="map-btns">
           <Button onClick={this.findLastProject} id="refreshBtn">Get New Projects</Button>
           <Button onClick={this.deleteProjects} id="refreshBtn">Refresh Projects</Button>
-        </div>
+        </div> */}
       </div>
     );
   }

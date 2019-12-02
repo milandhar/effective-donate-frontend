@@ -118,7 +118,7 @@ class ChoroplethMap extends Component {
                           '<strong>', geo.properties.name, '</strong>',
                           // '<br>Count: <strong>', data.numberOfThings, '</strong>',
                           // '<br>Count: <strong>', Math.round(Math.pow(Math.E,data.numberOfThings)),'</strong>',
-                          '<br>Count: <strong>', transformCount,'</strong>',
+                          '<br>Project Count: <strong>', transformCount,'</strong>',
                           '</div>'].join('');
                   }
           },
