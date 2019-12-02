@@ -3,7 +3,7 @@ A nonprofit discovery and donation tool, using data from [GlobalGiving's API](ht
 
 EffectiveDonate allows users to filter active projects by theme and find them on a world map (desktop). It also enables users to save their favorite projects.
 
-View the website in production [here](http://effectivedonate.herokuapp.com/). 
+View the website in production [here](https://effectivedonate.herokuapp.com/). 
 
 
 ### Demo
