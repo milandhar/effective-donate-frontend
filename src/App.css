@@ -245,7 +245,7 @@ section {
 }
 
 .map-dropdown-div{
-  padding: 0 !important;
+  /* padding: 0 !important; */
   margin-top: 15px !important;
 }
 
@@ -469,6 +469,30 @@ th {
   margin: 0 !important;
 }
 
+.ui.attached.label, .ui[class*="top attached"].label {
+  width: auto !important;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+}
+
+.ui.segment {
+  border: 0 !important;
+}
+
+.computer.only.tablet.one.column.row.map-dropdown-div {
+  position: absolute;
+  padding: 0 !important;
+  top: 96vh;
+}
+
+#map-div {
+  height: 80vh;
+}
+
+#choropleth_parent {
+  margin-top: 0px !important;
+}
 
 .profile-section .sixteen {
   margin-top: 20px !important;

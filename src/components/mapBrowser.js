@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Grid, Button, Loader } from 'semantic-ui-react'
+import { Grid, Button, Loader, Label, Segment } from 'semantic-ui-react'
 import '../App.css';
 import ChoroplethMap from './choroplethMap.js'
 import ThemesDropdownMultiple from './ThemesDropdownMultiple'
@@ -197,17 +197,20 @@ class MapBrowser extends Component {
     return (
       <div className="app-div">
         <Navbar activeItem='map' logout={this.props.logout}/>
-        <Grid divided='vertically'>
+        <Grid id="map-grid" divided='vertically'>
           <Grid.Row columns={1} id="map-div" only='computer tablet'>
             <Grid.Column>
               {(this.state.updatedData)
               ? <div>
-                  <ChoroplethMap toggleDropdownUpdated={this.toggleDropdownUpdated} dropdownUpdated={this.state.dropdownUpdated} history={this.props.history} handleClick={this.goToProjects} data={this.state.data}/>
+                  <Segment>
+                    <Label attached='top'>Click on a country to view its projects, or change themes below</Label>
+                    <ChoroplethMap toggleDropdownUpdated={this.toggleDropdownUpdated} dropdownUpdated={this.state.dropdownUpdated} history={this.props.history} handleClick={this.goToProjects} data={this.state.data}/>
+                  </Segment>
                 </div>
               : <div id="map-loader"><Loader active inline='centered' /></div>}
             </Grid.Column>
           </Grid.Row>
-          <Grid.Row className="map-dropdown-div"columns={1} only='computer tablet'>
+          <Grid.Row className="map-dropdown-div" columns={1} only='computer tablet'>
             <Grid.Column>
               <div class="attribution-div">
                 <a href="https://www.globalgiving.org/" target="_blank">
@@ -216,7 +219,7 @@ class MapBrowser extends Component {
                 <p class="gg-attribution">Project Data</p>
               </div>
               <div>
-                <h1>Select Theme(s)</h1>
+                <h1>Select Themes</h1>
                 {(this.state.updatedMapThemes)
                 ? <ThemesDropdownMultiple updateMapThemes={this.updateMapThemes} themes={this.props.themes} mapThemes={this.state.mapThemes} className="map-dropdown"/>
                 : <Loader active inline='centered' />}
