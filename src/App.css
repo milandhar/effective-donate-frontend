@@ -470,7 +470,7 @@ th {
 }
 
 .ui.attached.label, .ui[class*="top attached"].label {
-  width: 30% !important;
+  width: auto !important;
   margin-left: auto;
   margin-right: auto;
   position: relative;
@@ -482,7 +482,12 @@ th {
 
 .computer.only.tablet.one.column.row.map-dropdown-div {
   position: absolute;
-  top: 100vh;
+  padding: 0 !important;
+  top: 96vh;
+}
+
+#map-div {
+  height: 80vh;
 }
 
 #choropleth_parent {

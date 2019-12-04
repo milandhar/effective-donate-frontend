@@ -197,13 +197,13 @@ class MapBrowser extends Component {
     return (
       <div className="app-div">
         <Navbar activeItem='map' logout={this.props.logout}/>
-        <Grid divided='vertically'>
+        <Grid id="map-grid" divided='vertically'>
           <Grid.Row columns={1} id="map-div" only='computer tablet'>
             <Grid.Column>
               {(this.state.updatedData)
               ? <div>
                   <Segment>
-                    <Label attached='top'>Click on a country to view its projects</Label>
+                    <Label attached='top'>Click on a country to view its projects, or change themes below</Label>
                     <ChoroplethMap toggleDropdownUpdated={this.toggleDropdownUpdated} dropdownUpdated={this.state.dropdownUpdated} history={this.props.history} handleClick={this.goToProjects} data={this.state.data}/>
                   </Segment>
                 </div>
@@ -219,7 +219,7 @@ class MapBrowser extends Component {
                 <p class="gg-attribution">Project Data</p>
               </div>
               <div>
-                <h1>Select Theme(s)</h1>
+                <h1>Select Themes</h1>
                 {(this.state.updatedMapThemes)
                 ? <ThemesDropdownMultiple updateMapThemes={this.updateMapThemes} themes={this.props.themes} mapThemes={this.state.mapThemes} className="map-dropdown"/>
                 : <Loader active inline='centered' />}
