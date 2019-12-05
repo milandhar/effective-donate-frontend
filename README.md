@@ -1,4 +1,4 @@
-## EffectiveDonate
+# EffectiveDonate
 A nonprofit discovery and donation tool, using data from [GlobalGiving's API](https://www.globalgiving.org/api/)
 
 EffectiveDonate allows users to filter active projects by theme and find them on a world map (desktop). It also enables users to save their favorite projects.
@@ -16,69 +16,31 @@ View full demo video [here](https://youtu.be/kSz0PQtufXE)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+### Getting Started
+* Clone this repo to get started running EffectiveDonate's frontend locally:
+```
+git clone https://github.com/milandhar/mod5-project-frontend.git
+```
+* Then, `npm install` to install all required dependencies
+* `npm start` to start the local server (this project uses create-react-app)
+The local web server will use Port 8000 instead of React's Port 3000 to prevent any conflict with the Rails backend. You can configure the default start port in the `package.json` file. 
 
-In the project directory, you can run:
+## Project Overview 
+EffectiveDonate is an immersive website where users can explore and donate to nonprofit projects from around the world. Users create a profile where they can specify their top-3 project themes (Education, Children, Environment, etc), and a default country. The landing page is a world map where users can hover and discover how many available projects they can donate to in every country. They can filter by any of the project themes to visualize which countries have the highest concentration of projects. The user can click on a country to view summaries of all of the projects, and can star individual projects or donate to them (payment feature still under development). 
 
-### `npm start`
+### User Stories
+EffectiveDonate was developed with the following user stories in mind: 
+* As a salaried technology professional with cash on hand, I want to quickly find a project that I care and immediately donate my hard-earned money to it.
+* As a frugal student, I want to learn about charitable projects so that I can save it to my favorites and eventually donate to it once I have a job.
+* As a person who cares about Subsaharan Africa, I want to visually find projects that are serving that region so that I can learn more and donate.
+* As an environmentalist, I want to find projects in countries around the world so that I can learn about them and discuss them with my friends.
+* As someone who is curious about how my donated money will be spent, I want a breakdown of donation amounts by description (ex. $10 will pay for safe water for one child), so that I know where my dollars will go if I donate.
+* As someone who has never considered donating money, I want to learn about what impact even a small donation can make so that I will understand a new way of helping someone in need.
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Front End Technologies Used:
+* [React](https://reactjs.org/) - User Interface 
+* [Semantic UI React](https://react.semantic-ui.com/) - Theme + Style
+* [D3 React](https://react-d3-library.github.io/) - Data Visualization 
+* [React DataMaps](https://www.npmjs.com/package/react-datamaps) - Choropleth World Map 
+* [React Beautiful DnD](https://react-beautiful-dnd.netlify.com/?path=/story/single-vertical-list--basic) - Drag and Drop Table Component
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
