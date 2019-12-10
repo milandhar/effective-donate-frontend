@@ -245,8 +245,12 @@ section {
 }
 
 .map-dropdown-div{
-  /* padding: 0 !important; */
+  padding: 0 !important;
   margin-top: 15px !important;
+}
+
+.ui.grid>.mobile.only.row {
+  /* width: 100vw !important; */
 }
 
 .map-dropdown-div .multiple.dropdown{
