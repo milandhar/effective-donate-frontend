@@ -122,7 +122,7 @@ export default class FavoriteThemes extends Component {
       let unique = true
       let themeNamesArray = []
 
-      if (prevUserThemes[0] != undefined && prevUserThemes[1] != undefined && prevUserThemes[2] != undefined){
+      if (prevUserThemes[0] !== undefined && prevUserThemes[1] !== undefined && prevUserThemes[2] !== undefined){
         console.log(prevUserThemes)
         prevUserThemes.forEach(theme => {
           if(theme.name === newThemeName){
