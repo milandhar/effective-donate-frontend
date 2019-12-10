@@ -13,10 +13,9 @@ View backend repo [here](https://github.com/milandhar/mod5-project-backend).
 View full demo video [here](https://youtu.be/kSz0PQtufXE)
 
 
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
 ### Getting Started
+*This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).*
+
 * Clone this repo to get started running EffectiveDonate's frontend locally:
 ```
 git clone https://github.com/milandhar/mod5-project-frontend.git
