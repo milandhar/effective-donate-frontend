@@ -3,6 +3,7 @@ import { Grid } from 'semantic-ui-react'
 import FavoriteThemes from './FavoriteThemes'
 import Navbar from './Navbar'
 import StarredProjectsList from './StarredProjectsList'
+import Footer from './Footer'
 import { withRouter } from 'react-router-dom'
 import config from 'react-global-configuration';
 
@@ -91,42 +92,47 @@ class Profile extends Component {
 
     render() {
         return(
-          <section class = "profile-section">
-           <Navbar activeItem='profile' logout={this.props.logout}/>
-            <Grid>
-              <Grid.Row>
-                <Grid.Column width={16}>
-                  <div className='profile-header'>
-                    <h2 className="ui header highlight">
-                      <i className="user icon"></i>
-                    </h2>
-                    <h2 className="ui header highlight">
-                      {localStorage.first_name} {localStorage.last_name}
-                    </h2>
-                  </div>
-                </Grid.Column>
-              </Grid.Row>
-              <Grid.Row>
-                <Grid.Column width={16}>
-                  <h1 class="ui center aligned header highlight">
-                    Favorite Themes:
-                  </h1>
+          <div>
+            <section class = "profile-section">
+             <Navbar activeItem='profile' logout={this.props.logout}/>
+              <Grid>
+                <Grid.Row>
+                  <Grid.Column width={16}>
+                    <div className='profile-header'>
+                      <h2 className="ui header highlight">
+                        <i className="user icon"></i>
+                      </h2>
+                      <h2 className="ui header highlight">
+                        {localStorage.first_name} {localStorage.last_name}
+                      </h2>
+                    </div>
+                  </Grid.Column>
+                </Grid.Row>
+                <Grid.Row>
+                  <Grid.Column width={16}>
+                    <h1 class="ui center aligned header highlight">
+                      Favorite Themes:
+                    </h1>
 
-                  <FavoriteThemes getThemes={this.props.getThemes} updateAppThemes={this.props.updateAppThemes} />
-                </Grid.Column>
-              </Grid.Row>
-              <Grid.Row>
-                <Grid.Column width={16}>
-                  <h1 className="ui center aligned header highlight">
-                    Starred Projects:
-                  </h1>
-                  {(this.state.projectArrayUpdated)
-                    ? <StarredProjectsList handleDonate={this.props.handleDonate} removeFavorite={this.removeFavorite} projectArray={this.state.projectArray}/>
-                    : <div></div> }
-                </Grid.Column>
-              </Grid.Row>
-            </Grid>
-        </section>
+                    <FavoriteThemes getThemes={this.props.getThemes} updateAppThemes={this.props.updateAppThemes} />
+                  </Grid.Column>
+                </Grid.Row>
+                <Grid.Row>
+                  <Grid.Column width={16}>
+                    <h1 className="ui center aligned header highlight">
+                      Starred Projects:
+                    </h1>
+                    {(this.state.projectArrayUpdated)
+                      ? <StarredProjectsList handleDonate={this.props.handleDonate} removeFavorite={this.removeFavorite} projectArray={this.state.projectArray}/>
+                      : <div></div> }
+                  </Grid.Column>
+                </Grid.Row>
+              </Grid>
+          </section>
+          <div id="footer-div">
+            <Footer />
+          </div>
+        </div>
         )
     }
 }

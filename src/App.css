@@ -19,6 +19,26 @@
   margin-bottom: 40px;
 }
 
+#footer-div {
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+}
+
+#absolute-footer{
+  position: absolute;
+  bottom: 0;
+  width: 100vw;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.borderless.menu {
+  text-align: center;
+  justify-content: center;
+  border-radius: 0;
+}
+
 section {
   height: 100vh !important;
 }
@@ -111,9 +131,23 @@ section {
   text-align: center;
 }
 
+.borderless .item p {
+  margin-left: auto;
+  margin-right: auto;
+}
+
 #gg-logo {
   max-width: 15%;
 }
+
+#gg-footer {
+  max-height: 3vh;
+}
+
+#gg-anchor {
+  vertical-align: middle;
+}
+
 
 #default-country{
   font-size: 1.3em !important;
@@ -245,8 +279,12 @@ section {
 }
 
 .map-dropdown-div{
-  /* padding: 0 !important; */
+  padding: 0 !important;
   margin-top: 15px !important;
+}
+
+.ui.grid>.mobile.only.row {
+  /* width: 100vw !important; */
 }
 
 .map-dropdown-div .multiple.dropdown{
@@ -619,6 +657,8 @@ td {
     word-wrap: break-word;
   }
 
+
+
   #remove-donate-div {
     display: flex !important;
     justify-content: space-evenly;
@@ -681,6 +721,24 @@ td {
   }
   .ui.form .field.login-buttons input {
     margin-top: .5em;
+  }
+}
+
+@media only screen and (max-width: 375px) {
+  #absolute-footer {
+    bottom: -8vh;
+  }
+}
+
+@media only screen and (max-width: 360px) {
+  #absolute-footer {
+    bottom: -13vh;
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  #absolute-footer {
+    bottom: -23vh;
   }
 }
 

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Grid, Button, Loader, Label, Segment } from 'semantic-ui-react'
 import '../App.css';
 import ChoroplethMap from './choroplethMap.js'
+import Footer from './Footer'
 import ThemesDropdownMultiple from './ThemesDropdownMultiple'
 import Navbar from './Navbar.js'
 import { withRouter } from 'react-router-dom'
@@ -234,6 +235,9 @@ class MapBrowser extends Component {
             </Grid.Column>
           </Grid.Row>
         </Grid>
+          <div id="footer-div">
+            <Footer />
+          </div>
         {/*<div id="map-btns">
           <Button onClick={this.findLastProject} id="refreshBtn">Get New Projects</Button>
           <Button onClick={this.deleteProjects} id="refreshBtn">Refresh Projects</Button>
