@@ -724,6 +724,24 @@ td {
   }
 }
 
+@media only screen and (max-width: 375px) {
+  #absolute-footer {
+    bottom: -8vh;
+  }
+}
+
+@media only screen and (max-width: 360px) {
+  #absolute-footer {
+    bottom: -13vh;
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  #absolute-footer {
+    bottom: -23vh;
+  }
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
