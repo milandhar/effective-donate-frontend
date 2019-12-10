@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Form, Header, Icon  } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
+import Footer from './Footer'
 import Media from 'react-media'
 import config from 'react-global-configuration';
 
@@ -130,6 +131,9 @@ export default class LoginForm extends Component {
                 </Form>
               </article>
             </div>
+          </div>
+          <div id="absolute-footer">
+            <Footer />
           </div>
         </div>
     )

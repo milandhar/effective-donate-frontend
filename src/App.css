@@ -19,6 +19,26 @@
   margin-bottom: 40px;
 }
 
+#footer-div {
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+}
+
+#absolute-footer{
+  position: absolute;
+  bottom: 0;
+  width: 100vw;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.borderless.menu {
+  text-align: center;
+  justify-content: center;
+  border-radius: 0;
+}
+
 section {
   height: 100vh !important;
 }
@@ -111,9 +131,23 @@ section {
   text-align: center;
 }
 
+.borderless .item p {
+  margin-left: auto;
+  margin-right: auto;
+}
+
 #gg-logo {
   max-width: 15%;
 }
+
+#gg-footer {
+  max-height: 3vh;
+}
+
+#gg-anchor {
+  vertical-align: middle;
+}
+
 
 #default-country{
   font-size: 1.3em !important;
@@ -622,6 +656,8 @@ td {
     white-space: normal !important;
     word-wrap: break-word;
   }
+
+
 
   #remove-donate-div {
     display: flex !important;
