@@ -14,14 +14,13 @@ View full demo video [here](https://youtu.be/kSz0PQtufXE)
 
 
 ### Getting Started
-*This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).*
 
 * Clone this repo to get started running EffectiveDonate's frontend locally:
 ```
 git clone https://github.com/milandhar/mod5-project-frontend.git
 ```
 * Then, `npm install` to install all required dependencies
-* `npm start` to start the local server (this project uses create-react-app)
+* `npm start` to start the local server (this project uses [create-react-app](https://github.com/facebook/create-react-app))
 The local web server will use Port 8000 instead of React's Port 3000 to prevent any conflict with the Rails backend. You can configure the default start port in the `package.json` file. 
 
 ## Project Overview 
