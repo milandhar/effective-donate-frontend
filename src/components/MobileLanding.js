@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import ThemesDropdownMultiple from './ThemesDropdownMultiple'
 import Navbar from './Navbar.js'
+import Footer from './Footer'
 import { Grid, Button, Header, Dropdown } from 'semantic-ui-react'
 import '../App.css'
 import { withRouter } from 'react-router-dom'
@@ -105,6 +106,9 @@ class MobileLanding extends Component {
               </Grid.Column>
           </Grid.Row>
         </Grid>
+        <div id="absolute-footer">
+          <Footer />
+        </div>
       </div>
     )
   }

@@ -1,6 +1,7 @@
 import React, { Component} from 'react'
 import { Dropdown, Button, Form, Grid, Header, Checkbox, List, Icon } from 'semantic-ui-react'
 import { withRouter } from 'react-router-dom'
+import Footer from './Footer'
 import config from 'react-global-configuration';
 
 class CreateUserForm extends Component {
@@ -243,6 +244,9 @@ class CreateUserForm extends Component {
                 </article>
                 </div>
                 </container>
+                <div id="footer-div">
+                  <Footer />
+                </div>
             </div>
         )
     }

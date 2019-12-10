@@ -4,6 +4,7 @@ import '../App.css';
 import CountryCard from './CountryCard.js'
 import ThemesDropdownMultiple from './ThemesDropdownMultiple'
 import Navbar from './Navbar.js'
+import Footer from './Footer'
 import { withRouter } from 'react-router-dom'
 import * as Scroll from 'react-scroll';
 import { Link, Element , Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
@@ -176,6 +177,9 @@ class ProjectBrowser extends Component {
             : <Loader active inline='centered' />
           }
         </Grid>
+        <div id="footer-div">
+          <Footer />
+        </div>
       </div>
     )
   }
