@@ -5,7 +5,7 @@ export default class Footer extends Component {
 
   render(){
     return(
-      <Menu inverted borderless stackable>
+      <Menu borderless stackable>
         <Menu.Item name='gg-link'>
           <p id="gg-link-p">All project data from <a id="gg-anchor"href="https://www.globalgiving.org/" target="_blank"><img id="gg-footer" src={require('../img/GG2015_Logo_horizontal_4color.png')} /></a></p>
         </Menu.Item>
