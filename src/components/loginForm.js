@@ -113,7 +113,10 @@ export default class LoginForm extends Component {
                   EffectiveDonate
                   <Icon name='globe' circular />
                 </Header>
-                <h2>Sign in</h2>
+                <Header as='h4' textAlign='center'>
+                  // a project discovery and donation tool //
+                </Header>
+                {/*<h2>Sign in</h2> */}
                 <Form onSubmit={this.login}>
                 <Form.Field className="login-field" onChange={this.handleChange}>
                 <label>Username</label>
