@@ -513,9 +513,16 @@ th {
   margin-left: auto;
   margin-right: auto;
   position: relative;
+  background-color: #f9fafb;
 }
 
 .ui.segment {
+  border: 0 !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+}
+
+.segments {
   border: 0 !important;
 }
 

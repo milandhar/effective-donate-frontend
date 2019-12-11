@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Form, Header, Icon  } from 'semantic-ui-react'
+import { Form, Header, Icon } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import Footer from './Footer'
 import Media from 'react-media'
@@ -104,6 +104,7 @@ export default class LoginForm extends Component {
   render(){
     return(
       <div className='body'>
+
         <header className='spacer'> </header>
           <div className='login-section'>
             <div className='login-div'>
