@@ -38,7 +38,7 @@ class Navbar extends Component {
     render() {
         return(
           <Grid className="menu-grid">
-            <Grid.Row columns={1} only='computer tablet'>
+            <Grid.Row className="navbar" columns={1} only='computer tablet'>
               <Grid.Column>
                 <Segment inverted>
                   <Menu stackable inverted pointing secondary>

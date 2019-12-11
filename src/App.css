@@ -111,12 +111,13 @@ section {
 }
 
 .ui.center.aligned.header{
-  margin-top: 5px !important;
+  margin-top: 6vh !important;
 }
 
 .ui.inverted.segment{
   /* height: 5.2em; */
   height: 115%;
+  margin-bottom: 2vh;
 }
 
 .visiblity-div {
@@ -545,6 +546,11 @@ th {
   padding: 0 !important;
   top: 96vh;
 }
+
+.computer.only.tablet.one.column.row.navbar {
+  padding-bottom: 0 !important;
+}
+
 
 #map-div {
   height: 80vh;
