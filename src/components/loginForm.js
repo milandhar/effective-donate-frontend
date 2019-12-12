@@ -65,6 +65,11 @@ export default class LoginForm extends Component {
     const username = this.username.current.value
     const password = this.password.current.value
 
+    if(!username) {
+      alert("Please Enter your Username!")
+      return
+    }
+
     const URL = `${config.get('API_URL')}/api/v1/login/`
     const headers = {
         method: 'POST',
