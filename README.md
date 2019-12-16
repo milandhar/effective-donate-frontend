@@ -28,7 +28,7 @@ EffectiveDonate is an immersive website where users can explore and donate to no
 
 ### User Stories
 EffectiveDonate was developed with the following user stories in mind: 
-* As a salaried technology professional with cash on hand, I want to quickly find a project that I care and immediately donate my hard-earned money to it.
+* As a salaried technology professional with cash on hand, I want to quickly find a project that I care about and immediately donate my hard-earned money to it.
 * As a frugal student, I want to learn about charitable projects so that I can save it to my favorites and eventually donate to it once I have a job.
 * As a person who cares about Subsaharan Africa, I want to visually find projects that are serving that region so that I can learn more and donate.
 * As an environmentalist, I want to find projects in countries around the world so that I can learn about them and discuss them with my friends.
