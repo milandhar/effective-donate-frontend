@@ -31,7 +31,7 @@ EffectiveDonate was developed with the following user stories in mind:
 * As a salaried technology professional with cash on hand, I want to quickly find a project that I care about and immediately donate my hard-earned money to it.
 * As a frugal student, I want to learn about charitable projects so that I can save it to my favorites and eventually donate to it once I have a job.
 * As a person who especially cares about projects in Subsaharan Africa, I want to visually find projects that are serving that region so that I can learn more and donate.
-* As an environmentalist, I want to find projects in countries around the world so that I can learn about them and discuss them with my friends.
+* As an environmentalist, I want to find projects focused on climate change and the envrionment in countries around the world so that I can learn about them and discuss them with my friends.
 * As someone who is curious about how my donated money will be spent, I want a breakdown of donation amounts by description (ex. $10 will pay for safe water for one child), so that I know where my dollars will go if I donate.
 * As someone who has never considered donating money, I want to learn about what impact even a small donation can make so that I will understand a new way of helping someone in need.
 
