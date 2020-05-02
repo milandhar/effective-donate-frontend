@@ -3,7 +3,7 @@
   height: 100vh !important;
 }
 
-.ui{
+.ui {
   /* font-family: 'Open Sans', sans-serif !important; */
 }
 
@@ -25,7 +25,7 @@
   width: 100vw;
 }
 
-#absolute-footer{
+#absolute-footer {
   position: absolute;
   bottom: 0;
   width: 100vw;
@@ -49,16 +49,23 @@ section {
   height: 100vh !important;
 }
 
+.ui.form .field.login-buttons {
+  margin-top: 2vh;
+  padding-top: 2vh;
+  display: flex;
+  flex-direction: column;
+}
+
 .login-div form {
   margin-top: 8vh;
 }
 
 .login-div .login i {
-  color: #1586cb
+  color: #1586cb;
 }
 
 .login-div .login h4 {
-  color: #1586cb
+  color: #1586cb;
 }
 
 .menu-grid {
@@ -84,37 +91,37 @@ section {
   padding-bottom: 40px;
 }
 
-#donate-header{
+#donate-header {
   display: flex !important;
   flex-direction: column !important;
 }
 
-#donate-header-div{
+#donate-header-div {
   margin-top: 5px !important;
 }
 
-#flag-div{
+#flag-div {
   text-align: center;
 }
 
-#donate-div{
+#donate-div {
   padding-left: 30px;
   padding-right: 30px;
 }
 
-.ui.divided.middle.aligned.list{
-  padding-right:10px;
+.ui.divided.middle.aligned.list {
+  padding-right: 10px;
 }
 
 .login-field label {
   text-align: center;
 }
 
-.ui.center.aligned.header{
+.ui.center.aligned.header {
   margin-top: 6vh !important;
 }
 
-.ui.inverted.segment{
+.ui.inverted.segment {
   /* height: 5.2em; */
   height: 115%;
   margin-bottom: 2vh;
@@ -125,21 +132,21 @@ section {
   height: 1000px !important;
 }
 
-.user.icon{
-  color: rgb(21,134, 203)
+.user.icon {
+  color: rgb(21, 134, 203);
 }
 
-.tasks.icon{
-  color: rgb(21,134, 203)
+.tasks.icon {
+  color: rgb(21, 134, 203);
 }
 
-.country-drop-div{
+.country-drop-div {
   margin-top: 18px !important;
   flex-direction: column !important;
   width: 50%;
 }
 
-.dollar.sign.circular.icon{
+.dollar.sign.circular.icon {
   color: green;
 }
 
@@ -164,14 +171,13 @@ section {
   vertical-align: middle;
 }
 
-
-#default-country{
+#default-country {
   font-size: 1.3em !important;
   font-weight: bold;
   margin-bottom: 10px;
 }
 
-.ui.positive{
+.ui.positive {
   width: 40%;
   margin-left: auto;
   margin-right: auto;
@@ -210,18 +216,18 @@ section {
   pointer-events: none;
 }
 
-.org-link{
+.org-link {
   color: blue !important;
 }
 
-.attribution-div{
+.attribution-div {
   position: absolute;
   left: 4 !important;
   text-align: left;
   width: auto;
 }
 
-.celled{
+.celled {
   height: 250px !important;
 }
 
@@ -248,44 +254,44 @@ section {
   text-align: center;
 }
 
-.dropdown-container{
+.dropdown-container {
   display: flex;
   flex-direction: row;
   justify-content: center;
   margin-top: 30px;
 }
 
-.select-container{
+.select-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.content{
+.content {
   text-align: left;
 }
 
-.extra{
+.extra {
   display: flex;
   flex-direction: row;
   justify-content: center;
 }
 
-.ui.globe.icon{
+.ui.globe.icon {
   font-size: 20px;
 }
 
-.login-field{
+.login-field {
   width: 20%;
 }
 
-.login-div h2{
+.login-div h2 {
   margin-top: 10px;
   text-align: center;
 }
 
-.ui.form{
+.ui.form {
   margin-left: auto;
   margin-right: auto;
   display: flex;
@@ -294,31 +300,31 @@ section {
   align-items: center;
 }
 
-.map-dropdown-div{
+.map-dropdown-div {
   padding: 0 !important;
   margin-top: 15px !important;
 }
 
-.ui.grid>.mobile.only.row {
+.ui.grid > .mobile.only.row {
   /* width: 100vw !important; */
 }
 
-.map-dropdown-div .multiple.dropdown{
-  width: 30% ;
+.map-dropdown-div .multiple.dropdown {
+  width: 30%;
   margin-left: auto;
   margin-right: auto;
 }
 
-.extra a{
+.extra a {
   margin-left: 5px;
   margin-right: 5px;
 }
 
-.card:after{
+.card:after {
   display: none !important;
 }
 
-.list .item{
+.list .item {
   display: flex !important;
   flex-direction: row;
   justify-content: space-between;
@@ -328,18 +334,17 @@ section {
   width: 50px;
 }
 
-.buttons{
+.buttons {
   display: flex;
   flex-direction: row;
 }
 
-
-.dropdown-container select{
+.dropdown-container select {
   margin-left: 10px;
   margin-right: 10px;
 }
 
-.profile-header{
+.profile-header {
   margin-top: 40px;
   margin-left: 10px;
   text-align: center;
@@ -358,8 +363,7 @@ section {
   font-size: 17px;
 }
 
-
-#choropleth_map{
+#choropleth_map {
   padding-bottom: 0px !important;
   padding-top: 15px;
   height: 120vh;
@@ -371,16 +375,15 @@ section {
   justify-content: center;
 }
 
-
 .App-link {
   color: #61dafb;
 }
 
-.app-div{
+.app-div {
   margin: 0px !important;
 }
 
-.refreshBtn{
+.refreshBtn {
   position: absolute;
   margin-top: 0%;
 }
@@ -402,7 +405,6 @@ section {
   width: 80px !important;
 }
 
-
 .donation.description {
   width: 100%;
   margin-left: 20px !important;
@@ -421,17 +423,17 @@ section {
   width: 50%;
 }
 
-.star.icon.donate.active{
+.star.icon.donate.active {
   color: gold !important;
 }
 
-.card-div{
+.card-div {
   margin-bottom: 80px !important;
-  padding-left: .25rem;
-  padding-right: .25rem;
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
 }
 
-.card-row{
+.card-row {
   justify-content: center !important;
   text-align: center;
   margin-left: auto;
@@ -439,13 +441,13 @@ section {
   /* padding-left: 130px !important; */
 }
 
-.ui.card{
+.ui.card {
   margin-left: 30px !important;
   margin-right: 30px !important;
 }
 
 .ui.progress {
-  margin-bottom: .2em !important;
+  margin-bottom: 0.2em !important;
 }
 
 .country-drop {
@@ -461,7 +463,7 @@ section {
   text-align: left !important;
 }
 
-.ui.form.create-form{
+.ui.form.create-form {
   flex-direction: column !important;
   width: 80vw !important;
 }
@@ -470,7 +472,7 @@ section {
   justify-content: space-between !important;
 } */
 
-.equal.width.fields{
+.equal.width.fields {
   flex-direction: column !important;
 }
 
@@ -511,19 +513,20 @@ th {
   margin-right: auto;
 }
 
-.profile-section .ui.fluid.dropdown{
+.profile-section .ui.fluid.dropdown {
   width: 20% !important;
 }
 
-.map-dropdown-div .ui.fluid.dropdown{
+.map-dropdown-div .ui.fluid.dropdown {
   width: 30% !important;
 }
 
-.ui.fluid.dropdown div{
+.ui.fluid.dropdown div {
   margin: 0 !important;
 }
 
-.ui.attached.label, .ui[class*="top attached"].label {
+.ui.attached.label,
+.ui[class*='top attached'].label {
   width: auto !important;
   margin-left: auto;
   margin-right: auto;
@@ -551,7 +554,6 @@ th {
   padding-bottom: 0 !important;
 }
 
-
 #map-div {
   height: 80vh;
 }
@@ -569,7 +571,7 @@ td {
 }
 
 #map-btns {
-    margin-top: 500px;
+  margin-top: 500px;
 }
 
 .mobile-btn-row {
@@ -641,10 +643,9 @@ td {
     width: 50vw;
   }
 
-  #button-div .field{
+  #button-div .field {
     width: 80% !important;
   }
-
 
   .ui.fluid.search.selection.dropdown.create-country-drop {
     width: 50vw;
@@ -656,9 +657,8 @@ td {
 }
 
 @media only screen and (max-width: 767px) {
-
   /* increase width of dropdowns */
-  .ui.grid>[class*="two column"].row>.column {
+  .ui.grid > [class*='two column'].row > .column {
     width: 80% !important;
   }
 
@@ -680,12 +680,10 @@ td {
   }
 
   /* change the whitespace from nowrap to normal */
-  .ui.table[class*="single line"]  {
+  .ui.table[class*='single line'] {
     white-space: normal !important;
     word-wrap: break-word;
   }
-
-
 
   #remove-donate-div {
     display: flex !important;
@@ -699,7 +697,6 @@ td {
   .ui.table:not(.unstackable) {
     width: 78vw !important;
   }
-
 
   /* centering donate page */
   #donate-header-div .content {
@@ -724,7 +721,7 @@ td {
   }
 
   .project-dropdown-row .themes-drop {
-      min-width: 70% !important;
+    min-width: 70% !important;
   }
   /* stack dropdowns ontop of each other and center them */
   .ui.grid .project-dropdown-row {
@@ -733,7 +730,7 @@ td {
     align-items: center;
   }
   .ui.form {
-      margin-top: 2em;
+    margin-top: 2em;
   }
   .ui.form .field {
     margin-bottom: 2em !important;
