@@ -25,6 +25,7 @@
 
 .create-profile-link:hover {
   text-decoration: underline;
+  cursor: pointer;
 }
 
 #footer-div {
@@ -62,6 +63,7 @@ section {
   padding-top: 2vh;
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .login-div form {

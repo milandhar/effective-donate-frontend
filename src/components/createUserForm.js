@@ -260,13 +260,16 @@ class CreateUserForm extends Component {
                     </Form.Field>
                   </Form.Group>
                   <div id='button-div'>
-                    <Form.Field>
-                      <Button>Create Profile</Button>
-                    </Form.Field>
-                    <Form.Field>
-                      <Button onClick={this.backToLogin}>
-                        Return to Login
+                    <Form.Field className='login-buttons'>
+                      <Button className='login-btn large ui blue button'>
+                        Create Profile
                       </Button>
+                      <a
+                        className='create-profile-link'
+                        onClick={this.backToLogin}
+                      >
+                        Return to Login
+                      </a>
                     </Form.Field>
                   </div>
                 </Form>
