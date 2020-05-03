@@ -1,175 +1,174 @@
-import React, { Component } from 'react'
-import { Dropdown } from 'semantic-ui-react'
+import React, { Component } from 'react';
+import { Dropdown } from 'semantic-ui-react';
 import config from 'react-global-configuration';
 
 export default class FavoriteThemes extends Component {
-
   //make a single list with the id and name => selected options at this time
   //set the value initially with fetch
   //onchange => change that list
   //build function that translates theme id to string
   //build function that translates theme string to id
 
-  constructor(){
-    super()
+  constructor() {
+    super();
     this.state = {
       userThemes: [],
       themes: [],
       themeOptions: [],
-    }
+    };
   }
 
-  componentWillMount(){
-    console.log('in mount')
-    this.getThemes()
+  componentWillMount() {
+    console.log('in mount');
+    this.getThemes();
   }
-
 
   getThemes = () => {
-    console.log('in themes')
-    const url = `${config.get('API_URL')}/api/v1/themes`
+    console.log('in themes');
+    const url = `${config.get('API_URL')}/api/v1/themes`;
     fetch(url)
-    .then(res=>res.json())
-    .then(json => {
-      this.setState({themes: json})
-    })
-    .then(()=> this.fetchUserThemes())
-  }
+      .then((res) => res.json())
+      .then((json) => {
+        this.setState({ themes: json });
+      })
+      .then(() => this.fetchUserThemes());
+  };
 
   getThemeFromId = (themeId) => {
-    let theme = this.state.themes.find(theme=>theme.id===themeId)
-    return theme
-  }
+    let theme = this.state.themes.find((theme) => theme.id === themeId);
+    return theme;
+  };
 
   fetchUserThemes = () => {
-    let themeArray = []
-    let token = localStorage.getItem("jwt")
-      fetch(`${config.get('API_URL')}/api/v1/profile`, {
-        headers: {
-          'Authorization': 'Bearer ' + token
-        }
-      })
-      .then(res=>res.json())
-      .then(json=> {
-        themeArray.push(this.getThemeFromId(json.user.theme1))
-        themeArray.push(this.getThemeFromId(json.user.theme2))
-        themeArray.push(this.getThemeFromId(json.user.theme3))
+    let themeArray = [];
+    let token = localStorage.getItem('jwt');
+    fetch(`${config.get('API_URL')}/api/v1/profile`, {
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        themeArray.push(this.getThemeFromId(json.user.theme1));
+        themeArray.push(this.getThemeFromId(json.user.theme2));
+        themeArray.push(this.getThemeFromId(json.user.theme3));
         this.setState({
-          userThemes: themeArray
-        })
+          userThemes: themeArray,
+        });
       })
-      .then(() => this.renderThemeField())
-      return themeArray
-  }
+      .then(() => this.renderThemeField());
+    return themeArray;
+  };
 
   returnDropdown = (themeNum) => {
-    let userTheme = this.state.userThemes[0]
-    let themes = this.state.themes
-      return this.state.themes.map((theme) => {
-        return <option value={theme.id}>{theme.name}</option>
-      }
-    )
-    return this.state.themes.map((theme)=> {
-      return(
-        <div>
-          {theme.name}
-        </div>
-        )
-      })
-  }
+    // let userTheme = this.state.userThemes[0]
+    // let themes = this.state.themes
+    return this.state.themes.map((theme) => {
+      return <option value={theme.id}>{theme.name}</option>;
+    });
+    // return this.state.themes.map((theme) => {
+    //   return <div>{theme.name}</div>;
+    // });
+  };
 
   findDefaults = () => {
     // let userThemeId = this.state.userThemes[i]
-    let themes = this.state.themes
-    let defaults = []
+    let themes = this.state.themes;
+    let defaults = [];
     this.state.userThemes.forEach((theme, idx) => {
-      defaults.push(themes[theme]["name"])
-    })
-    this.setState({default: defaults})
-  }
-
+      defaults.push(themes[theme]['name']);
+    });
+    this.setState({ default: defaults });
+  };
 
   renderThemeField = () => {
-    console.log('in render theme field')
-    let themes = this.state.themes.sort(this.compare)
-    let optionsArray = []
-    this.state.themes.forEach((theme)=> {
-        optionsArray.push({key: theme.id, text: theme.name, value: theme.name})
-      })
-      this.setState({themeOptions: optionsArray})
+    console.log('in render theme field');
+    // let themes = this.state.themes.sort(this.compare);
+    let optionsArray = [];
+    this.state.themes.forEach((theme) => {
+      optionsArray.push({ key: theme.id, text: theme.name, value: theme.name });
+    });
+    this.setState({ themeOptions: optionsArray });
+  };
+
+  getThemeFromState = (idx) => {
+    let theme = '';
+    if (this.state.userThemes[idx]) {
+      theme = this.state.userThemes[idx]['name'];
+    } else {
+      theme = 'Select a Theme';
     }
+    return theme;
+  };
 
-    getThemeFromState = (idx) => {
-      let theme = ""
-      if(this.state.userThemes[idx]){
-        theme = this.state.userThemes[idx]["name"]
-      } else{
-        theme = "Select a Theme"
-      }
-      return theme
-    }
+  getThemeFromName = (name) => {
+    let theme = this.state.themes.find((theme) => theme.name === name);
+    return theme;
+  };
 
-    getThemeFromName = (name) => {
-      let theme = this.state.themes.find(theme=>theme.name===name)
-      return theme
-    }
+  handleChange = (ev, data) => {
+    let userThemeNumber = parseInt(data.name);
+    let newThemeName = data.value;
+    let newThemeId = this.getThemeFromName(newThemeName).id;
+    let prevUserThemes = this.state.userThemes;
+    let unique = true;
+    let themeNamesArray = [];
 
-    handleChange = (ev, data) => {
-      let userThemeNumber = parseInt(data.name)
-      let newThemeName = data.value
-      let newThemeId = this.getThemeFromName(newThemeName).id
-      let prevUserThemes = this.state.userThemes
-      let unique = true
-      let themeNamesArray = []
-
-      if (prevUserThemes[0] !== undefined && prevUserThemes[1] !== undefined && prevUserThemes[2] !== undefined){
-        console.log(prevUserThemes)
-        prevUserThemes.forEach(theme => {
-          if(theme.name === newThemeName){
-            unique = false
-          } else {
-            themeNamesArray.push(theme.name)
-          }
-        })
-      }
-      if(unique){
-        prevUserThemes.splice(userThemeNumber, 1, {id: newThemeId, name: newThemeName})
-        themeNamesArray.splice(userThemeNumber, 1, newThemeName)
-        console.log(prevUserThemes)
-        this.props.updateAppThemes(themeNamesArray)
-        this.setState({prevUserThemes})
-        this.postUserThemes(userThemeNumber, newThemeId)
-      } else{
-        window.alert('duplicate theme')
-      }
-    }
-
-    postUserThemes = (themeNumber, themeId) => {
-      console.log(themeNumber)
-      console.log(themeId)
-      let bodyHash = {}
-      bodyHash[`theme${themeNumber+1}`] = themeId
-      const URL = `${config.get('API_URL')}/api/v1/users/${localStorage.userid}`
-      const headers = {
-          method: 'Put',
-          headers: {
-              'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(bodyHash)
+    if (
+      prevUserThemes[0] !== undefined &&
+      prevUserThemes[1] !== undefined &&
+      prevUserThemes[2] !== undefined
+    ) {
+      console.log(prevUserThemes);
+      prevUserThemes.forEach((theme) => {
+        if (theme.name === newThemeName) {
+          unique = false;
+        } else {
+          themeNamesArray.push(theme.name);
         }
-      fetch(URL, headers)
-          .then(res=>res.json())
-          .then(json=>this.props.getThemes())
-        }
+      });
+    }
+    if (unique) {
+      prevUserThemes.splice(userThemeNumber, 1, {
+        id: newThemeId,
+        name: newThemeName,
+      });
+      themeNamesArray.splice(userThemeNumber, 1, newThemeName);
+      console.log(prevUserThemes);
+      this.props.updateAppThemes(themeNamesArray);
+      this.setState({ prevUserThemes });
+      this.postUserThemes(userThemeNumber, newThemeId);
+    } else {
+      window.alert('duplicate theme');
+    }
+  };
 
-  render(){
-    return(
-      <div class="dropdown-container">
+  postUserThemes = (themeNumber, themeId) => {
+    console.log(themeNumber);
+    console.log(themeId);
+    let bodyHash = {};
+    bodyHash[`theme${themeNumber + 1}`] = themeId;
+    const URL = `${config.get('API_URL')}/api/v1/users/${localStorage.userid}`;
+    const headers = {
+      method: 'Put',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(bodyHash),
+    };
+    fetch(URL, headers)
+      .then((res) => res.json())
+      .then((json) => this.props.getThemes());
+  };
+
+  render() {
+    return (
+      <div class='dropdown-container'>
         <Dropdown
           fluid
           selection
-          key="0"
-          name="0"
+          key='0'
+          name='0'
           options={this.state.themeOptions}
           value={this.getThemeFromState(0)}
           onChange={this.handleChange}
@@ -177,8 +176,8 @@ export default class FavoriteThemes extends Component {
         <Dropdown
           fluid
           selection
-          key="1"
-          name="1"
+          key='1'
+          name='1'
           options={this.state.themeOptions}
           value={this.getThemeFromState(1)}
           onChange={this.handleChange}
@@ -186,13 +185,13 @@ export default class FavoriteThemes extends Component {
         <Dropdown
           fluid
           selection
-          key="2"
-          name="2"
+          key='2'
+          name='2'
           options={this.state.themeOptions}
           value={this.getThemeFromState(2)}
           onChange={this.handleChange}
         />
       </div>
-    )
+    );
   }
 }

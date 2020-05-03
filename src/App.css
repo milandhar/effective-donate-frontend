@@ -8,6 +8,18 @@
   font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif !important;
 }
 
+.ui.secondary.menu .header {
+  padding-top: 0.6em !important;
+}
+
+.ui.table {
+  margin-bottom: 2em;
+}
+
+.header-under-nav {
+  margin-top: 8vh;
+}
+
 .computer.only.tablet.only.four.column {
   margin-right: 6vw;
 }
@@ -41,6 +53,11 @@
 
 .ui.form input[type='password'] {
   width: 12vw;
+}
+
+.ui.attached.label,
+.ui[class*='top attached'].label {
+  margin-top: 2vh;
 }
 
 #absolute-footer {
@@ -137,7 +154,7 @@ section {
 }
 
 .ui.center.aligned.header {
-  margin-top: 6vh !important;
+  margin-top: 2vh !important;
 }
 
 .ui.inverted.segment {

@@ -253,7 +253,6 @@ class CreateUserForm extends Component {
                         fluid
                         search
                         selection
-                        placeholder='Country'
                         options={this.state.countryList}
                         onChange={this.handleCountryChange}
                         value={this.state.selectedCountry}
