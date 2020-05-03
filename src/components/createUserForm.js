@@ -245,10 +245,11 @@ class CreateUserForm extends Component {
                     </Form.Group>
                   </div>
                   <Form.Group className='country-drop-div' flex>
-                    <Form.Field required>
+                    <Form.Field required id='drop-inner-div'>
                       <label id='default-country'>Default Country</label>
                       <Dropdown
                         className='create-country-drop'
+                        id='create-user-country-drop'
                         fluid
                         search
                         selection

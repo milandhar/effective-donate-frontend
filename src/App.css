@@ -5,6 +5,7 @@
 
 .ui {
   /* font-family: 'Open Sans', sans-serif !important; */
+  font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif !important;
 }
 
 .computer.only.tablet.only.four.column {
@@ -32,6 +33,14 @@
   position: fixed;
   bottom: 0;
   width: 100vw;
+}
+
+.ui.form input[type='text'] {
+  width: 12vw;
+}
+
+.ui.form input[type='password'] {
+  width: 12vw;
 }
 
 #absolute-footer {
@@ -151,7 +160,7 @@ section {
 }
 
 .country-drop-div {
-  margin-top: 18px !important;
+  margin-top: 5vh !important;
   flex-direction: column !important;
   width: 50%;
 }
@@ -204,6 +213,12 @@ section {
 
 .login-div {
   padding-top: 3vh;
+}
+
+.ui.form .field > .selection.dropdown {
+  width: 15vw;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .user.icon {
@@ -293,7 +308,8 @@ section {
 }
 
 .login-field {
-  width: 20%;
+  width: 20vw;
+  text-align: center;
 }
 
 .login-div h2 {
@@ -604,6 +620,17 @@ td {
   #map-div {
     margin-bottom: -5%;
   }
+  .create-form .ui.list .item {
+    text-align: left;
+  }
+
+  .create-form .country-drop-div {
+    margin-top: 5vh;
+  }
+
+  #fields-div {
+    margin-top: 5vh;
+  }
 }
 
 @media only screen and (max-width: 768px) {
@@ -612,6 +639,10 @@ td {
   }
   .ui.secondary.inverted.menu a.item {
     color: #000 !important;
+  }
+
+  #top-themes {
+    margin-bottom: 2vh;
   }
 
   /* stack create user form */
@@ -624,6 +655,7 @@ td {
     margin-left: auto;
     margin-right: auto;
     width: 100% !important;
+    text-align: left;
   }
 
   .country-drop-div {
