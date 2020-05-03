@@ -151,16 +151,17 @@ export default class LoginForm extends Component {
                 <Form.Field className='login-buttons'>
                   <input
                     type='submit'
-                    className='large ui blue button'
+                    className='login-btn large ui blue button'
                     value='Log In'
                     onClick={this.login}
                   />
                   <Link to='/create_user' replace>
-                    <input
+                    {/* <input
                       type='submit'
                       // className='large ui blue button'
                       value='Create Profile'
-                    />
+                    /> */}
+                    <a className='create-profile-link'>Create Profile</a>
                   </Link>
                 </Form.Field>
               </Form>

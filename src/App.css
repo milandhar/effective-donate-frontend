@@ -19,6 +19,14 @@
   margin-bottom: 40px;
 }
 
+.ui.button.login-btn {
+  margin-bottom: 1em;
+}
+
+.create-profile-link:hover {
+  text-decoration: underline;
+}
+
 #footer-div {
   position: fixed;
   bottom: 0;
