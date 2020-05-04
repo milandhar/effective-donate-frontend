@@ -48,11 +48,11 @@
 }
 
 .ui.form input[type='text'] {
-  width: 12vw;
+  width: 12em;
 }
 
 .ui.form input[type='password'] {
-  width: 12vw;
+  width: 12em;
 }
 
 .ui.attached.label,
